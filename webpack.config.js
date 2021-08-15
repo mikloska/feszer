@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    //publicPath: '/',
+    // publicPath: '/',
     //clean: true,
   },
 
@@ -52,6 +52,8 @@ module.exports = {
     ]
   },
   devServer: {
+    //This is needed to allow entry into app from places other than the root
+    historyApiFallback: true,
     publicPath: '/build/',
     // proxy: {
     //   '/api': 'http://localhost:5000',

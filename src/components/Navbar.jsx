@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import { alpha, makeStyles, withStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Button, TextField, Badge} from '@material-ui/core';
+import React, {useState,useEffect} from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Button, TextField, Badge, Box} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import LanguageIcon from '@material-ui/icons/Language';
 import { Link as RouterLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { CHANGE_LANGUAGE } from '../redux/constants';
 
 
 const MyBadge = withStyles((theme) => ({
@@ -47,27 +47,6 @@ const useStyles = makeStyles((theme) => ({
     // },
   },
 
-  search: {
-    
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block',
-    },
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100VW',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -83,8 +62,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar= () => {
-
+  const dispatch = useDispatch()
   const classes = useStyles();
+  const language = useSelector((state) => state.language)
+  const [siteLanguage, setSiteLanguage] = useState(language)
+  const handleLanguage = () =>{
+    dispatch({ type: CHANGE_LANGUAGE })
+  }
+
+  useEffect(()=>{
+    setSiteLanguage(language)
+
+  }, [language])
 
 
 
@@ -106,6 +95,7 @@ const Navbar= () => {
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
+      onMouseOut={handleMobileMenuClose}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
@@ -115,16 +105,16 @@ const Navbar= () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem component={RouterLink} to='/about' onClick={handleMobileMenuClose}>
-        About the Band
+        {language === 'MAGYAR' ? 'About Us' : 'Rólunk'}
       </MenuItem>
       <MenuItem component={RouterLink} to='/events' onClick={handleMobileMenuClose}>
-        Upcoming Events
+        {language === 'MAGYAR' ? 'Events' : 'Események'}
       </MenuItem>
       <MenuItem component={RouterLink} to='/gallery' onClick={handleMobileMenuClose}>
-        Gallery
+        {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
       </MenuItem>
       <MenuItem component={RouterLink} to='/contact' onClick={handleMobileMenuClose}>
-        Contact Us
+        {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
       </MenuItem>
 
     </Menu>
@@ -139,39 +129,37 @@ const Navbar= () => {
           {/* <Typography style={{ color: 'inherit', textDecoration: 'inherit'}} component={RouterLink} to='/' className={classes.title} variant="h6" noWrap>
             Sikra Jewelry
           </Typography> */}
+          
 
           <Typography variant="h6" className={classes.title} component={RouterLink} to='/'>
             <img
-              src={'./images/logo.png'}
+              src={language === 'MAGYAR' ? './src/img/feszer-logo-landscape.png' : './src/img/feszer-logo-landscape-magyar.png'}
               alt="logo"
               className={classes.logo}
             />
-          </Typography>
- 
-
-          
+          </Typography>          
           <div className={classes.grow} />
    
           <div className={classes.sectionDesktop}>
             <Typography aria-label="about" aria-controls="about" color="inherit"
             style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/about'
             >
-              About
+              {language === 'MAGYAR' ? 'About Us' : 'Rólunk'}
             </Typography>
-            <Typography  aria-label="about" aria-controls="about" aria-haspopup="true" color="inherit"
+            <Typography  aria-label="events" aria-controls="events" aria-haspopup="true" color="inherit"
               style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/events'
             >
-              Upcoming Events
+              {language === 'MAGYAR' ? 'Events' : 'Események'}
             </Typography>
-            <Typography  aria-label="about" aria-controls="about" aria-haspopup="true" color="inherit"
+            <Typography  aria-label="gallery" aria-controls="gallery" aria-haspopup="true" color="inherit"
               style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/gallery'
             >
-              Gallery
+              {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
             </Typography>
-            <Typography  aria-label="about" aria-controls="about" aria-haspopup="true" color="inherit"
+            <Typography  aria-label="contact" aria-controls="contact" aria-haspopup="true" color="inherit"
              style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/contact'
             >
-              Contact Us
+              {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
             </Typography>
           </div>
           <div className={classes.sectionMobile}>
@@ -185,6 +173,13 @@ const Navbar= () => {
               <MenuIcon style={{color:"black"}}/>
             </IconButton>
           </div>
+          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10}}>
+            <IconButton style={{paddingBottom:0}} onClick={handleLanguage}>
+              <LanguageIcon/>
+            </IconButton>
+          <Typography style={{fontSize:'.75rem', color:'rgba(0, 0, 0, 0.54)'}}>{siteLanguage}</Typography>
+          </Box>
+
 
         </Toolbar>
       </AppBar>

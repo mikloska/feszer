@@ -7,7 +7,7 @@ import EventsScreen from './src/screens/EventsScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import GalleryScreen from './src/screens/GalleryScreen';
 import Container from '@material-ui/core/Container'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, browserHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -19,7 +19,7 @@ const App = (showBelow) => {
 
   const classes = useStyles();
   return (
-    <Router>
+    <Router history={browserHistory}>
       <>
         <div className = 'page-wrap'>
         <Navbar/>
