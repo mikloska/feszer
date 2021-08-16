@@ -59,6 +59,14 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  title: {
+    // display: 'none',
+    // [theme.breakpoints.up('sm')]: {
+    //   display: 'block',
+    // },
+  },
+
+
 }));
 
 const Navbar= () => {
@@ -95,7 +103,7 @@ const Navbar= () => {
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
-      onMouseOut={handleMobileMenuClose}
+      onMouseLeave={handleMobileMenuClose}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
@@ -133,7 +141,7 @@ const Navbar= () => {
 
           <Typography variant="h6" className={classes.title} component={RouterLink} to='/'>
             <img
-              src={language === 'MAGYAR' ? './src/img/feszer-logo-landscape.png' : './src/img/feszer-logo-landscape-magyar.png'}
+              src={language === 'MAGYAR' ? 'https://feszer-band.s3.amazonaws.com/feszer-logo-landscape.png' : 'https://feszer-band.s3.amazonaws.com/feszer-logo-landscape-magyar.png'}
               alt="logo"
               className={classes.logo}
             />
@@ -173,7 +181,7 @@ const Navbar= () => {
               <MenuIcon style={{color:"black"}}/>
             </IconButton>
           </div>
-          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10}}>
+          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10, paddingRight:30}}>
             <IconButton style={{paddingBottom:0}} onClick={handleLanguage}>
               <LanguageIcon/>
             </IconButton>

@@ -1,4 +1,13 @@
 .page-wrap {
   min-height: 510px;
+  padding:0px;
   /* margin-bottom: 260px; */
+}
+body, html{
+  overflow-x:hidden;
+  min-width:100vw;
+}
+
+.home-screen{
+  background-image: url("./src/img/Band.jpg")
 }
