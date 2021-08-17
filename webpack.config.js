@@ -8,7 +8,7 @@ module.exports = {
   entry : ['babel-polyfill','./index.js'],
   devtool: 'inline-source-map',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/',
     //clean: true,
@@ -54,7 +54,7 @@ module.exports = {
   devServer: {
     //This is needed to allow entry into app from places other than the root
     historyApiFallback: true,
-    publicPath: '/build/',
+    publicPath: '/dist/',
     // proxy: {
     //   '/api': 'http://localhost:5000',
     // },
