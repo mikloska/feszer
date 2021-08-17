@@ -53,8 +53,12 @@ export default function Footer({handleScrollClick}) {
       <div>
       <Grid container alignItems="center" justifyContent="center" value={value} onChange={(event, newValue) => {setValue(newValue);}} className={classes.root}>
         <Grid item xs={12} style={{textAlign:"center"}}>
-          <a href='https://www.facebook.com/SikraJewelry/' target="_blank"><FacebookIcon className={classes.SocialMediaIcons} fontSize="large" style={{ color: 'black', textDecoration: 'none'}}/></a>
-          <a href='https://www.instagram.com/sikrajewelry/?hl=en' target="_blank"><InstagramIcon className={classes.SocialMediaIcons} fontSize="large" style={{ color: 'black', textDecoration: 'none'}}/></a>
+          {/* <a href='https://www.facebook.com/SikraJewelry/' target="_blank"> */}
+            <FacebookIcon className={classes.SocialMediaIcons} fontSize="large" style={{ color: 'black', textDecoration: 'none'}}/>
+          {/* </a> */}
+          {/* <a href='https://www.instagram.com/sikrajewelry/?hl=en' target="_blank"> */}
+            <InstagramIcon className={classes.SocialMediaIcons} fontSize="large" style={{ color: 'black', textDecoration: 'none'}}/>
+          {/* </a> */}
         </Grid>
         <Grid item xs={12} style={{textAlign:"center"}}><Typography>Copyright © {new Date().getFullYear()} Fészer Band</Typography></Grid>
 

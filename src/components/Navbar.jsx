@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
   //   background: 'black'
   // },
   logo: {
-    height:70,
+    width:'100%',
     marginTop: 10,
-    marginRight:20
+    // marginRight:20
     // maxWidth: 60,
 
     // marginRight: "80px",
@@ -101,9 +101,10 @@ const Navbar= () => {
   };
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+
   const renderMobileMenu = (
     <Menu
-      onMouseLeave={handleMobileMenuClose}
+      // onMouseOut={handleMobileMenuClose}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
@@ -140,11 +141,12 @@ const Navbar= () => {
           
 
           <Typography variant="h6" className={classes.title} component={RouterLink} to='/'>
-            <img
+            {/* <Box height="100%"> */}
+            <Box width={1/2}><img
               src={language === 'MAGYAR' ? 'https://feszer-band.s3.amazonaws.com/feszer-logo-landscape.png' : 'https://feszer-band.s3.amazonaws.com/feszer-logo-landscape-magyar.png'}
               alt="logo"
               className={classes.logo}
-            />
+            /></Box>
           </Typography>          
           <div className={classes.grow} />
    
@@ -170,6 +172,12 @@ const Navbar= () => {
               {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
             </Typography>
           </div>
+          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10, marginRight:20}}>
+            <IconButton style={{paddingBottom:0}} onClick={handleLanguage}>
+              <LanguageIcon/>
+            </IconButton>
+          <Typography style={{fontSize:'.75rem', color:'rgba(0, 0, 0, 0.54)'}}>{siteLanguage}</Typography>
+          </Box>
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -178,15 +186,10 @@ const Navbar= () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MenuIcon style={{color:"black"}}/>
+              <MenuIcon style={{color:"black", marginRight:20}}/>
             </IconButton>
           </div>
-          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10, paddingRight:30}}>
-            <IconButton style={{paddingBottom:0}} onClick={handleLanguage}>
-              <LanguageIcon/>
-            </IconButton>
-          <Typography style={{fontSize:'.75rem', color:'rgba(0, 0, 0, 0.54)'}}>{siteLanguage}</Typography>
-          </Box>
+
 
 
         </Toolbar>
