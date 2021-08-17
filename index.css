@@ -1,11 +1,12 @@
 .page-wrap {
   min-height: 510px;
-  padding:0px;
   /* margin-bottom: 260px; */
 }
 body, html{
   overflow-x:hidden;
   min-width:100vw;
+  padding:0px;
+  margin:0px;
 }
 
 .home-screen{

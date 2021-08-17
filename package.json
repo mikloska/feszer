@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development --open --hot",
-    "build": "webpack --mode production && echo '/* /index.html 200' | cat >build/_redirects",
+    "build": "webpack --mode production && echo /* /index.html 200 | cat >build/_redirects",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

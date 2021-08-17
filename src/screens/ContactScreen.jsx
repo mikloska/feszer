@@ -83,7 +83,7 @@ const ContactScreen = () => {
                     setName(e.target.value);
                   }}
                 />
-                <TextField variant="outlined" margin="normal" required fullWidth name="user_email" label={language === 'MAGYAR' ? 'Email Address' : 'Email Cím'} type="email" cím
+                <TextField variant="outlined" margin="normal" required fullWidth name="user_email" label={language === 'MAGYAR' ? 'Email Address' : 'Email Cím'} type="email"
                   id="email" value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);

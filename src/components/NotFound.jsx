@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react'
 import {Alert} from '@material-ui/lab';
 import { useLocation } from 'react-router-dom'
-import { Grid, List, ListItem } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 const NotFound = () =>{
 
   const location = useLocation();
-  
-  // return <span>Path : {location.pathname}</span>
+
   return (
     <div>         
       <Grid container justifyContent='center'>

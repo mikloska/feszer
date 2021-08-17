@@ -6,6 +6,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_LANGUAGE } from '../redux/constants';
+import { useLocation } from 'react-router-dom'
 
 
 const MyBadge = withStyles((theme) => ({
@@ -65,11 +66,31 @@ const useStyles = makeStyles((theme) => ({
     //   display: 'block',
     // },
   },
+  NotVisiting:{
+    color: 'black', 
+    textDecoration: 'inherit', 
+    borderBottom: '2px solid white',
+    marginRight:20
+
+  },
+  Visiting:{
+    // position:'static',
+    color: 'black',
+    // opacity:0.5,
+    borderBottom: '2px solid #BC0813',
+    textDecoration: 'inherit', 
+    marginRight:20
+  }
 
 
 }));
 
 const Navbar= () => {
+  const [nav,setNav]=useState('')
+  const location = useLocation();
+  // setNav(location.pathName)
+  console.log('location: ', location.pathname)
+  // setNav(location.pathName)
   const dispatch = useDispatch()
   const classes = useStyles();
   const language = useSelector((state) => state.language)
@@ -80,8 +101,10 @@ const Navbar= () => {
 
   useEffect(()=>{
     setSiteLanguage(language)
+    setNav(location.pathname)
+    console.log(nav)
 
-  }, [language])
+  }, [language, location])
 
 
 
@@ -152,31 +175,31 @@ const Navbar= () => {
    
           <div className={classes.sectionDesktop}>
             <Typography aria-label="about" aria-controls="about" color="inherit"
-            style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/about'
+               className={nav==='/about'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/about'
             >
               {language === 'MAGYAR' ? 'About Us' : 'Rólunk'}
             </Typography>
             <Typography  aria-label="events" aria-controls="events" aria-haspopup="true" color="inherit"
-              style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/events'
+              className={nav==='/events'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/events'
             >
               {language === 'MAGYAR' ? 'Events' : 'Események'}
             </Typography>
             <Typography  aria-label="gallery" aria-controls="gallery" aria-haspopup="true" color="inherit"
-              style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/gallery'
+              className={nav==='/gallery'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/gallery'
             >
               {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
             </Typography>
             <Typography  aria-label="contact" aria-controls="contact" aria-haspopup="true" color="inherit"
-             style={{ color: 'black', textDecoration: 'inherit', marginRight:20 }} component={RouterLink} to='/contact'
+             className={nav==='/contact'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/contact'
             >
               {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
             </Typography>
           </div>
-          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10, marginRight:20}}>
+          <Box style={{display:'flex',flexDirection:'column', paddingBottom:10, marginRight:20, textAlign:'center'}}>
             <IconButton style={{paddingBottom:0}} onClick={handleLanguage}>
-              <LanguageIcon/>
+              <LanguageIcon fontSize='small'/>
             </IconButton>
-          <Typography style={{fontSize:'.75rem', color:'rgba(0, 0, 0, 0.54)'}}>{siteLanguage}</Typography>
+          <Typography style={{fontSize:'.5rem', color:'rgba(0, 0, 0, 0.54)'}}>{siteLanguage}</Typography>
           </Box>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -186,7 +209,7 @@ const Navbar= () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MenuIcon style={{color:"black", marginRight:20}}/>
+              <MenuIcon style={{color:"black", marginRight:10}}/>
             </IconButton>
           </div>
 
