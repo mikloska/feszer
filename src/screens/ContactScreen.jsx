@@ -96,7 +96,7 @@ const ContactScreen = () => {
                   onChange={(e) => {setMessage(e.target.value);}}
                 placeholder={language === 'MAGYAR' ? 'Message' : 'Üzenet'} name="message"/>
 
-                <Button value="send" type="submit" fullWidth variant="contained" color="primary" className={classes.submit} >
+                <Button value="send" type="submit" fullWidth variant="contained" color="primary" className={classes.submit} > 
                   {language === 'MAGYAR' ? 'Send' : 'Küldés'}
                 </Button>
 

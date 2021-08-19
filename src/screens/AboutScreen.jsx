@@ -7,7 +7,7 @@ import ReactCardFlip from 'react-card-flip';
 
 const useStyles = makeStyles((theme) => ({
   Box: {
-    width:350,
+    width:355,
     height:360
   },
   Media:{
@@ -130,11 +130,9 @@ const AboutScreen = () =>{
           <Paper elevation={3}>
             <Box className={classes.Box}>
               <Typography style={{padding:5}}>{language === 'MAGYAR' ?
-                `Bence looks like a beaver. Beavers are large, semiaquatic rodents in the genus Castor native 
-                to the temperate Northern Hemisphere. There are two extant species: the North American beaver 
-                (Castor canadensis) and the Eurasian beaver (C. fiber). Beavers are the second-largest living 
-                rodents after the capybaras. They have stout bodies with large heads, long chisel-like incisors, 
-                brown or gray fur, hand-like front feet, webbed back feet and flat, scaly tails. `: `Bence hasonlít a hódfélékre. A hódfélék (Castoridae) az emlősök (Mammalia) osztályába és a rágcsálók 
+                `Bence is from New York and his parents are from Hungary. He has been a strong part of the
+                Hungarian community in New York City and New Jersey. He has been playing the violin for 11 years now and has been to many
+                recitals, festival, performances. He also plays two traditional Hungarian folk violas.`: `Bence hasonlít a hódfélékre. A hódfélék (Castoridae) az emlősök (Mammalia) osztályába és a rágcsálók 
                 (Rodentia) rendjébe tartozó család. A családnak csak 1 élő neme létezik, amelybe 2 ma is élő faj tartozik: az eurázsiai
                  hód és a kanadai hód. Ezeken kívül számos fosszilis faj is tartozik a családba..`
                 }
@@ -197,7 +195,7 @@ const AboutScreen = () =>{
             <img src={'https://feszer-band.s3.amazonaws.com/Gyuri.jpg'} className={classes.Media}/> 
             </Box>
             <Typography className={classes.Heading}>
-              {language === 'MAGYAR' ? 'George Kalán - viola' : 'Kalán György - brácsa'}
+              {language === 'MAGYAR' ? 'György Kalán - viola' : 'Kalán György - brácsa'}
               <ExpandMoreIcon className={classes.More} onClick={handleGyuri} />
             </Typography>
           </Paper>
@@ -205,12 +203,10 @@ const AboutScreen = () =>{
           <Paper elevation={3}>
             <Box className={classes.Box}>
               <Typography style={{padding:5}}>{language === 'MAGYAR' ?
-                `George looks like an aardvark. The aardvark (/ˈɑːrdvɑːrk/ ARD-vark; Orycteropus afer) is a medium-sized,
-                 burrowing, nocturnal mammal native to Africa.[2][3] It is the only living species of the order Tubulidentata,
-                 [4][5] although other prehistoric species and genera of Tubulidentata are known. Unlike most other insectivores,
-                  it has a long pig-like snout, which is used to sniff out food. It roams over most of the southern two-thirds of 
-                  the African continent, avoiding areas that are mainly rocky. A nocturnal feeder, it subsists on ants and termites, 
-                  which it will dig out of their hills using its sharp claws and powerful legs.`: `Gyuri hasonlít a földimalacra. A földimalac (Orycteropus afer) az emlősök (Mammalia) osztályába a csövesfogúak
+                `Gyuri was born and raised in Miskolc, Hungary. He began learning authentic Roma music from the local Roma community at the age of 14.
+                His interest eventually turned to authentic Hungarian folk music and he studied the three-stringed Hungarian folk viola. 
+               After moving to New York, Gyuri collaborated with Viva Patshiva, a roma inspired world music comedy. Gyuri also danced
+                in the New York based Ritka Magyar Hungarian folk dance group. He is also an active member of both Fėnyes Banda and Életfa Hungarian folk bands.`: `Gyuri hasonlít a földimalacra. A földimalac (Orycteropus afer) az emlősök (Mammalia) osztályába a csövesfogúak
                    (Tubulidentata) rendjébe és a földimalacfélék (Orycteropodidae) családjába tartozó Orycteropus nem egyetlen faja.
                    A hosszú pofája végén levő túróorr hasonlít a disznóéra. Fülei azonban a szamáréhoz hasonlítanak, a farka meg olyan, 
                    mint a kengurué. Majdnem kizárólag hangyát és termeszeket eszik. Afrika egyik legfontosabb állata. Olyan mennyiségű
@@ -220,7 +216,7 @@ const AboutScreen = () =>{
             {/* <img src={'./src/img/Hunor.jpg'} className={classes.Media}/>  */}
             </Box>
             <Typography className={classes.Heading}>
-              {language === 'MAGYAR' ? 'George Kalán - viola' : 'Kalán György - brácsa'}
+              {language === 'MAGYAR' ? 'György Kalán - viola' : 'Kalán György - brácsa'}
               <ExpandMoreIcon className={classes.More} onClick={handleGyuri}/>
             </Typography>
           </Paper>
@@ -316,7 +312,7 @@ const AboutScreen = () =>{
             <img src={'https://feszer-band.s3.amazonaws.com/George.jpg'} className={classes.Media}/> 
             </Box>
             <Typography className={classes.Heading}>
-              George Petran{language === 'MAGYAR' ? ' - viola, cimbalom, tárogató' : ' - brácsa, cimbalom, tárogató'}
+              George Petran{language === 'MAGYAR' ? ' - viola, cimbalom, tárogató' : '- brácsa, cimbalom, tárogató'}
               <ExpandMoreIcon className={classes.More} onClick={handleGeorge} />
             </Typography>
           </Paper>
@@ -337,7 +333,7 @@ const AboutScreen = () =>{
  
             </Box>
             <Typography className={classes.Heading}>
-              George Petran{language === 'MAGYAR' ? ' - viola, cimbalom, tárogató' : ' - brácsa, cimbalom, tárogató'}
+              George Petran{language === 'MAGYAR' ? ' - viola, cimbalom, tárogató' : '- brácsa, cimbalom, tárogató'}
             <ExpandMoreIcon className={classes.More} onClick={handleGeorge}/>
             </Typography>
           </Paper>
@@ -361,10 +357,13 @@ const AboutScreen = () =>{
           <Paper elevation={3}>
             <Box className={classes.Box}>
               <Typography style={{padding:5}}>{language === 'MAGYAR' ?
-                `Miklós looks lie a rat. Rats are various medium-sized, long-tailed rodents. Species of rats are found throughout the order 
-                Rodentia, but stereotypical rats are found in the genus Rattus. Other rat genera include Neotoma (pack rats), Bandicota (bandicoot
-               rats) and Dipodomys (kangaroo rats). Rats are typically distinguished from mice by their size. Usually the common name of a large muroid
-                rodent will include the word "rat", while a smaller muroid's name will include "mouse".`: `Miklós hasonlít a vándorpatkányra. Eredetileg a 
+                `Miklós was born and raised in New Jersey and was exposed to Hungarian folk music and 
+                dancing at a young age but it wasn’t until he was 14 years old that he took an active 
+                interest in it. After finishing his university studies, he moved to Budapest for several 
+                years and continued dancing and playing music. He plays the accordion and 
+                has been learning from the master Hungarian folk accordionist Zoltán Bobár. Miklós currently resides 
+                in New Jersey and is an active member of the Hungrian folk scene in New York and New Jersey. Whenever 
+                he is not playing music at a dance house, he is dancing.`: `Miklós hasonlít a vándorpatkányra. Eredetileg a 
                 vándorpatkány nem volt honos Európában. Miképp jutott ide, az nem tisztázott. Mindenesetre Kelet-Ázsiában (például Kínában) és Szibéria
                  mérsékelt éghajlatú részein a szabad természetben, az embertől távol is előfordul. A lengyel városokban már a 11–13. században megjelenhetett,
                   de inváziószerű bevándorlása és elterjedése Európa egész területén csak a 18. században következett be, azaz jóval később, mint a házi patkánynál.
