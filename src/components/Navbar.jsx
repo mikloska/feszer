@@ -9,14 +9,6 @@ import { CHANGE_LANGUAGE } from '../redux/constants';
 import { useLocation } from 'react-router-dom'
 
 
-const MyBadge = withStyles((theme) => ({
-  badge: {
-    left: 7,
-    top: -4,
-    // backgroundColor:'#067e78'
-  },
-}))(Badge);
-
 const useStyles = makeStyles((theme) => ({
   Badge : {
 
