@@ -22,15 +22,15 @@ This repo is for the splash page for the tri-state based Hungarian folk music ba
 
 
 <p align="center">
-  <img style="width:200px border-right:10px;" src='./src/img/about.png'/>
+  <img style="width:200px border-right:10px;" src='./readme images/about.png'/>
 </p>
 
 <p align="center" style="margin-top:30px;">
-  <img style="width:200px border-right:10px;" src='./src/img/home.png'/>
+  <img style="width:200px border-right:10px;" src='./readme images/home.png'/>
 </p>
 
 <p align="center" style="margin-top:30px">
-  <img style="width:200px border-right:10px;" src='./src/img/contact.png'/>
+  <img style="width:200px border-right:10px;" src='./readme images/contact.png'/>
 </p>
 
 
