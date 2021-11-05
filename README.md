@@ -10,7 +10,7 @@
 
 </p>
 
-<h2 href="#About">About sikrajewelry.com</h2>
+<h2 href="#About">About feszerband.com</h2>
 
 This repo is for the splash page for the tri-state based Hungarian folk music band Fészer. The website can be toggled from English to Hungarian globally with redux. There is no database or back end. EmailJS is used to send emails to the band. There are interactive flippable cards on the about section to learn more about each member of the band.
 
