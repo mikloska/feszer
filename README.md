@@ -12,9 +12,9 @@
 
 <h2>Table of Contents</h2>
 
-- [About](https://github.com/mikloska/feszer/#about)
+- [About](https://github.com/mikloska/feszer/#About)
 - [License](https://github.com/mikloska/feszer/#License) 
-- [Languages & Tools](https://github.com/mikloska/feszer/#languages-and-tools)
+- [Languages & Tools](https://github.com/mikloska/feszer/#Languages)
 
 <h2 href="#About">About sikrajewelry.com</h2>
 
