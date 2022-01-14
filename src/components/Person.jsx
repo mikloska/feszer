@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const People = ({musicianFirstName, musicianLastName}) => {
   const language = useSelector((state) => state.language)
   const classes = useStyles();
-  const cleanName =  musicianFirstName.replace('ó','o').replace('ö','o').replace('á','a').replace(/^"|"$/g, '');
+  const cleanName =  musicianFirstName.replace('ó','o').replace('ö','o').replace('á','a')
   const lowerCaseFirstName = musicianFirstName.charAt(0).toLowerCase() + musicianFirstName.slice(1)
   const EnglishHeading = `${musicianFirstName} ${musicianLastName} - ${AboutMembersText[`${cleanName}`].EnglishInstruments}`
   const magyarCim = `${musicianLastName} ${musicianFirstName} - ${AboutMembersText[`${cleanName}`].magyarHangszerek}`
