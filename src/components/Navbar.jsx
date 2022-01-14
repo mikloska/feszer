@@ -81,7 +81,7 @@ const Navbar= () => {
   const [nav,setNav]=useState('')
   const location = useLocation();
   // setNav(location.pathName)
-  console.log('location: ', location.pathname)
+  // console.log('location: ', location.pathname)
   // setNav(location.pathName)
   const dispatch = useDispatch()
   const classes = useStyles();
@@ -94,7 +94,7 @@ const Navbar= () => {
   useEffect(()=>{
     setSiteLanguage(language)
     setNav(location.pathname)
-    console.log(nav)
+    // console.log(nav)
 
   }, [language, location])
 
