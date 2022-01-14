@@ -177,11 +177,11 @@ const Navbar= () => {
             >
               {language === 'MAGYAR' ? 'Events' : 'Események'}
             </Typography>
-            <Typography  aria-label="gallery" aria-controls="gallery" aria-haspopup="true" color="inherit"
+            {/* <Typography  aria-label="gallery" aria-controls="gallery" aria-haspopup="true" color="inherit"
               className={nav==='/gallery'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/gallery'
             >
               {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
-            </Typography>
+            </Typography> */}
             <Typography  aria-label="contact" aria-controls="contact" aria-haspopup="true" color="inherit"
              className={nav==='/contact'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/contact'
             >
