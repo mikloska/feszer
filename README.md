@@ -10,7 +10,7 @@
 
 </p>
 
-<h2>Table of Contents</h2>
+<h2 href="#About">About feszerband.com</h2>
 
 - [About](https://github.com/mikloska/feszer/#About)
 - [License](https://github.com/mikloska/feszer/#License) 
