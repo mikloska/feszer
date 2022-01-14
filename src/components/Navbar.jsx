@@ -135,9 +135,9 @@ const Navbar= () => {
       <MenuItem component={RouterLink} to='/events' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Events' : 'Események'}
       </MenuItem>
-      <MenuItem component={RouterLink} to='/gallery' onClick={handleMobileMenuClose}>
+      {/* <MenuItem component={RouterLink} to='/gallery' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem component={RouterLink} to='/contact' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
       </MenuItem>
