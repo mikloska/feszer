@@ -1,4 +1,4 @@
-import {CHANGE_LANGUAGE, CHANGE_NAV} from './constants'
+import {CHANGE_LANGUAGE} from './constants'
 
 export const languageReducer = (
   state='',
@@ -21,22 +21,6 @@ export const languageReducer = (
       //     language: 'MAGYAR'
       //   }
       // }
-    default:
-      return state
-  }
-}
-
-export const navReducer = (
-  state='',
-  action
-) => {
-  switch (action.type) {
-    case CHANGE_NAV:
-      return {
-        // state: state,
-
-      }
-
     default:
       return state
   }

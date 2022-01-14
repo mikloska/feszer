@@ -1,14 +1,7 @@
-import {CHANGE_LANGUAGE, CHANGE_NAV} from './constants'
+import {CHANGE_LANGUAGE} from './constants'
 
-export const changeLanguage = (dispatch) => {
-  dispatch({
+export const changeLanguage = () => (
+ {
     type: CHANGE_LANGUAGE,
-  })
-}
-
-export const changeNav = (data) => (dispatch) => {
-  dispatch({
-    type: CHANGE_NAV,
-    payload: data,
-  })
-}
+  }
+)

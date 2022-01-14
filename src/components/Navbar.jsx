@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LanguageIcon from '@material-ui/icons/Language';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { changeLanguage } from '../redux/actions'
 import { CHANGE_LANGUAGE } from '../redux/constants';
 import { useLocation } from 'react-router-dom'
 
@@ -88,7 +89,7 @@ const Navbar= () => {
   const language = useSelector((state) => state.language)
   const [siteLanguage, setSiteLanguage] = useState(language)
   const handleLanguage = () =>{
-    dispatch({ type: CHANGE_LANGUAGE })
+    dispatch(changeLanguage())
   }
 
   useEffect(()=>{

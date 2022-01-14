@@ -1,15 +1,13 @@
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { languageReducer, navReducer } from './src/redux/reducers';
+import { createStore, combineReducers } from 'redux';
+import { languageReducer } from './reducers';
 
 const reducer =  combineReducers({
   language: languageReducer,
-  nav: navReducer
 })
 
 const initialState = {
   language: 'MAGYAR',
-  nav:'Home'
 }
 
 
