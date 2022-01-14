@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/mikloska/feszer#readme",
   "dependencies": {
+    "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@material-ui/core": "^4.12.3",
