@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
+import { LanguageContext } from '../../App';
 import {Typography, Grid, Paper, Box} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ReactCardFlip from 'react-card-flip';
 import { AboutMembersText } from '../Text/AboutMembersText';
@@ -26,9 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-
 const People = ({musicianFirstName, musicianLastName}) => {
-  const language = useSelector((state) => state.language)
+  const {language} = useContext(LanguageContext)
   const classes = useStyles();
   const cleanName =  musicianFirstName.replace('ó','o').replace('ö','o').replace('á','a')
   const lowerCaseFirstName = musicianFirstName.charAt(0).toLowerCase() + musicianFirstName.slice(1)

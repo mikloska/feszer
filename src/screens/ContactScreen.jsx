@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux'
-import {Avatar, Button, Card, TextField, Link, Grid, Box, Paper, Typography, Divider, Container, List, ListItem} from '@material-ui/core';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React, { useState, useContext } from 'react';
+import { LanguageContext } from '../../App';
+import { Avatar, Button, Card, TextField,  Box, Paper, Typography, Container, List } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import emailjs from 'emailjs-com';
 import EmailIcon from '@material-ui/icons/Email';
@@ -12,18 +11,13 @@ const useStyles = makeStyles((theme) => ({
   card: {
     paddingLeft:20,
     paddingRight:20
-    // padding: theme.spacing(5),
-    // height="100%"
   },
   paper: {
-    // marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   avatar: {
-    // backgroundColor:'#067e78'
-    // margin: theme.spacing(1),
     backgroundColor: theme.palette.primary.main,
   },
   form: {
@@ -42,9 +36,7 @@ const ContactScreen = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [alert, setAlert] = useState(false);
-  const language = useSelector((state) => state.language)
-
-
+  const {language} = useContext(LanguageContext)
   const classes = useStyles();
 
   const sendEmail =(e) =>{

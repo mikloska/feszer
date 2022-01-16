@@ -1,12 +1,10 @@
-import React, {useState,useEffect} from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Button, TextField, Badge, Box} from '@material-ui/core';
+import React, {useState, useEffect, useContext} from 'react';
+import { LanguageContext } from '../../App';
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Box } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import LanguageIcon from '@material-ui/icons/Language';
 import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeLanguage } from '../redux/actions'
-import { CHANGE_LANGUAGE } from '../redux/constants';
 import { useLocation } from 'react-router-dom'
 
 
@@ -17,9 +15,6 @@ const useStyles = makeStyles((theme) => ({
   stylebar:{
     background: 'white'
   },
-  // Icons:{
-  //   background: 'black'
-  // },
   logo: {
     width:'100%',
     marginTop: 10,
@@ -34,13 +29,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    // display: 'none',
-    // [theme.breakpoints.up('sm')]: {
-    //   display: 'block',
-    // },
-  },
-
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -52,12 +40,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
-  },
-  title: {
-    // display: 'none',
-    // [theme.breakpoints.up('sm')]: {
-    //   display: 'block',
-    // },
   },
   NotVisiting:{
     color: 'black', 
@@ -79,38 +61,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar= () => {
+  const {language, setLanguage} = useContext(LanguageContext)
   const [nav,setNav]=useState('')
   const location = useLocation();
-  // setNav(location.pathName)
-  // console.log('location: ', location.pathname)
-  // setNav(location.pathName)
-  const dispatch = useDispatch()
   const classes = useStyles();
-  const language = useSelector((state) => state.language)
-  const [siteLanguage, setSiteLanguage] = useState(language)
   const handleLanguage = () =>{
-    dispatch(changeLanguage())
+    language === 'MAGYAR' ? setLanguage('ENGLISH') : setLanguage('MAGYAR')
   }
 
   useEffect(()=>{
-    setSiteLanguage(language)
     setNav(location.pathname)
-    // console.log(nav)
 
   }, [language, location])
 
-
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -148,14 +116,7 @@ const Navbar= () => {
   return (
     <div className={classes.grow} style={{marginBottom:35}}>
       <AppBar position="static" className={classes.stylebar}>
-        <Toolbar>
-          
-          {/* <Image alt="Example Alt" src="https://sikra.s3.us-east-2.amazonaws.com/logo-%2Bhigh%2Bres4.png" /> */}
-          {/* <Typography style={{ color: 'inherit', textDecoration: 'inherit'}} component={RouterLink} to='/' className={classes.title} variant="h6" noWrap>
-            Sikra Jewelry
-          </Typography> */}
-          
-
+        <Toolbar>     
           <Typography variant="h6" className={classes.title} component={RouterLink} to='/'>
             {/* <Box height="100%"> */}
             <Box width={1/2}><img
@@ -189,18 +150,14 @@ const Navbar= () => {
             </Typography>
           </div>
           <Box style={{display:'flex',flexDirection:'column', paddingBottom:10, marginRight:20, textAlign:'center'}}>
-            <IconButton style={{paddingBottom:0}} onClick={handleLanguage}>
-              <LanguageIcon fontSize='small'/>
+            <IconButton style={{paddingBottom:0, height:40}} onClick={handleLanguage}>
+              <LanguageIcon style={{paddingBottom:10}} fontSize='small'/>
             </IconButton>
-          <Typography style={{fontSize:'.5rem', color:'rgba(0, 0, 0, 0.54)'}}>{siteLanguage}</Typography>
+          <Typography style={{fontSize:'.5rem', color:'rgba(0, 0, 0, 0.54)'}}>{language}</Typography>
           </Box>
           <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
+            <IconButton aria-label="show more" aria-controls={mobileMenuId} aria-haspopup="true"
+              onClick={handleMobileMenuOpen}  color="inherit"
             >
               <MenuIcon style={{color:"black", marginRight:10}}/>
             </IconButton>

@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { LanguageContext } from '../../App';
 import {Typography, Grid} from '@material-ui/core';
-import { useSelector } from 'react-redux';
 import Person from '../components/Person'
 
 
 const AboutScreen = () =>{
-  const language = useSelector((state) => state.language)
-
+  const {language} = useContext(LanguageContext)
   return (
     <div>
       <Typography variant ='h3'>{language === 'MAGYAR' ? 'About Us' : 'Rólunk'}</Typography>

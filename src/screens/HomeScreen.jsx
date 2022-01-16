@@ -1,13 +1,11 @@
 import { Typography, Grid, Button } from '@material-ui/core'
-import React from 'react'
-import { useSelector } from 'react-redux';
+import { LanguageContext } from '../../App';
+import React, { useContext } from 'react'
 import { Link as RouterLink } from 'react-router-dom';
 import {AboutBandText} from '../Text/AboutBandText'
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const HomeScreen = () =>{
-  // const isSmall = useMediaQuery("max-width:400, max:height:200")
-  const language = useSelector((state) => state.language)
+  const {language} = useContext(LanguageContext)
   return (
     <Grid container justifyContent='center' alignItems='center' spacing={6} >
       <Grid item md={5} sm={12} style={{textAlign:'left'}}>
@@ -17,7 +15,6 @@ const HomeScreen = () =>{
       <Grid item  md={5} sm={12} style={{textAlign:'left'}}>
         <Typography>{language==='MAGYAR'?
           AboutBandText.English:AboutBandText.Magyar}</Typography>
-
         <Grid item  md={4} sm={12} style={{textAlign:'center'}}>
           <RouterLink to='/about' style={{color:'none',textDecoration:'none'}}>
             <Button variant="contained" color="primary" style={{marginTop:20}}>{language === 'MAGYAR' ? 'The Band' : 'A Zenekar'}</Button>
