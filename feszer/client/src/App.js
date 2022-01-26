@@ -1,12 +1,12 @@
 import React, { useState, createContext } from 'react';
-import Navbar from './src/components/Navbar';
-import Footer from './src/components/Footer';
-import NotFound from './src/components/NotFound';
-import AboutScreen from './src/screens/AboutScreen';
-import ContactScreen from './src/screens/ContactScreen';
-import EventsScreen from './src/screens/EventsScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import GalleryScreen from './src/screens/GalleryScreen';
+import Navbar from './public/components/Navbar';
+import Footer from './public/components/Footer';
+import NotFound from './public/components/NotFound';
+import AboutScreen from './public/screens/AboutScreen';
+import ContactScreen from './public/screens/ContactScreen';
+import EventsScreen from './public/screens/EventsScreen';
+import HomeScreen from './public/screens/HomeScreen';
+import GalleryScreen from './public/screens/GalleryScreen';
 import Container from '@material-ui/core/Container'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
