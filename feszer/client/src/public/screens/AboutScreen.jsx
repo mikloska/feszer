@@ -10,7 +10,7 @@ const AboutScreen = () =>{
     <div>
       <Typography variant ='h3'>{language === 'MAGYAR' ? 'About Us' : 'Rólunk'}</Typography>
       <Grid container style={{marginTop:0}} spacing={6} justifyContent='center' alignItems='center'>
-        <Person musicianFirstName='Hunor' musicianLastName='Kiss'/>
+        <Person musicianFirstName='Hunor' musicianLastName='Kosbor'/>
         <Person musicianFirstName='Bence' musicianLastName='Kalán'/>        
         <Person musicianFirstName='Iza' musicianLastName='Valcuha'/> 
         <Person musicianFirstName='György' musicianLastName='Kalán'/>

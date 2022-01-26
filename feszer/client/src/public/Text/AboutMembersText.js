@@ -10,9 +10,8 @@ export const AboutMembersText =
     English:`Bence was born in New York and is a first generation American-Hungarian. He has been a strong part of the
     Hungarian community in New York City and New Jersey. He has been playing the violin for eleven years now and has been to many
     recitals, festival, performances. He also plays two traditional Hungarian folk violas.`,
-    magyar: `Bence New Yorkban született mint első generációs amerikai-magyar. Erős része a
-    New York-i és New Jersey-i magyar közösségnek. Immár tizenegy éve hegedül, és számos
-    előadáson és fesztiválon fellépett. Két hagyományos magyar népi brácsán is játszik.`,
+    magyar: `Bence New Yorkban született első generációs amerikai magyarként. A New York-i és New Jersey-i magyar közösség aktív tagja. 
+    Immár tizenegy éve hegedül, és számos előadáson és fesztiválon fellépett. Két hagyományos magyar népi brácsán is játszik.`,
     EnglishInstruments: 'violin, viola',
     magyarHangszerek: 'hegedű, brácsa'
   },
@@ -57,7 +56,10 @@ export const AboutMembersText =
     has been learning from the master Hungarian folk accordionist Zoltán Bobár. Miklós currently resides 
     in New Jersey and is an active member of the Hungrian folk scene in New York and New Jersey. Whenever 
     he is not playing music at a dance house, he is dancing.`,
-    magyar: ``,
+    magyar: `Miklós New Jerseyben született, és már kisgyermekként találkozott magyar népzenével és tánccal, 14 éves kora óta aktívan foglalkozik vele. 
+    Egyetemi tanulmányai befejezése után Budapesten élt néhány évig ahol tovább bővítette zenei és táncos tudását. 
+    Harmonikázni a magyar népzenei harmonika kiemelkedő mesterétől, Bobár Zoltántól tanult. 
+    Miklós jelenleg New Jerseyben él és aktív része a New Yorki és környéki népzenei életnek, amikor épp nem zenél, akkor táncol is a táncházakban.`,
     EnglishInstruments: 'accordion, viola',
     magyarHangszerek: 'harmonika, brácsa'
   },
