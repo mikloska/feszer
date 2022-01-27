@@ -55,7 +55,8 @@ module.exports = {
   devServer: {
     //This is needed to allow entry into app from places other than the root
     historyApiFallback: true,
-    publicPath: '/build/',
+    //Having '/build/' in puclicPath, was the reason I had to keep changing the src tag in the root index.html.
+    publicPath: '/',
     // proxy: {
     //   '/api': 'http://localhost:5000',
     // },
