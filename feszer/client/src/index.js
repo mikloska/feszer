@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { ThemeProvider } from "@material-ui/core";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import App from './App'
-import { createTheme } from '@material-ui/core/styles';
 
 
 const theme = createTheme({

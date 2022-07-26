@@ -1,11 +1,11 @@
-import { Typography, Grid, Button } from '@material-ui/core'
-import { LanguageContext } from '../../App';
+import { Typography, Grid, Button } from '@mui/material'
+import { AppContext } from '../../App';
 import React, { useContext } from 'react'
 import { Link as RouterLink } from 'react-router-dom';
 import {AboutBandText} from '../Text/AboutBandText'
 
 const HomeScreen = () =>{
-  const {language} = useContext(LanguageContext)
+  const {language} = useContext(AppContext)
   return (
     <Grid container justifyContent='center' alignItems='center' spacing={6} >
       <Grid item md={5} sm={12} style={{textAlign:'left'}}>

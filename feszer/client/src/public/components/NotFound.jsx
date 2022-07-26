@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
-import {Alert} from '@material-ui/lab';
+import {Alert} from '@mui/lab';
 import { useLocation } from 'react-router-dom'
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
 const NotFound = () =>{
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, styled } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import {Grid, Typography} from '@material-ui/core'
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import { makeStyles, styled } from '@mui/styles';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import {Grid, Typography} from '@mui/material'
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import { Link as RouterLink } from 'react-router-dom';
 
 const CustomScroll = styled(PlayCircleFilledIcon)({
@@ -15,13 +15,12 @@ const CustomScroll = styled(PlayCircleFilledIcon)({
 
 const useStyles = makeStyles({
   root: {
-    bottom: 0,
-    marginTop:'auto',
+    // bottom: 0,
     backgroundColor: '#c8d4e8',
     width: "100%",
     marginTop : 35,
-    paddingTop: 35,
-    height: 260
+    // paddingTop: 35,
+    height: 260,
   },
   FooterNav: {
     // marginTop: 70

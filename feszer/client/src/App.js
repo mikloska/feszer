@@ -7,18 +7,19 @@ import ContactScreen from './public/screens/ContactScreen';
 import EventsScreen from './public/screens/EventsScreen';
 import HomeScreen from './public/screens/HomeScreen';
 import GalleryScreen from './public/screens/GalleryScreen';
-import Container from '@material-ui/core/Container'
+import Container from '@mui/material/Container'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-export const LanguageContext = createContext();
+export const AppContext = createContext();
 
 const App = () => {
   const [language, setLanguage] = useState('MAGYAR')
+  const [loggedIn, setLoggedIn] = useState(false)
   return (
     <Router>
       <>
         <div className = 'page-wrap'>
-          <LanguageContext.Provider value={{language, setLanguage}}>
+          <AppContext.Provider value={{language, setLanguage, loggedIn, setLoggedIn}}>
             <Navbar/>
             <Container className='main-container'>
               <Switch>
@@ -35,7 +36,8 @@ const App = () => {
                 
               </Switch>
             </Container>
-          </LanguageContext.Provider>
+          </AppContext.Provider>
+          <div className="push"></div>
         </div>
         <Footer />
           

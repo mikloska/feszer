@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { LanguageContext } from '../../App';
-import {Typography, Grid} from '@material-ui/core';
+import { AppContext } from '../../App';
+import {Typography, Grid} from '@mui/material';
 import Person from '../components/Person'
 
 
 const AboutScreen = () =>{
-  const {language} = useContext(LanguageContext)
+  const {language} = useContext(AppContext)
   return (
     <div>
       <Typography variant ='h3'>{language === 'MAGYAR' ? 'About Us' : 'Rólunk'}</Typography>

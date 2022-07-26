@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { LanguageContext } from '../../App';
-import { Avatar, Button, Card, TextField,  Box, Paper, Typography, Container, List } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { AppContext } from '../../App';
+import { Avatar, Button, Card, TextField,  Box, Paper, Typography, Container, List } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import emailjs from 'emailjs-com';
-import EmailIcon from '@material-ui/icons/Email';
-import Alert from '@material-ui/lab/Alert';
+import EmailIcon from '@mui/icons-material/Email';
+import Alert from '@mui/lab/Alert';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ const ContactScreen = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [alert, setAlert] = useState(false);
-  const {language} = useContext(LanguageContext)
+  const {language} = useContext(AppContext)
   const classes = useStyles();
 
   const sendEmail =(e) =>{

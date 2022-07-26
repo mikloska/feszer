@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { LanguageContext } from '../../App';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Box } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import LanguageIcon from '@material-ui/icons/Language';
+import { AppContext } from '../../App';
+import { makeStyles } from '@mui/styles';
+import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Box } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import LanguageIcon from '@mui/icons-material/Language';
 import { Link as RouterLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
+import LoginDialog from './LoginDialog';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,12 +62,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar= () => {
-  const {language, setLanguage} = useContext(LanguageContext)
+  const {language, setLanguage} = useContext(AppContext)
   const [nav,setNav]=useState('')
   const location = useLocation();
   const classes = useStyles();
   const handleLanguage = () =>{
     language === 'MAGYAR' ? setLanguage('ENGLISH') : setLanguage('MAGYAR')
+  }
+  const login = () => {
+
   }
 
   useEffect(()=>{
@@ -97,7 +101,7 @@ const Navbar= () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem component={RouterLink} to='/about' onClick={handleMobileMenuClose}>
+      <MenuItem component={RouterLink} to='/about' onClick={handleMobileMenuClose} style={{marginRight: '20px'}}>
         {language === 'MAGYAR' ? 'About Us' : 'Rólunk'}
       </MenuItem>
       <MenuItem component={RouterLink} to='/events' onClick={handleMobileMenuClose}>
@@ -115,7 +119,7 @@ const Navbar= () => {
 
   return (
     <div className={classes.grow} style={{marginBottom:35}}>
-      <AppBar position="static" className={classes.stylebar}>
+      <AppBar position="static" className={classes.stylebar} style={{backgroundColor: 'white'}}>
         <Toolbar>     
           <Typography variant="h6" className={classes.title} component={RouterLink} to='/'>
             {/* <Box height="100%"> */}
@@ -128,12 +132,12 @@ const Navbar= () => {
           <div className={classes.grow} />
    
           <div className={classes.sectionDesktop}>
-            <Typography aria-label="about" aria-controls="about" color="inherit"
+            <Typography aria-label="about" aria-controls="about"  style={{marginRight: '30px'}}
                className={nav==='/about'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/about'
             >
               {language === 'MAGYAR' ? 'About Us' : 'Rólunk'}
             </Typography>
-            <Typography  aria-label="events" aria-controls="events" aria-haspopup="true" color="inherit"
+            <Typography  aria-label="events" aria-controls="events" aria-haspopup="true" style={{marginRight: '30px'}}
               className={nav==='/events'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/events'
             >
               {language === 'MAGYAR' ? 'Events' : 'Események'}
@@ -143,7 +147,7 @@ const Navbar= () => {
             >
               {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
             </Typography> */}
-            <Typography  aria-label="contact" aria-controls="contact" aria-haspopup="true" color="inherit"
+            <Typography  aria-label="contact" aria-controls="contact" aria-haspopup="true" style={{marginRight: '30px'}}
              className={nav==='/contact'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/contact'
             >
               {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
@@ -155,6 +159,7 @@ const Navbar= () => {
             </IconButton>
           <Typography style={{fontSize:'.5rem', color:'rgba(0, 0, 0, 0.54)'}}>{language}</Typography>
           </Box>
+          <LoginDialog/>
           <div className={classes.sectionMobile}>
             <IconButton aria-label="show more" aria-controls={mobileMenuId} aria-haspopup="true"
               onClick={handleMobileMenuOpen}  color="inherit"

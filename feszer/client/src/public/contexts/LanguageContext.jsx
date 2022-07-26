@@ -1,3 +1,3 @@
 import React, { useState, createContext, useEffect } from 'react';
-const LanguageContext = createContext();
+const AppContext = createContext();
 const [language, setLanguage] = useState('MAGYAR')
