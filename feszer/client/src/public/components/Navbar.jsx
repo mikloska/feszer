@@ -19,10 +19,6 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width:'100%',
     marginTop: 10,
-    // marginRight:20
-    // maxWidth: 60,
-
-    // marginRight: "80px",
   },
   grow: {
     flexGrow: 1,
@@ -113,7 +109,6 @@ const Navbar= () => {
       <MenuItem component={RouterLink} to='/contact' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
       </MenuItem>
-
     </Menu>
   );
 
@@ -159,13 +154,17 @@ const Navbar= () => {
             </IconButton>
           <Typography style={{fontSize:'.5rem', color:'rgba(0, 0, 0, 0.54)'}}>{language}</Typography>
           </Box>
-          <LoginDialog/>
+          <div className={classes.sectionDesktop}>
+            <LoginDialog/>
+          </div>
+          
           <div className={classes.sectionMobile}>
             <IconButton aria-label="show more" aria-controls={mobileMenuId} aria-haspopup="true"
               onClick={handleMobileMenuOpen}  color="inherit"
             >
-              <MenuIcon style={{color:"black", marginRight:10}}/>
+              <MenuIcon style={{color:"black"}}/>
             </IconButton>
+            <LoginDialog/>
           </div>
 
 

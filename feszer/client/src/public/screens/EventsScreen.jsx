@@ -14,49 +14,51 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import { AppContext } from '../../App';
 
-const columns = [
-  { id: 'name', label: 'Event', minWidth: 170 },
-  { id: 'location', label: 'Location', minWidth: 100 },
-  {
-    id: 'address',
-    label: 'Address',
-    minWidth: 170,
-  },
-  {
-    id: 'dateAndTime',
-    label: 'Date & Time',
-    minWidth: 170,
-  },
-  {
-    id: 'modify',
-    label: 'Modify',
-    minWidth: 170,
-  },
-];
 
-const createData = (name, location, address, dateAndTime, modify) => {
-  return { name, location, address, dateAndTime, modify };
-}
-
-const rows = [
-  createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-];
 
 const EventsScreen = () => {
   const {loggedIn} = useContext(AppContext)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [columns, setColumns] = useState([
+      { id: 'name', label: 'Event', minWidth: 100 },
+      { id: 'location', label: 'Location', minWidth: 100 },
+      { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
+      { id: 'dateAndTime', label: 'Date & Time', minWidth: 90, maxWidth: 150 },
+    ] 
+  );
+
+  
+  const createData = (name, location, address, dateAndTime, modify) => {
+    return { name, location, address, dateAndTime, modify };
+  }
+  
+  const rows = [
+    createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023 4:20 PM'),
+    createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023 4:20 PM'),
+    createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023 4:20 PM'),
+    createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
+    createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023 4:20 PM'),
+  ];
+
+  useEffect(()=> {
+    if(loggedIn){
+      setColumns(current => [...current, { id: 'modify', label: 'Modify', minWidth: 40 }])
+    }
+    if(!loggedIn && columns.length === 5){
+      setColumns([
+        ...columns.slice(0, 4)
+      ]);
+    }
+  }, [loggedIn])
+
 
 
   const handleChangePage = (event, newPage) => {
@@ -68,25 +70,9 @@ const EventsScreen = () => {
     setPage(0);
   };
 
-  const finalColumns = []
-  for(let i = 0; i < columns.length; i++){
-    if(columns[i].id === 'modify' && !loggedIn){
-      break
-    } else {
-      finalColumns.push(
-        <TableCell
-          key={columns[i].id}
-          align={columns[i].align}
-          style={{ top: 57, minWidth: columns[i].minWidth, fontWeight: 'bold' }}
-        >
-          {columns[i].label}
-        </TableCell>
-      )
-    }
-  }
-
   return (
-    <Paper sx={{ width: '100%' }}>
+    <Paper > 
+      {/* sx={{ width: '100%' }} */}
       <TableContainer sx={{ minHeight: 440 }} style={{overflowX: 'auto'}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -96,7 +82,16 @@ const EventsScreen = () => {
               </TableCell>
             </TableRow>
             <TableRow>
-            {finalColumns}
+              {columns.map(column => (
+                <TableCell
+                key={column.id}
+                align={column.align}
+                style={{ top: 57, minWidth: column.minWidth, maxWidth: column.maxWidth, fontWeight: 'bold' }}
+              >
+                {column.label}
+              </TableCell>
+                    
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -111,10 +106,10 @@ const EventsScreen = () => {
                         <TableCell key={`${column.id}-${column.label}`} align={column.align}>
                           {(column.id === 'modify' && loggedIn) ?
                           <>
-                            <IconButton style={{paddingBottom:0, height:7}}>
+                            <IconButton>
                               <DeleteIcon fontSize='small'/>
                             </IconButton>
-                            <IconButton style={{paddingBottom:0, height:7}}>
+                            <IconButton>
                               <EditIcon fontSize='small'/>
                             </IconButton>
                           </>
@@ -131,6 +126,7 @@ const EventsScreen = () => {
         </Table>
       </TableContainer>
       <TablePagination
+        style={{overflowX: 'hidden'}}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}

@@ -45,12 +45,12 @@ const LoginDialog = () => {
     <div>
       
         {loggedIn ? 
-          <IconButton style={{paddingBottom:0, height:7}} onClick={() => setLoggedIn(false)}>
-            <VpnKeyOffIcon style={{paddingBottom:40}} fontSize='small'/>
+          <IconButton style={{marginBottom:40}} onClick={() => setLoggedIn(false)}>
+            <VpnKeyOffIcon fontSize='small'/>
           </IconButton>
            :
-          <IconButton style={{paddingBottom:0, height:7}} onClick={handleClickOpen}>
-            <VpnKeyIcon style={{paddingBottom:40}} fontSize='small'/>
+          <IconButton style={{marginBottom:40}} onClick={handleClickOpen}>
+            <VpnKeyIcon fontSize='small'/>
           </IconButton>
         }
         
