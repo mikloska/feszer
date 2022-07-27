@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import { AppContext } from '../../App';
+import EventAdditionDialog from '../components/Events/EventAdditionDialog';
 
 
 
@@ -78,7 +79,12 @@ const EventsScreen = () => {
           <TableHead>
             <TableRow>
               <TableCell align="left" colSpan={loggedIn ? 5 : 4} >
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <Typography style={{fontSize: 'h6.fontSize', fontWeight: 'bold'}}>Upcoming Events</Typography>
+                {loggedIn &&
+                  <EventAdditionDialog/>
+                }
+                </div>
               </TableCell>
             </TableRow>
             <TableRow>
