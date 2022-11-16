@@ -6,8 +6,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import EventIcon from '@mui/icons-material/Event';
-import { IconButton } from '@mui/material';
 import DateTimePicker from 'react-datetime-picker';
 
 const EventAdditionDialog = () => {
@@ -50,8 +48,7 @@ const EventAdditionDialog = () => {
      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Event</DialogTitle>
-        {
-          error &&
+        {error &&
           <Alert severity="error">Fill out all fields!</Alert>
         }
         <DialogContent>
