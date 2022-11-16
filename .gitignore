@@ -1,5 +1,5 @@
 client/img
-client/node_modules
+node_modules
 .vscode
 readme_images
 client/feszer_logo
