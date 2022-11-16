@@ -3,3 +3,4 @@ src/node_modules
 .vscode
 readme_images
 src/feszer_logo
+.env
