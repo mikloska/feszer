@@ -23,12 +23,13 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
+    fallback: { "fs": false, "os" : false, "path" : false }
   },
   module: {
     rules: [
       {
         test: /\.jsx?/,
-        exclude: /(node_modules|bower_components)/,
+       exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
           options: {

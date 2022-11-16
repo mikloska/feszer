@@ -24,6 +24,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
