@@ -1,6 +1,6 @@
-src/img
-src/node_modules
+client/img
+client/node_modules
 .vscode
 readme_images
-src/feszer_logo
+client/feszer_logo
 .env
