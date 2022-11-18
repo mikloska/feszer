@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {   
   Paper,
   Table,
@@ -14,11 +14,12 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+import { AppContext } from '../../../../App';
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog';
 
 const UpcomingEvents = ({ loggedIn }) => {
-
+  const {language} = useContext(AppContext)
   useEffect(()=> {
     if(loggedIn){
       setColumns(current => [...current, { id: 'modify', label: 'Modify', minWidth: 40 }])
@@ -54,7 +55,9 @@ const UpcomingEvents = ({ loggedIn }) => {
             <TableRow>
               <TableCell align="left" colSpan={loggedIn ? 5 : 4} >
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
-                <Typography style={{fontSize: 'h6.fontSize', fontWeight: 'bold'}}>Upcoming Events</Typography>
+                <Typography style={{fontSize: 'h6.fontSize', fontWeight: 'bold'}}>
+                  {language === 'MAGYAR' ? 'Upcoming Events' : 'Közelgő események'}
+                </Typography>
                 {loggedIn &&
                   <EventAdditionDialog/>
                 }

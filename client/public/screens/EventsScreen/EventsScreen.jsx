@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Box,
   Button,
@@ -22,6 +22,7 @@ import PastEventsModal from './PastEventsModal';
 
 
 const EventsScreen = () => {
+  const {language} = useContext(AppContext)
   const date = new Date()
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const {loggedIn} = useContext(AppContext)
@@ -66,7 +67,9 @@ const EventsScreen = () => {
   return (
     <>
       <UpcomingEvents loggedIn={loggedIn}/>
-      <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>View Past Events</Button>
+      <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
+        {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
+      </Button>
       <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal}/>
     </>
   );
