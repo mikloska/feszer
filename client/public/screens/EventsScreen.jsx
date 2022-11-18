@@ -28,8 +28,12 @@ import { AppContext } from '../../App';
 import EventAdditionDialog from '../components/Events/EventAdditionDialog';
 
 const EventsScreen = () => {
+  const date = new Date()
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const {loggedIn} = useContext(AppContext)
   const [page, setPage] = useState(0);
+  const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  // const [currentDate, setCurrentDate] = useState(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`)
   const createData = ([name, location, address, dateAndTime, modify]) => {
     return { name, location, address, dateAndTime, modify };
   }
@@ -43,24 +47,12 @@ const EventsScreen = () => {
   );
 
   const [rows, setRows] = useState([
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2030 4:20 PM'},
-    {name: 'TH33', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'October 22, 2022'},
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'September 20, 2022'},
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2027 4:20 PM'},
-    {name: 'TH6', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2023 4:20 PM'},
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2039 4:20 PM'},
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2030 4:20 PM'},
-    {name: 'Concert', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2032 4:20 PM'},
-    {name: 'Stupid Show', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2030 4:20 PM'},
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2030 4:20 PM'},
-    {name: 'TH1', 'location': 'HAAC', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 21, 2063 4:20 PM'},
-    {name: '7 Tribesname', 'location': 'Strip Club', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2034 4:20 PM'},
-    {name: 'IDK', 'location': 'Back Yard', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'April 20, 2030 4:20 PM'},
-    {name: 'TH1', 'location': 'Hell', 'address': '123 Plum St. New Brunswick, NJ 111111', 'dateAndTime': 'February 20, 2032 4:20 PM'},
+    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM'},
+    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM'},
+    {name: 'Mikulás (Santa Claus)', 'location': 'Darrida Foundation', 'address': '', 'dateAndTime': ''},
+    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM'},
   ])
 
-  
-  
   // const rows = [
   //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2030 4:20 PM'),
   //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'October 22, 2022'),
@@ -98,6 +90,9 @@ const EventsScreen = () => {
     }
   }, [loggedIn])
 
+  useEffect(() => {
+    console.log(currentDate)
+  }, [])
 
 
   const handleChangePage = (event, newPage) => {

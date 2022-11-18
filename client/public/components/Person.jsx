@@ -9,13 +9,15 @@ import { AboutMembersText } from '../Text/AboutMembersText';
 const useStyles = makeStyles((theme) => ({
   Box: {
     width:355,
-    height:360
+    height:390
   },
   Media:{
     maxWidth:'100%'
   },
   Heading:{
-    padding:5
+    padding:5,
+    fontSize: 900,
+    fontWeight: 'bold'
   },
   More:{
     float:'right',
@@ -40,29 +42,29 @@ const People = ({musicianFirstName, musicianLastName}) => {
   }
   return(
     <Grid item s={12} m={3}>
-    <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
-      <Paper elevation={3}>
-        <Box className={classes.Box}>
-        <img src={`https://feszer-band.s3.amazonaws.com/${cleanName}.jpg`} className={classes.Media}/> 
-        </Box>
-        <Typography className={classes.Heading}>
-          {language === 'MAGYAR' ?  EnglishHeading : magyarCim}
-          <ExpandMoreIcon id={lowerCaseFirstName} className={classes.More} value={lowerCaseFirstName} onClick={handleFlip}/>
-        </Typography>
-      </Paper>
-
-      <Paper elevation={3}>
-        <Box className={classes.Box}>
-          <Typography style={{padding:5}}>{
-          language === 'MAGYAR' ? AboutMembersText[`${cleanName}`].English : AboutMembersText[`${cleanName}`].magyar
-            }
+      <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
+        <Paper elevation={3}>
+          <Box className={classes.Box}>
+          <img src={`https://feszer-band.s3.amazonaws.com/${cleanName}.jpg`} className={classes.Media}/> 
+          </Box>
+          <Typography sx = {{fontWeight: 'bold'}} className={classes.Heading}>
+            {language === 'MAGYAR' ?  EnglishHeading : magyarCim}
+            <ExpandMoreIcon id={lowerCaseFirstName} className={classes.More} value={lowerCaseFirstName} onClick={handleFlip}/>
           </Typography>
-        </Box>
-        <Typography className={classes.Heading}>
-          {language === 'MAGYAR' ? EnglishHeading : magyarCim}
-          <ExpandMoreIcon id={lowerCaseFirstName} className={classes.More} onClick={handleFlip}/>
-        </Typography>
-      </Paper>
+        </Paper>
+
+        <Paper elevation={3}>
+          <Box className={classes.Box}>
+            <Typography style={{padding:5}}>{
+            language === 'MAGYAR' ? AboutMembersText[`${cleanName}`].English : AboutMembersText[`${cleanName}`].magyar
+              }
+            </Typography>
+          </Box>
+          <Typography sx = {{fontWeight: 'bold'}} className={classes.Heading}>
+            {language === 'MAGYAR' ? EnglishHeading : magyarCim}
+            <ExpandMoreIcon id={lowerCaseFirstName} className={classes.More} onClick={handleFlip}/>
+          </Typography>
+        </Paper>
       </ReactCardFlip>
     </Grid>
   )

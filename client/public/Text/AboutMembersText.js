@@ -2,7 +2,14 @@ export const AboutMembersText =
 {
   Hunor: {
     English:``,
-    Magyar: ``,
+    magyar: `Hunor népzenei és néptáncos környezetben nőtt fel. 4 évesen kezdett el hegedülni,
+      klasszikust és népit. 10 éves kora óta minden nyarát Erdélyben vagy Magyarországon tölti népzenei és
+      néptánc táborokban, ahol kiváló hegedűtanároktól és adatközlőktől tanul hegedülni és táncolni.
+      A pandémia ideje alatt alakult ki a Fészer banda. A zenekar prímásaként Hunornak a
+      legfontosabb, hogy autentikus magyar népzenét játsszon az eredeti hangzás megőrzésével.
+      A népzenén kívül a néptánc is fontos a Hunor életében. Jelenleg a Csűrdöngölő felnőtt
+      együttesben, valamint a Mákvirág együttes ifjúsági csoportjában táncol és a Mákvirág egyik
+      gyerekcsoportjának a tánctanára.`,
     EnglishInstruments: 'violin, viola',
     magyarHangszerek: 'hegedű, brácsa'
   },

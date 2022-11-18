@@ -81,13 +81,14 @@ const ContactScreen = () => {
                     setEmail(e.target.value);
                   }}
                 />
-                <List>
-                  {alert===true && <Alert severity="success">Email sent!</Alert>}
-                </List>
-		            <TextField style={{marginTop:20}} fullWidth multiline aria-label="empty textarea" value={message} 
-                  onChange={(e) => {setMessage(e.target.value);}}
-                placeholder={language === 'MAGYAR' ? 'Message' : 'Üzenet'} name="message"/>
-
+		            <TextField style={{marginTop: 20, marginBottom: 20}} required fullWidth multiline aria-label="empty textarea" value={message} 
+                  onChange={(e) => {setMessage(e.target.value);}} label={language === 'MAGYAR' ? 'Message' : 'Üzenet'} name="message"
+                />
+                {alert===true && 
+                  <List>
+                    <Alert severity="success">Email sent!</Alert>
+                  </List>
+                }
                 <Button value="send" type="submit" fullWidth variant="contained" color="primary" className={classes.submit} > 
                   {language === 'MAGYAR' ? 'Send' : 'Küldés'}
                 </Button>

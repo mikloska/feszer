@@ -103,9 +103,9 @@ const Navbar= () => {
       <MenuItem component={RouterLink} to='/events' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Events' : 'Események'}
       </MenuItem>
-      {/* <MenuItem component={RouterLink} to='/gallery' onClick={handleMobileMenuClose}>
+      <MenuItem component={RouterLink} to='/gallery' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
-      </MenuItem> */}
+      </MenuItem>
       <MenuItem component={RouterLink} to='/contact' onClick={handleMobileMenuClose}>
         {language === 'MAGYAR' ? 'Contact Us' : 'Kapcsolat'}
       </MenuItem>
@@ -137,11 +137,11 @@ const Navbar= () => {
             >
               {language === 'MAGYAR' ? 'Events' : 'Események'}
             </Typography>
-            {/* <Typography  aria-label="gallery" aria-controls="gallery" aria-haspopup="true" color="inherit"
+            <Typography  aria-label="gallery" aria-controls="gallery" aria-haspopup="true" style={{marginRight: '30px'}}
               className={nav==='/gallery'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/gallery'
             >
               {language === 'MAGYAR' ? 'Gallery' : 'Képek'}
-            </Typography> */}
+            </Typography>
             <Typography  aria-label="contact" aria-controls="contact" aria-haspopup="true" style={{marginRight: '30px'}}
              className={nav==='/contact'?classes.Visiting:classes.NotVisiting} component={RouterLink} to='/contact'
             >

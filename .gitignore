@@ -4,3 +4,4 @@ node_modules
 readme_images
 client/feszer_logo
 .env
+build
