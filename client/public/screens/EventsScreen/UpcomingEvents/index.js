@@ -31,9 +31,20 @@ const UpcomingEvents = ({ loggedIn }) => {
     }
   }, [loggedIn])
 
+  useEffect(() => {
+
+  }, [language])
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [columns, setColumns] = useState([
+  const columnsTranslation = {
+    'Event' : 'Esemény',
+    'Location' : 'Helyszín',
+    'Address' : 'Cím',
+    'Date & Time' : 'Dátum és idő'
+  }
+  const [columns, setColumns] = useState(
+    [
       { id: 'name', label: 'Event', minWidth: 100 },
       { id: 'location', label: 'Location', minWidth: 100 },
       { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
@@ -71,7 +82,7 @@ const UpcomingEvents = ({ loggedIn }) => {
                 align={column.align}
                 style={{ top: 57, minWidth: column.minWidth, maxWidth: column.maxWidth, fontWeight: 'bold' }}
               >
-                {column.label}
+                {language === 'MAGYAR' ? column.label : columnsTranslation[column.label]}
               </TableCell>
                     
               ))}
