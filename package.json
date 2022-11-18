@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
-  "type": "module",
   "scripts": {
     "local": "webpack serve --mode development --open --hot",
     "start": "nodemon node server/server.js",
