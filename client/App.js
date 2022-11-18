@@ -4,7 +4,7 @@ import Footer from './public/components/Footer';
 import NotFound from './public/components/NotFound';
 import AboutScreen from './public/screens/AboutScreen';
 import ContactScreen from './public/screens/ContactScreen';
-import EventsScreen from './public/screens/EventsScreen';
+import EventsScreen from './public/screens/EventsScreen/EventsScreen';
 import HomeScreen from './public/screens/HomeScreen';
 import GalleryScreen from './public/screens/GalleryScreen';
 import Container from '@mui/material/Container'

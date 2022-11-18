@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import {
+import React, { useState, useEffect } from 'react'
+import {   
   Paper,
   Table,
   TableBody,
@@ -9,75 +9,15 @@ import {
   TablePagination,
   TableRow,
   Typography,
-  IconButton
+  IconButton 
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import dayjs from 'dayjs'
-import { 
-  LocalizationProvider ,
-  AdapterDayjs,
-  TimePicker,
-  DateTimePicker,
-  DesktopDatePicker,
-  MobileDatePicker
-} from '@mui/x-date-pickers';
+import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
+import EventAdditionDialog from '../../../components/Events/EventAdditionDialog';
 
-import { AppContext } from '../../App';
-import EventAdditionDialog from '../components/Events/EventAdditionDialog';
-
-const EventsScreen = () => {
-  const date = new Date()
-  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const {loggedIn} = useContext(AppContext)
-  const [page, setPage] = useState(0);
-  const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-  // const [currentDate, setCurrentDate] = useState(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`)
-  const createData = ([name, location, address, dateAndTime, modify]) => {
-    return { name, location, address, dateAndTime, modify };
-  }
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [columns, setColumns] = useState([
-      { id: 'name', label: 'Event', minWidth: 100 },
-      { id: 'location', label: 'Location', minWidth: 100 },
-      { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
-      { id: 'dateAndTime', label: 'Date & Time', minWidth: 90, maxWidth: 150 },
-    ] 
-  );
-
-  const [rows, setRows] = useState([
-    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM'},
-    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM'},
-    {name: 'Mikulás (Santa Claus)', 'location': 'Darrida Foundation', 'address': '', 'dateAndTime': ''},
-    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM'},
-  ])
-
-  // const rows = [
-  //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2030 4:20 PM'),
-  //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'October 22, 2022'),
-  //   createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'September 20, 2022'),
-  //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023 4:20 PM'),
-  //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  //   createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2035'),
-  //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 21, 2035 4:20 PM'),
-  //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'August 20, 2022'),
-  //   createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2024'),
-  //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'February 20, 2032 4:20 PM'),
-  // ];
-
-  // useEffect(()=> {
-  //   const sorted = data.sort((date1, date2) => date1.dateAndTime - date2.dateAndTime)
-  //   const processed = sorted.map(el => {
-  //     createData(Object.keys(el))
-  //   })
-  //   const processedTemp = data.map(el => {
-  //     createData(Object.values(el))
-  //   })
-  //   setRows(processedTemp)
-  // }, [])
+const UpcomingEvents = ({ loggedIn }) => {
 
   useEffect(()=> {
     if(loggedIn){
@@ -90,23 +30,24 @@ const EventsScreen = () => {
     }
   }, [loggedIn])
 
-  useEffect(() => {
-    console.log(currentDate)
-  }, [])
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [columns, setColumns] = useState([
+      { id: 'name', label: 'Event', minWidth: 100 },
+      { id: 'location', label: 'Location', minWidth: 100 },
+      { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
+      { id: 'dateAndTime', label: 'Date & Time', minWidth: 90, maxWidth: 150 },
+    ] 
+  );
 
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
+  const [rows, setRows] = useState([
+    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM'},
+    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM'},
+    {name: 'Mikulás (Santa Claus)', 'location': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022'},
+    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM'},
+  ])
   return (
-    <Paper > 
-      {/* sx={{ width: '100%' }} */}
+    <Paper>
       <TableContainer sx={{ minHeight: 440 }} style={{overflowX: 'auto'}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -176,7 +117,7 @@ const EventsScreen = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
-  );
+  )
 }
 
-export default EventsScreen
+export default UpcomingEvents
