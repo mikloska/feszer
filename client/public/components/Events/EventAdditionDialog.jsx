@@ -1,12 +1,10 @@
-import React, {useState, useContext} from 'react';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import DateTimePicker from 'react-datetime-picker';
+import React, { useState } from 'react';
+import {
+  Alert, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle
+} from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 const EventAdditionDialog = () => {
   const [open, setOpen] = useState(false);
@@ -73,6 +71,7 @@ const EventAdditionDialog = () => {
             onChange={e=>setEventLocation(e.target.value)}
           />
           <TextField
+            style={{marginBottom: 20}}
             autoFocus
             margin="dense"
             id="eventAddress"
@@ -82,7 +81,14 @@ const EventAdditionDialog = () => {
             variant="standard"
             onChange={e=>setEventAddress(e.target.value)}
           />
-        <DateTimePicker onChange={setEventDateAndTime} value={eventDateAndTime} />
+        <LocalizationProvider dateAdapter={AdapterDayjs} >
+          <DateTimePicker
+            
+            label="Date & Time"
+            onChange={setEventDateAndTime} value={eventDateAndTime} 
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
         </DialogContent>
         <DialogActions>
           <Button onClick={()=> saveEvent(eventName, eventLocation, eventAddress, eventDateAndTime)}>Save Event</Button>
