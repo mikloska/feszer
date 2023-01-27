@@ -1,11 +1,11 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import morgan from 'morgan'
-import path from 'path'
+const express = require("express")
+const dotenv = require("dotenv")
+const morgan = require("morgan")
+const path = require("path")
 
-import connectDB from './config/db.js'
-import aboutRoutes from './routes/aboutRoute.js'
-import {notFound, errorHandler} from './middleware/errorHandler.js'
+const connectDB = require("./config/db.js")
+const aboutRoutes = require("./routes/aboutRoute.js")
+const {notFound, errorHandler} = require("./middleware/errorHandler.js")
 
 dotenv.config();
 connectDB()
@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json())
 
 app.use('/api/about', aboutRoutes)
-const __dirname = path.resolve()
+// const __dirname = path.resolve()
 
 const root = path.join(__dirname, 'build')
 if (process.env.NODE_ENV === 'production') {

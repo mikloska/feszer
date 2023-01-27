@@ -15,4 +15,4 @@ return res.json({
 // return res
 }
 
-export { notFound, errorHandler }
+module.exports =  { notFound, errorHandler }

@@ -11,8 +11,11 @@ import {
   Typography,
   IconButton 
 } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { 
+  Delete as DeleteIcon,
+  Edit as EditIcon,
+  Image as ImageIcon 
+} from '@mui/icons-material';
 
 import { AppContext } from '../../../../App';
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
@@ -24,9 +27,9 @@ const UpcomingEvents = ({ loggedIn }) => {
     if(loggedIn){
       setColumns(current => [...current, { id: 'modify', label: 'Modify', minWidth: 40 }])
     }
-    if(!loggedIn && columns.length === 5){
+    if(!loggedIn && columns.length === 6){
       setColumns([
-        ...columns.slice(0, 4)
+        ...columns.slice(0, 5)
       ]);
     }
   }, [loggedIn])
@@ -49,14 +52,15 @@ const UpcomingEvents = ({ loggedIn }) => {
       { id: 'location', label: 'Location', minWidth: 100 },
       { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
       { id: 'dateAndTime', label: 'Date & Time', minWidth: 90, maxWidth: 150 },
+      { id: 'flyer', label: 'Flyer', minWidth: 90},
     ] 
   );
 
   const [rows, setRows] = useState([
-    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM'},
-    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM'},
-    {name: 'Mikulás (Santa Claus)', 'location': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022'},
-    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM'},
+    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM', 'flyer': <ImageIcon/>},
+    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM', 'flyer': <ImageIcon/>},
+    {name: 'Mikulás (Santa Claus)', 'location': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022', 'flyer': <ImageIcon/>},
+    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM', 'flyer': <ImageIcon/>},
   ])
   return (
     <Paper>
@@ -64,7 +68,7 @@ const UpcomingEvents = ({ loggedIn }) => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left" colSpan={loggedIn ? 5 : 4} >
+              <TableCell align="left" colSpan={loggedIn ? 6 : 5} >
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <Typography style={{fontSize: 'h6.fontSize', fontWeight: 'bold'}}>
                   {language === 'MAGYAR' ? 'Upcoming Events' : 'Közelgő események'}

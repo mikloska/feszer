@@ -1,4 +1,4 @@
-import About from "../models/aboutModel.js"
+const About = require("../models/aboutModel.js")
 
 const getAboutController = async(req, res, next) => {
   // res.send('It worked!')
@@ -21,4 +21,4 @@ const getAboutController = async(req, res, next) => {
 
 }
 
-export default getAboutController
+module.exports =  getAboutController

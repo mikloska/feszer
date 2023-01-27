@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const aboutSchema= mongoose.Schema({
   English: {
@@ -15,4 +15,4 @@ const aboutSchema= mongoose.Schema({
 )
 
 const About= mongoose.model('About', aboutSchema)
-export default About;
+module.exports =  About;
