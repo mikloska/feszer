@@ -57,10 +57,10 @@ const UpcomingEvents = ({ loggedIn }) => {
   );
 
   const [rows, setRows] = useState([
-    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM', 'flyer': <ImageIcon/>},
-    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM', 'flyer': <ImageIcon/>},
-    {name: 'Mikulás (Santa Claus)', 'location': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022', 'flyer': <ImageIcon/>},
-    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM', 'flyer': <ImageIcon/>},
+    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
+    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM', 'flyer': <IconButton disabled={true} color='primary'><ImageIcon/></IconButton>},
+    {name: 'Mikulás (Santa Claus)', 'location': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
+    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
   ])
   return (
     <Paper>
