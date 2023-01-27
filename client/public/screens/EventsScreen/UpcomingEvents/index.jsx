@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import {   
   Paper,
   Table,
@@ -17,12 +18,12 @@ import {
   Image as ImageIcon 
 } from '@mui/icons-material';
 
-import { AppContext } from '../../../../App';
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog';
 
-const UpcomingEvents = ({ loggedIn }) => {
-  const {language} = useContext(AppContext)
+const UpcomingEvents = () => {
+  const language = useSelector((state) => state.language.value)
+  const loggedIn = useSelector((state) => state.loggedIn.value) 
   useEffect(()=> {
     if(loggedIn){
       setColumns(current => [...current, { id: 'modify', label: 'Modify', minWidth: 40 }])

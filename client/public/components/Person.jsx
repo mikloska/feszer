@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { AppContext } from '../../App';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import {Typography, Grid, Paper, Box} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const People = ({musicianFirstName, musicianLastName}) => {
-  const {language} = useContext(AppContext)
+  const language = useSelector((state) => state.language.value)
   const classes = useStyles();
   const cleanName =  musicianFirstName.replace('ó','o').replace('ö','o').replace('á','a')
   const lowerCaseFirstName = musicianFirstName.charAt(0).toLowerCase() + musicianFirstName.slice(1)

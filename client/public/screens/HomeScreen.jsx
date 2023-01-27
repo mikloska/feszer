@@ -1,11 +1,12 @@
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Typography, Grid, Button } from '@mui/material'
 import { AppContext } from '../../App';
-import React, { useContext } from 'react'
 import { Link as RouterLink } from 'react-router-dom';
 import {AboutBandText} from '../Text/AboutBandText'
 
 const HomeScreen = () =>{
-  const {language} = useContext(AppContext)
+  const language = useSelector((state) => state.language.value)
   return (
     <Grid container justifyContent='center' alignItems='center' spacing={6} >
       <Grid item md={5} sm={12} style={{textAlign:'left'}}>

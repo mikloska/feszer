@@ -1,13 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { AppContext } from '../../App';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@mui/styles';
 import { AppBar, Toolbar, IconButton, Menu, MenuItem, Typography, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LanguageIcon from '@mui/icons-material/Language';
 import { Link as RouterLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
-import LoginDialog from './LoginDialog';
 
+import { changeLanguage } from '../../redux/slices/languageSlice';
+import LoginDialog from './LoginDialog';
 
 const useStyles = makeStyles((theme) => ({
   Badge : {
@@ -58,15 +59,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar= () => {
-  const {language, setLanguage} = useContext(AppContext)
+  const language = useSelector((state) => state.language.value)
+  const dispatch = useDispatch()
   const [nav,setNav]=useState('')
   const location = useLocation();
   const classes = useStyles();
   const handleLanguage = () =>{
-    language === 'MAGYAR' ? setLanguage('ENGLISH') : setLanguage('MAGYAR')
-  }
-  const login = () => {
-
+    dispatch(changeLanguage())
   }
 
   useEffect(()=>{

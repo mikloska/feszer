@@ -1,4 +1,5 @@
-import React, {useState, useContext} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,42 +11,44 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import VpnKeyOffIcon from '@mui/icons-material/VpnKeyOff';
 import { IconButton } from '@mui/material';
 
-import { AppContext } from '../../App';
+import { login, logout } from '../../redux/slices/loginSlice';
 
 const LoginDialog = () => {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(false)
-  const {loggedIn, setLoggedIn} = useContext(AppContext)
+  const [loginError, setLoginError] = useState(false)
+  const loggedIn = useSelector((state) => state.loggedIn.value) 
+  const error = useSelector((state) => state.loggedIn.error)
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setLoginError(false);
     setOpen(false);
   };
 
-  const login = () => {
-    if(userName === 'csiklos' && password === 'banda'){
-      setLoggedIn(true)
-      setError(false)
+  const loginUser = () => {
+    dispatch(login({"username" : userName, "password":password}))
+  }
+
+  useEffect(() => {
+    if(loggedIn) {
+      setLoginError(false)
       setOpen(false)
-    } else {
-      setError(true)
+    } 
+    if(error) {
+      setLoginError(true)
     }
-  }
-
-  const logout = () => {
-      setLoggedIn(true)
-
-  }
+  }, [loggedIn, error])
 
   return (
     <div>
       
         {loggedIn ? 
-          <IconButton style={{marginBottom:40}} onClick={() => setLoggedIn(false)}>
+          <IconButton style={{marginBottom:40}} onClick={() => dispatch(logout())}>
             <VpnKeyOffIcon fontSize='small'/>
           </IconButton>
            :
@@ -58,7 +61,7 @@ const LoginDialog = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Admin Login</DialogTitle>
         {
-          error &&
+          loginError &&
           <Alert severity="error">Username or password is incorrect</Alert>
         }
         <DialogContent>
@@ -84,7 +87,7 @@ const LoginDialog = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={login}>Login</Button>
+          <Button onClick={loginUser}>Login</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

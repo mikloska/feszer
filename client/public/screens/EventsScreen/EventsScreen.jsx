@@ -1,31 +1,16 @@
-import React, { useState, useContext } from 'react';
-import {
-  Box,
-  Button,
-  Paper
-} from '@mui/material'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
+import { Button } from '@mui/material'
 
-import dayjs from 'dayjs'
-import { 
-  LocalizationProvider ,
-  AdapterDayjs,
-  TimePicker,
-  DateTimePicker,
-  DesktopDatePicker,
-  MobileDatePicker
-} from '@mui/x-date-pickers';
-
-import { AppContext } from '../../../App';
-import EventAdditionDialog from '../../components/Events/EventAdditionDialog';
 import UpcomingEvents from './UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
 
 
 const EventsScreen = () => {
-  const {language} = useContext(AppContext)
+  const language = useSelector((state) => state.language.value)
   const date = new Date()
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const {loggedIn} = useContext(AppContext)
+  const loggedIn = useSelector((state) => state.loggedIn.value) 
   const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   // const [currentDate, setCurrentDate] = useState(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`)
 
@@ -66,7 +51,7 @@ const EventsScreen = () => {
 
   return (
     <>
-      <UpcomingEvents loggedIn={loggedIn}/>
+      <UpcomingEvents/>
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>

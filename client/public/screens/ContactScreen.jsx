@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { AppContext } from '../../App';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
 import { Avatar, Button, Card, TextField,  Box, Paper, Typography, Container, List } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import emailjs from 'emailjs-com';
@@ -36,7 +36,7 @@ const ContactScreen = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [alert, setAlert] = useState(false);
-  const {language} = useContext(AppContext)
+  const language = useSelector((state) => state.language.value)
   const classes = useStyles();
 
   const sendEmail =(e) =>{
