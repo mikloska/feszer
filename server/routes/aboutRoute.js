@@ -3,6 +3,6 @@ const getAboutController = require("../controllers/aboutController.js")
 
 const router = express.Router()
 
-router.route('/about').get(getAboutController)
+router.route('/about-band').get(getAboutController)
 
 module.exports = router

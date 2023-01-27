@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 const PORT = process.env.PORT || 3000;
 app.use(express.json())
 
-app.use('/api/about', aboutRoutes)
+app.use('/api', aboutRoutes)
 // const __dirname = path.resolve()
 
 const root = path.join(__dirname, 'build')
