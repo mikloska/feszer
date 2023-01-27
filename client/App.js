@@ -7,12 +7,13 @@ import ContactScreen from './public/screens/ContactScreen';
 import EventsScreen from './public/screens/EventsScreen/EventsScreen';
 import HomeScreen from './public/screens/HomeScreen';
 import GalleryScreen from './public/screens/GalleryScreen';
-import Container from '@mui/material/Container'
+import { Backdrop, Container, CircularProgress } from '@mui/material';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 export const AppContext = createContext();
 
 const App = () => {
+  const [loading, setLoading] = useState(false)
   const [language, setLanguage] = useState('MAGYAR')
   const [loggedIn, setLoggedIn] = useState(false)
   return (
@@ -22,6 +23,9 @@ const App = () => {
           <AppContext.Provider value={{language, setLanguage, loggedIn, setLoggedIn}}>
             <Navbar/>
             <Container className='main-container'>
+          <Backdrop open={loading}>
+            <CircularProgress size='100px' />
+          </Backdrop>
               <Switch>
                 {/* Need to set root to exact in order to not only render homescreen on all paths */}
                 
