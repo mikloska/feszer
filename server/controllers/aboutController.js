@@ -1,24 +1,18 @@
-const About = require("../models/aboutModel.js")
+const client = require("../config/db")
+const { getClient } = require("../config/pool")
 
-const getAboutController = async(req, res, next) => {
-  // res.send('It worked!')
-  try{
-    const about= await About.find({})
-    if(about){
-    //  res.locals.userProfile=({
-     res.json({
-      'about': about
-     })
-    }else{
-      res.status(404)
-      throw new Error('About not found')
-    }
-    next()
-  }catch(error){
+const getAboutController = async (req, res, next) => {
+  try {
+    const selectQuery = "SELECT * FROM about;"
+    const client = await getClient()
+    
+    console.log('client: ', client)
+    const queryResult = await client.query(selectQuery)
+    res.json(queryResult.rows[0])
+  } catch(error) {
     console.error(`Error: ${error.message}`)
-    return next(new Error(`Error in getProfile controller: ${error.message}`))
+    return next(new Error(`Error in about controller: ${error.message}`))
   }
-
 }
 
-module.exports =  getAboutController
+module.exports =  { getAboutController }

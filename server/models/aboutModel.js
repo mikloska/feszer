@@ -1,18 +1,15 @@
 const mongoose = require('mongoose')
 
 const aboutSchema= mongoose.Schema({
-  English: {
-  type: String,
-  required: true
-  },
-  Magyar: {
-    type: String,
-    required: true
-  },
+  English: String,
+  // required: true
+  
+  Magyar: String
+    // required: true
+  
 }, {
-  timestamps: true
-}
-)
+  collection: 'about'
+})
 
-const About= mongoose.model('about', aboutSchema)
+const About= mongoose.model('About', aboutSchema)
 module.exports =  About;

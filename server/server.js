@@ -3,7 +3,8 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const path = require("path")
 
-const connectDB = require("./config/db.js")
+
+const {connectDB}  = require("./config/db.js")
 const aboutRoutes = require("./routes/aboutRoute.js")
 const {notFound, errorHandler} = require("./middleware/errorHandler.js")
 
