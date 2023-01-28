@@ -1,13 +1,17 @@
-const connectDB = require("./client")
+const client = require("./db")
+const { getClient } = require("./pool")
 
-const executeQuery = async (sql, binding) => {
-  const connection = connectDB.connect();
+const executeQuery = async (query, next) => {
   try {
-    const results = await connection.query(sql, binding);
-    return results;
-  } catch (error) {
-    return next(new Error(`Error executing query: ${error.message}`))
+    const client = await getClient()
+    console.log('client: ', client)
+    const queryResult = await client.query(query)
+    return queryResult;
+    // res.json(queryResult.rows[0])
+  } catch(error) {
+    console.error(`Error: ${error.message}`)
+    return next(new Error(`Error running query: ${error.message}`))
   }
 }
 
-module.exports = executeQuery;
+module.exports =  { executeQuery }

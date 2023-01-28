@@ -1,13 +1,11 @@
-const client = require("../config/db")
-const { getClient } = require("../config/pool")
+// const client = require("../config/db")
+// const { getClient } = require("../config/pool")
+const {executeQuery} = require("../config/executeQuery")
 
 const getAboutController = async (req, res, next) => {
   try {
     const selectQuery = "SELECT * FROM about;"
-    const client = await getClient()
-    
-    console.log('client: ', client)
-    const queryResult = await client.query(selectQuery)
+    const queryResult = await executeQuery(selectQuery, next)
     res.json(queryResult.rows[0])
   } catch(error) {
     console.error(`Error: ${error.message}`)
