@@ -15,12 +15,13 @@ const CustomScroll = styled(PlayCircleFilledIcon)({
 
 const useStyles = makeStyles({
   root: {
-    // bottom: 0,
+    position: 'fixed',
+    bottom: 0,
     backgroundColor: '#c8d4e8',
     width: "100%",
     marginTop : 35,
     // paddingTop: 35,
-    height: 260,
+    height: 150,
   },
   FooterNav: {
     // marginTop: 70
