@@ -28,13 +28,15 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const People = ({musicianFirstName, musicianLastName}) => {
+const People = ({
+  musicianFirstName, musicianLastName, englishIntruments, hungarianInstruments, englishBio, hungarianBio
+}) => {
   const language = useSelector((state) => state.language.value)
   const classes = useStyles();
   const cleanName =  musicianFirstName.replace('ó','o').replace('ö','o').replace('á','a')
   const lowerCaseFirstName = musicianFirstName.charAt(0).toLowerCase() + musicianFirstName.slice(1)
-  const EnglishHeading = `${musicianFirstName} ${musicianLastName} - ${AboutMembersText[`${cleanName}`].EnglishInstruments}`
-  const magyarCim = `${musicianLastName} ${musicianFirstName} - ${AboutMembersText[`${cleanName}`].magyarHangszerek}`
+  const EnglishHeading = `${musicianFirstName} ${musicianLastName} - ${englishIntruments}`
+  const magyarCim = `${musicianLastName} ${musicianFirstName} - ${hungarianInstruments}`
   const [flipped, setFlipped] = useState(false)
   const handleFlip = (e) => {
     e.preventDefault();
@@ -56,7 +58,7 @@ const People = ({musicianFirstName, musicianLastName}) => {
         <Paper elevation={3}>
           <Box className={classes.Box}>
             <Typography style={{padding:5}}>{
-            language === 'MAGYAR' ? AboutMembersText[`${cleanName}`].English : AboutMembersText[`${cleanName}`].magyar
+            language === 'MAGYAR' ? englishBio : hungarianBio
               }
             </Typography>
           </Box>

@@ -1,9 +1,9 @@
-const { getClient } = require("./pool")
+const { getPool } = require("./pool")
 
 const executeQuery = async (query, next) => {
   try {
-    const client = await getClient()
-    const queryResult = await client.query(query)
+    const pool = await getPool()
+    const queryResult = await pool.query(query)
     return queryResult;
   } catch(error) {
     console.error(`Error: ${error.message}`)

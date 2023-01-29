@@ -1,25 +1,42 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {Typography, Grid} from '@mui/material';
+
+import { useGetAboutMembersQuery } from '../../redux/slices/aboutMembersSlice';
 import Person from '../components/Person'
+import { changeLoading } from '../../redux/slices/loadingSlice';
 
 
 const AboutScreen = () =>{
+  const dispatch = useDispatch()
   const language = useSelector((state) => state.language.value)
+  const { data, error, isLoading } = useGetAboutMembersQuery()
+  if(data) console.log(data)
+
+  useEffect(() => {
+    if(isLoading){
+      dispatch(changeLoading({"loading":true}))
+    } else {
+      dispatch(changeLoading({"loading":false}))
+    }
+  }, [isLoading])
+
   return (
     <div>
       <Typography variant ='h3'>{language === 'MAGYAR' ? 'About Us' : 'Rólunk'}</Typography>
       <Grid container style={{marginTop:0}} spacing={6} justifyContent='center' alignItems='center'>
-        <Person musicianFirstName='Hunor' musicianLastName='Kosbor'/>
-        <Person musicianFirstName='Bence' musicianLastName='Kalán'/>        
-        <Person musicianFirstName='Iza' musicianLastName='Valcuha'/> 
-        <Person musicianFirstName='György' musicianLastName='Kalán'/>
-        <Person musicianFirstName='Brano' musicianLastName='Brinarsky'/>
-        <Person musicianFirstName='László' musicianLastName='Gáspár'/>
-        <Person musicianFirstName='George' musicianLastName='Petran'/>
-        <Person musicianFirstName='Miklós' musicianLastName='Kertész'/>       
+        {data && data.map((current, index) => (
+          <Person 
+            musicianFirstName={current.first_name} 
+            musicianLastName={current.last_name} 
+            englishIntruments={current.english_instruments}
+            hungarianInstruments={current.hungarian_instruments}
+            englishBio={current.english_bio}
+            hungarianBio={current.hungarian_bio}
+            key={`${current.first_name}-${current.last_name}`}
+          />
+        ))}
       </Grid>
-      
     </div>
   )
 }

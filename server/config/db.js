@@ -1,8 +1,8 @@
-const { createClient } = require("./pool")
+const { createPool } = require("./pool")
 
 const connectDB = async () =>{
   try{
-    await createClient()
+    await createPool()
     console.log('Database is now connected')
   } catch(error){
     console.error(`Error: ${error.message}`)
