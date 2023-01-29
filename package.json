@@ -37,6 +37,7 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^7.5.0",
     "connect-history-api-fallback": "^1.6.0",
+    "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "css-loader": "^6.2.0",
     "dayjs": "^1.11.6",

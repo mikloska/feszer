@@ -1,22 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const initialState = {
-  value : {
-    Magyar: null,
-    English: null
-  }
-}
-
-export const aboutBandSlice = createSlice({
-  name: 'aboutBand',
-  initialState,
-  reducers: {
-    getAbout: (state, payload) => {
-      state.value = action.payload
-    }
-  },
+export const aboutBandApi = createApi({
+  reducerPath: 'aboutApi',
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.URL}),
+  endpoints: (builder) => ({
+    getAboutBand: builder.query({
+      query: () => 'about-band',
+    }),
+  }),
 })
 
-export const { getAbout } = aboutBandSlice.actions
-
-export default aboutBandSlice.reducer
+export const { useGetAboutBandQuery } = aboutBandApi

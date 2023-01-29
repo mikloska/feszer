@@ -8,7 +8,6 @@ const getAboutController = async (req, res, next) => {
     const queryResult = await executeQuery(selectQuery, next)
     res.json(queryResult.rows[0])
   } catch(error) {
-    console.error(`Error: ${error.message}`)
     return next(new Error(`Error in about controller: ${error.message}`))
   }
 }

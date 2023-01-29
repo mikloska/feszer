@@ -2,7 +2,7 @@ const express = require("express")
 const dotenv = require("dotenv")
 const morgan = require("morgan")
 const path = require("path")
-
+const cors = require('cors')
 
 const {connectDB}  = require("./config/db.js")
 const aboutRoutes = require("./routes/aboutRoute.js")
@@ -16,6 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const PORT = process.env.PORT || 3000;
+app.use(cors())
 app.use(express.json())
 
 app.use('/api', aboutRoutes)
