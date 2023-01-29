@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Navbar from './public/components/Navbar';
 import Footer from './public/components/Footer';
 import NotFound from './public/components/NotFound';
@@ -11,14 +12,22 @@ import { Backdrop, Container, CircularProgress } from '@mui/material';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
-  const [loading, setLoading] = useState(false)
+  const [spinnerActive, setSpinnerActive] = useState(false)
+  const loading = useSelector((state) => state.loading.value)
+
+  useEffect(() => {
+    if(loading === false || loading === true) {
+      setSpinnerActive(loading)
+    }
+  }, [loading])
+
   return (
     <Router>
       <>
         <div className = 'page-wrap'>
           <Navbar/>
           <Container className='main-container'>
-            <Backdrop open={loading}>
+            <Backdrop open={spinnerActive}>
               <CircularProgress size='100px' />
             </Backdrop>
             <Switch>

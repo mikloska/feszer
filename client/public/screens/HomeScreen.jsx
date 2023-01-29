@@ -1,15 +1,23 @@
-import React, {useEffect} from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Typography, Grid, Button } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom';
+
+import { changeLoading } from '../../redux/slices/loadingSlice';
 import { useGetAboutBandQuery } from '../../redux/slices/aboutBandSlice';
 
 const HomeScreen = () =>{
+  const dispatch = useDispatch()
   const language = useSelector((state) => state.language.value)
-  const {data} = useGetAboutBandQuery()
-  if(data){
-    console.log(data.english)
-  }
+  const { data, error, isLoading } = useGetAboutBandQuery()
+
+  useEffect(() => {
+    if(isLoading){
+      dispatch(changeLoading({"loading":true}))
+    } else {
+      dispatch(changeLoading({"loading":false}))
+    }
+  }, [isLoading])
   
 
   return (
