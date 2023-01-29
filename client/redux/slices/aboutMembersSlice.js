@@ -7,6 +7,17 @@ export const aboutMembersApi = createApi({
     getAboutMembers: builder.query({
       query: () => 'about-members',
     }),
+    updateAboutMember: builder.mutation({
+      query: (payload) => ({
+        url: '/about-members',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      // invalidatesTags: ['Put'],
+    }),
   }),
 })
 

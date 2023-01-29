@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const People = ({
-  musicianFirstName, musicianLastName, englishIntruments, hungarianInstruments, englishBio, hungarianBio
+  musicianFirstName, musicianLastName, englishIntruments, hungarianInstruments, englishBio, hungarianBio, id
 }) => {
   const language = useSelector((state) => state.language.value)
   const classes = useStyles();

@@ -34,6 +34,7 @@ const AboutScreen = () =>{
             englishBio={current.english_bio}
             hungarianBio={current.hungarian_bio}
             key={`${current.first_name}-${current.last_name}`}
+            id={current.id}
           />
         ))}
       </Grid>
