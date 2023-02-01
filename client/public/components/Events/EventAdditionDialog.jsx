@@ -16,7 +16,6 @@ const EventAdditionDialog = () => {
   const [eventLocation, setEventLocation] = useState('')
   const [eventAddress, setEventAddress] = useState('')
   const [eventDateAndTime, setEventDateAndTime] = useState(new Date())
-  const [processedDateAndTime, setProcessedDateAndTime] = useState('')
   const [eventFlyer, setEventFlyer] = useState('')
 
   const handleClickOpen = () => {
@@ -29,40 +28,34 @@ const EventAdditionDialog = () => {
 
   const setEvent = (event) => {
     setEventDateAndTime(event)
-    // 2/11/2023, 6:26:25 PM
     const dateAndTime = Object.values(event)[2]
     const date = dateAndTime.toDateString();
     const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
-    // const date = `${split[1].slice(0, )} ${split[1]}`
     const newEvent = `${date} ${time}`
-    setProcessedDateAndTime(newEvent)
+    return newEvent;
   }
 
-  useEffect(() => {
-    console.log('processedDateAndTime: ', processedDateAndTime)
-  }, [processedDateAndTime])
-
-  const saveEvent = (eventName, eventLocation, eventAddress, eventDateAndTime) => {
+  const saveEvent = (eventName, eventLocation, eventAddress, eventDateAndTime, eventFlyer) => {
     if(eventName === '' || eventLocation === '' || eventAddress === ''){
       setError(true)
     } else {
+      const newEvent = setEvent(eventDateAndTime)
       setEventName('')
       setEventLocation('')
       setEventAddress('')
       setEventDateAndTime(new Date())
       setError(false)
-      console.log('eventName: ', eventName, 'eventLocation: ', eventLocation, 'eventAddress: ', eventAddress, 'eventDateAndTime: ', eventDateAndTime)
+      setEventFlyer('')
+      console.log('eventName: ', eventName, 'eventLocation: ', eventLocation, 'eventAddress: ', eventAddress, 'newEvent: ', newEvent, 'eventFlyer: ', eventFlyer)
       setOpen(false);
     }
   }
-
 
   return (
     <div>
       <Button variant="contained" onClick={handleClickOpen} style={{marginLeft: 20}}>
         Add Event
       </Button>
-     
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Event</DialogTitle>
         {error &&
@@ -73,7 +66,7 @@ const EventAdditionDialog = () => {
             textId={'eventName'} textLabel={'Event Name'} setFunction={setEventName}
           />
           <TextInput 
-            textId={'eventLocation'} textLabel={'Event Location'} setFunction={setEventLocation}
+            textId={'eventLocation'} textLabel={'Event Venue Name'} setFunction={setEventLocation}
           />
           <TextInput
             textId={'eventAddress'} textLabel={'Event Address'} setFunction={setEventAddress}
@@ -81,22 +74,20 @@ const EventAdditionDialog = () => {
           <TextInput 
             textId={'eventFlyer'} textLabel={'Event Flyer'} setFunction={setEventFlyer} requiredField={false}
           />
-
         </DialogContent>
         <Box style={{width: 150, paddingLeft: 24}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker
             label="Date & Time"
             onChange={(newValue) => {
-              setEvent(newValue);
+              setEventDateAndTime(newValue);
             }} value={eventDateAndTime} 
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
         </Box>
-
         <DialogActions>
-          <Button onClick={()=> saveEvent(eventName, eventLocation, eventAddress, eventDateAndTime)}>Save Event</Button>
+          <Button onClick={()=> saveEvent(eventName, eventLocation, eventAddress, eventDateAndTime, eventFlyer)}>Save Event</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
