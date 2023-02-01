@@ -7,7 +7,7 @@ export const eventsApi = createApi({
     getEvents: builder.query({
       query: () => 'events',
     }),
-    updateEvents: builder.mutation({
+    addEvent: builder.mutation({
       query: (payload) => ({
         url: '/events',
         method: 'POST',
@@ -16,6 +16,8 @@ export const eventsApi = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
+    }),
+    updateEvent: builder.mutation({
       query: (payload) => ({
         url: '/events',
         method: 'PUT',
@@ -24,6 +26,8 @@ export const eventsApi = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
+    }),
+    deleteEvent: builder.mutation({
       query: (payload) => ({
         url: '/events',
         method: 'DELETE',
@@ -33,8 +37,8 @@ export const eventsApi = createApi({
         },
       }),
       // invalidatesTags: ['Put'],
-    }),
+    })
   }),
 })
 
-export const { useGetEventsQuery } = eventsApi
+export const { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } = eventsApi
