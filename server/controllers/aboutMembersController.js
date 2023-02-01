@@ -14,7 +14,7 @@ const getAboutMembersController = async (req, res, next) => {
         ON m.id = hb.member_id
         ORDER BY rank;
       `
-    await executeQuery(selectQuery, next)
+    await executeQuery(selectQuery, res)
 }
 
 const updateAboutMemberController = async (req, res, next) => {
