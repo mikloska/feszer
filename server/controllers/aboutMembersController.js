@@ -12,7 +12,8 @@ const getAboutMembersController = async (req, res, next) => {
         INNER JOIN english_bio AS eb
         ON m.id = eb.member_id
         INNER JOIN hungarian_bio AS hb
-        ON m.id = hb.member_id;
+        ON m.id = hb.member_id
+        ORDER BY rank;
       `
     const queryResult = await executeQuery(selectQuery, next)
     res.json(queryResult.rows)
