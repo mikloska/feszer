@@ -7,6 +7,17 @@ export const aboutBandApi = createApi({
     getAboutBand: builder.query({
       query: () => 'about-band',
     }),
+    updateAboutMember: builder.mutation({
+      query: (payload) => ({
+        url: '/about-band',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      // invalidatesTags: ['Put'],
+    }),
   }),
 })
 

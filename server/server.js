@@ -5,8 +5,9 @@ const path = require("path")
 const cors = require('cors')
 
 const {connectDB}  = require("./config/db.js")
-const aboutRoutes = require("./routes/aboutRoute.js")
-const aboutMembersRoutes = require("./routes/aboutMembersRoute.js")
+const aboutRoute = require("./routes/aboutRoute.js")
+const aboutMembersRoute = require("./routes/aboutMembersRoute.js")
+const eventsRoute = require("./routes/eventsRoute.js")
 const {notFound, errorHandler} = require("./middleware/errorHandler.js")
 
 dotenv.config();
@@ -20,8 +21,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors())
 app.use(express.json())
 
-app.use('/api', aboutRoutes)
-app.use('/api', aboutMembersRoutes)
+app.use('/api', aboutRoute)
+app.use('/api', aboutMembersRoute)
+app.use('/api', eventsRoute)
 // const __dirname = path.resolve()
 
 const root = path.join(__dirname, 'build')

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Alert, Box, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle
 } from '@mui/material';
@@ -16,6 +16,7 @@ const EventAdditionDialog = () => {
   const [eventLocation, setEventLocation] = useState('')
   const [eventAddress, setEventAddress] = useState('')
   const [eventDateAndTime, setEventDateAndTime] = useState(new Date())
+  const [processedDateAndTime, setProcessedDateAndTime] = useState('')
   const [eventFlyer, setEventFlyer] = useState('')
 
   const handleClickOpen = () => {
@@ -25,6 +26,21 @@ const EventAdditionDialog = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const setEvent = (event) => {
+    setEventDateAndTime(event)
+    // 2/11/2023, 6:26:25 PM
+    const dateAndTime = Object.values(event)[2]
+    const date = dateAndTime.toDateString();
+    const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
+    // const date = `${split[1].slice(0, )} ${split[1]}`
+    const newEvent = `${date} ${time}`
+    setProcessedDateAndTime(newEvent)
+  }
+
+  useEffect(() => {
+    console.log('processedDateAndTime: ', processedDateAndTime)
+  }, [processedDateAndTime])
 
   const saveEvent = (eventName, eventLocation, eventAddress, eventDateAndTime) => {
     if(eventName === '' || eventLocation === '' || eventAddress === ''){
@@ -70,9 +86,10 @@ const EventAdditionDialog = () => {
         <Box style={{width: 150, paddingLeft: 24}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker
-            
             label="Date & Time"
-            onChange={setEventDateAndTime} value={eventDateAndTime} 
+            onChange={(newValue) => {
+              setEvent(newValue);
+            }} value={eventDateAndTime} 
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
