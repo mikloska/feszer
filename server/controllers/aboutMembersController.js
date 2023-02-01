@@ -1,7 +1,7 @@
 const {executeQuery} = require("../config/executeQuery")
 
 const getAboutMembersController = async (req, res, next) => {
-  try {
+  // try {
     const selectQuery = 
       ` SELECT m.id, m.first_name, m.last_name, ei.instrument_name AS english_instruments, hi.instrument_name AS hungarian_instruments, eb.bio AS english_bio, hb.bio AS hungarian_bio
         FROM musicians AS m
@@ -16,26 +16,26 @@ const getAboutMembersController = async (req, res, next) => {
         ORDER BY rank;
       `
     const queryResult = await executeQuery(selectQuery, next)
-    res.json(queryResult.rows)
-  } catch(error) {
-    return next(new Error(`Error in about members controller: ${error.message}`))
-  }
+    if(queryResult){
+      res.json(queryResult.rows)
+    } else {
+      return next(new Error(`Error in about members controller: ${error.message}`))
+    }
+    
+  // } catch(error) {
+  //   return next(new Error(`Error in about members controller: ${error.message}`))
+  // }
 }
 
 const updateAboutMemberController = async (req, res, next) => {
-  // try {
-    const { id, language, bio } = req.body
-    const putQuery = 
-      `UPDATEs ${language}_bio
-        SET bio = '${bio}'
-        WHERE member_id = ${id};
-      `
-    const queryResult = await executeQuery(putQuery, next)
-    console.log('successful query: queryResult', queryResult)
-    res.json(queryResult)
-  // } catch(error) {
-  //   return next(new Error(`Error in updateAboutMemberController controller: ${error.message}`))
-  // }
+  const { id, language, bio } = req.body
+  const putQuery = 
+    `UPDATE ${language}_bio
+      SET bio = '${bio}'
+      WHERE member_id = ${id};
+    `
+  await executeQuery(putQuery, res)
+  res.json("Successfully updated!")
 }
 
 module.exports =  { getAboutMembersController, updateAboutMemberController }
