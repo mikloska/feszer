@@ -3,7 +3,7 @@ const {executeQuery} = require("../config/executeQuery")
 const getEventsController = async (req, res, next) => {
   const selectQuery = "SELECT * FROM events;"
   const result = await executeQuery(selectQuery, next)
-  if(result) res.json(queryResult.rows[0])
+  if(result) res.json(result.rows)
 }
 
 const addEventController = async (req, res, next) => {
