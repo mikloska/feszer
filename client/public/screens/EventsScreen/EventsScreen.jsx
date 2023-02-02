@@ -4,9 +4,12 @@ import { Button } from '@mui/material'
 
 import UpcomingEvents from './UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
+import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
 
 
 const EventsScreen = () => {
+  const { data, error, isLoading } = useGetEventsQuery()
+  const { addEvent, response } = useAddEventMutation()
   const language = useSelector((state) => state.language.value)
   const date = new Date()
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -55,7 +58,7 @@ const EventsScreen = () => {
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>
-      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal}/>
+      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={data}/>
     </>
   );
 }

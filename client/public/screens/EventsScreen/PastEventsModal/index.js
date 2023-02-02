@@ -4,7 +4,7 @@ import { Modal, Box, Typography } from '@mui/material'
 import pastEventsStyle from './pastEventsModalStyles'
 import PastEvents from './PastEvents'
 
-const PastEventsModal = ({ handlePastEventsModal, openPastEventsModal }) => {
+const PastEventsModal = ({ handlePastEventsModal, openPastEventsModal, events }) => {
   return (   
     <Modal
       open={openPastEventsModal}
@@ -13,7 +13,7 @@ const PastEventsModal = ({ handlePastEventsModal, openPastEventsModal }) => {
       aria-describedby="modal-modal-description"
     >
     <Box style = {{overflowY: 'scroll', overflowX: 'hidden'}} sx={pastEventsStyle}>
-    <PastEvents/>
+    <PastEvents events={events}/>
     </Box>
   </Modal>
 

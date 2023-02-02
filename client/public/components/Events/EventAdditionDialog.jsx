@@ -7,15 +7,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { TextInput } from '../TextInput';
-import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
 const EventAdditionDialog = () => {
-  const { addEvent, response } = useAddEventMutation()
-
   const [open, setOpen] = useState(false)
   const [formError, setFormError] = useState(false)
-  const { data, error, isLoading } = useGetEventsQuery()
   const [eventName, setEventName] = useState('')
   const [eventVenue, setEventVenue] = useState('')
   const [eventAddress, setEventAddress] = useState('')
