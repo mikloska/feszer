@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Alert, Box, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle
 } from '@mui/material';
@@ -11,9 +11,9 @@ import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDele
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
 const EventAdditionDialog = () => {
-  const { addEvent, response } = useAddEventMutation();
+  const { addEvent, response } = useAddEventMutation()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const [formError, setFormError] = useState(false)
   const { data, error, isLoading } = useGetEventsQuery()
   const [eventName, setEventName] = useState('')

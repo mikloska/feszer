@@ -52,7 +52,7 @@ const PastEvents = () => {
       <Typography id="modal-modal-description"  sx={{ mt: 2 }}>
         Dec. 12, 2021: <a herf="https://www.youtube.com/watch?v=OQacr-i-V28" target="_blank">Christmas Concert</a> at the Hungarian Catholic church in Passaic. 
       </Typography>
-      <Typography id="modal-modal-description"  sx={{ mt: 2 }}>
+      {/* <Typography id="modal-modal-description"  sx={{ mt: 2 }}>
         Nov. 13, 2021: Multicultural Folk Dance Gathering and Hungarian Dance House (Táncház) at the Hungarian Club in New Brunswick, NJ. Poster <a href= "http://www.csurfolk.org/uploads/1/7/2/5/17257604/folk_dance_gathering_-poster.jpg" target="_blank">HERE</a>. Schedule <a href= "http://www.csurfolk.org/uploads/1/7/2/5/17257604/folk_dance_gathering_2021_revised_schedule.jpg" target="_blank">HERE</a>. 
       </Typography>
       <Typography id="modal-modal-description"  sx={{ mt: 2 }}>
@@ -69,7 +69,7 @@ const PastEvents = () => {
       </Typography>
       <Typography id="modal-modal-description"  sx={{ mt: 2 }}>
         Apr. 2021: Hungarian event at 7 Tribesmen in Wayne
-      </Typography>
+      </Typography> */}
     </>
   )
 }
