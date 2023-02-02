@@ -7,11 +7,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { TextInput } from '../TextInput';
+import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
 
 const EventAdditionDialog = () => {
+  const { addEvent, response } = useAddEventMutation();
+
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false)
-  // const [value, setValue] = useState(new Date('2014-08-18T21:11:54'));
+  const [formError, setFormError] = useState(false)
+  const { data, error, isLoading } = useGetEventsQuery()
   const [eventName, setEventName] = useState('')
   const [eventLocation, setEventLocation] = useState('')
   const [eventAddress, setEventAddress] = useState('')
@@ -23,6 +26,7 @@ const EventAdditionDialog = () => {
   };
 
   const handleClose = () => {
+    setFormError(false);
     setOpen(false);
   };
 
@@ -37,14 +41,14 @@ const EventAdditionDialog = () => {
 
   const saveEvent = (eventName, eventLocation, eventAddress, eventDateAndTime, eventFlyer) => {
     if(eventName === '' || eventLocation === '' || eventAddress === ''){
-      setError(true)
+      setFormError(true)
     } else {
       const newEvent = setEvent(eventDateAndTime)
       setEventName('')
       setEventLocation('')
       setEventAddress('')
       setEventDateAndTime(new Date())
-      setError(false)
+      setFormError(false)
       setEventFlyer('')
       console.log('eventName: ', eventName, 'eventLocation: ', eventLocation, 'eventAddress: ', eventAddress, 'newEvent: ', newEvent, 'eventFlyer: ', eventFlyer)
       setOpen(false);
@@ -58,8 +62,8 @@ const EventAdditionDialog = () => {
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Event</DialogTitle>
-        {error &&
-          <Alert severity="error">Fill out all required fields!</Alert>
+        {formError &&
+          <Alert severity="formError">Fill out all required fields!</Alert>
         }
         <DialogContent>
           <TextInput 

@@ -12,6 +12,7 @@ const HomeScreen = () =>{
   const { data, error, isLoading } = useGetAboutBandQuery()
 
   useEffect(() => {
+    // This will be used for the query
     console.log(language === "MAGYAR" ? "english" : "magyar")
     if(isLoading){
       dispatch(changeLoading({"loading":true}))

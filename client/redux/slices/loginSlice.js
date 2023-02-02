@@ -10,7 +10,7 @@ export const loginSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      if(action.payload.username === 'arus' && action.payload.password === 'bela'){
+      if(action.payload.username === process.env.USERNAME && action.payload.password === process.env.USER_PASSWORD){
         state.value = true;
         state.error = false;
       } else {
