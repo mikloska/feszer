@@ -21,4 +21,4 @@ export const aboutMembersApi = createApi({
   }),
 })
 
-export const { useGetAboutMembersQuery } = aboutMembersApi
+export const { useGetAboutMembersQuery, useUpdateAboutMemberMutation } = aboutMembersApi

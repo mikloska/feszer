@@ -1,15 +1,13 @@
 import React from 'react'
 import { Typography } from '@mui/material'
 
-import pastEventsArray from './pastEventsArray'
-
 const PastEvents = () => {
 
-  const pastEventsMappedArray = pastEventsArray.map((event, index) => (
-    <Typography id="modal-modal-description" sx={{ mt: 2 }} key = {`${event}-${index}`}>
-      {event.replace(/(^"|"$)/g, '')}
-    </Typography>
-  ))
+  // const pastEventsMappedArray = pastEventsArray.map((event, index) => (
+  //   <Typography id="modal-modal-description" sx={{ mt: 2 }} key = {`${event}-${index}`}>
+  //     {event.replace(/(^"|"$)/g, '')}
+  //   </Typography>
+  // ))
   return (
     <>
       <Typography id="modal-modal-description" sx={{ mt: 2 }}>

@@ -7,7 +7,7 @@ export const aboutBandApi = createApi({
     getAboutBand: builder.query({
       query: () => 'about-band',
     }),
-    updateAboutMember: builder.mutation({
+    updateAboutBand: builder.mutation({
       query: (payload) => ({
         url: '/about-band',
         method: 'PUT',
@@ -21,4 +21,4 @@ export const aboutBandApi = createApi({
   }),
 })
 
-export const { useGetAboutBandQuery } = aboutBandApi
+export const { useGetAboutBandQuery, useUpdateAboutBandMutation } = aboutBandApi

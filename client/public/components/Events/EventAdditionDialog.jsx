@@ -8,6 +8,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 import { TextInput } from '../TextInput';
 import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
+import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
 const EventAdditionDialog = () => {
   const { addEvent, response } = useAddEventMutation();
@@ -16,51 +17,17 @@ const EventAdditionDialog = () => {
   const [formError, setFormError] = useState(false)
   const { data, error, isLoading } = useGetEventsQuery()
   const [eventName, setEventName] = useState('')
-  const [eventLocation, setEventLocation] = useState('')
+  const [eventVenue, setEventVenue] = useState('')
   const [eventAddress, setEventAddress] = useState('')
   const [eventDateAndTime, setEventDateAndTime] = useState(new Date())
   const [eventFlyer, setEventFlyer] = useState('')
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setFormError(false);
-    setOpen(false);
-  };
-
-  const setEvent = (event) => {
-    setEventDateAndTime(event)
-    const dateAndTime = Object.values(event)[2]
-    const date = dateAndTime.toDateString();
-    const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
-    const newEvent = `${date} ${time}`
-    return newEvent;
-  }
-
-  const saveEvent = (eventName, eventLocation, eventAddress, eventDateAndTime, eventFlyer) => {
-    if(eventName === '' || eventLocation === '' || eventAddress === ''){
-      setFormError(true)
-    } else {
-      const newEvent = setEvent(eventDateAndTime)
-      setEventName('')
-      setEventLocation('')
-      setEventAddress('')
-      setEventDateAndTime(new Date())
-      setFormError(false)
-      setEventFlyer('')
-      console.log('eventName: ', eventName, 'eventLocation: ', eventLocation, 'eventAddress: ', eventAddress, 'newEvent: ', newEvent, 'eventFlyer: ', eventFlyer)
-      setOpen(false);
-    }
-  }
-
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen} style={{marginLeft: 20}}>
+      <Button variant="contained" onClick={() => handleClickOpen(setOpen)} style={{marginLeft: 20}}>
         Add Event
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={() => handleClose(setFormError, setOpen)}>
         <DialogTitle>Add Event</DialogTitle>
         {formError &&
           <Alert severity="formError">Fill out all required fields!</Alert>
@@ -70,7 +37,7 @@ const EventAdditionDialog = () => {
             textId={'eventName'} textLabel={'Event Name'} setFunction={setEventName}
           />
           <TextInput 
-            textId={'eventLocation'} textLabel={'Event Venue Name'} setFunction={setEventLocation}
+            textId={'eventVenue'} textLabel={'Event Venue Name'} setFunction={setEventVenue}
           />
           <TextInput
             textId={'eventAddress'} textLabel={'Event Address'} setFunction={setEventAddress}
@@ -91,8 +58,11 @@ const EventAdditionDialog = () => {
         </LocalizationProvider>
         </Box>
         <DialogActions>
-          <Button onClick={()=> saveEvent(eventName, eventLocation, eventAddress, eventDateAndTime, eventFlyer)}>Save Event</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={()=> saveEvent(
+            eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, setEventName, setEventVenue,
+            setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setOpen
+          )}>Save Event</Button>
+          <Button onClick={() => handleClose(setFormError, setOpen)}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>
