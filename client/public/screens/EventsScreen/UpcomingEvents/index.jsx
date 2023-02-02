@@ -28,9 +28,9 @@ const UpcomingEvents = () => {
     if(loggedIn){
       setColumns(current => [...current, { id: 'modify', label: 'Modify', minWidth: 40 }])
     }
-    if(!loggedIn && columns.length === 6){
+    if(!loggedIn && columns.length === 7){
       setColumns([
-        ...columns.slice(0, 5)
+        ...columns.slice(0, 6)
       ]);
     }
   }, [loggedIn])
@@ -45,7 +45,9 @@ const UpcomingEvents = () => {
     'Event' : 'Esemény',
     'Venue' : 'Helyszín',
     'Address' : 'Cím',
-    'Date & Time' : 'Dátum és idő'
+    'Date & Time' : 'Dátum és idő',
+    'Flyer' : 'Plakát',
+    'Schedule' : 'Program'
   }
   const [columns, setColumns] = useState(
     [
@@ -54,6 +56,7 @@ const UpcomingEvents = () => {
       { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
       { id: 'dateAndTime', label: 'Date & Time', minWidth: 90, maxWidth: 150 },
       { id: 'flyer', label: 'Flyer', minWidth: 90},
+      { id: 'schedule', label: 'Schedule', minWidth: 90},
     ] 
   );
 
@@ -69,7 +72,7 @@ const UpcomingEvents = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left" colSpan={loggedIn ? 6 : 5} >
+              <TableCell align="left" colSpan={loggedIn ? 7 : 6} >
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <Typography style={{fontSize: 'h6.fontSize', fontWeight: 'bold'}}>
                   {language === 'MAGYAR' ? 'Upcoming Events' : 'Közelgő események'}
