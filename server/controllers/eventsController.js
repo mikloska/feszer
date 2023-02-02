@@ -1,41 +1,42 @@
 const {executeQuery} = require("../config/executeQuery")
 
-const getEventsController = async (req, res) => {
+const getEventsController = async (req, res, next) => {
   const selectQuery = "SELECT * FROM events;"
-  const queryResult = await executeQuery(selectQuery, res)
-  res.json(queryResult.rows[0])
+  const result = await executeQuery(selectQuery, next)
+  if(result) res.json(queryResult.rows[0])
 }
 
-const addEventController = async (req, res) => {
-  const { eventName, venue, address, dateAndTime, flyer } = req.body
+const addEventController = async (req, res, next) => {
+  const { eventName, venue, address, dateAndTime, flyer, schedule, video } = req.body
   const putQuery = 
-    `INSER INTO event(event_name, venue, address, date_and_time, flyer)
-      VALUES('${eventName}','${venue}','${address}', '${dateAndTime}','${flyer}');
+    `INSERT INTO events(event_name, venue, address, date_and_time, flyer, schedule, video)
+      VALUES('${eventName}','${venue}','${address}','${dateAndTime}','${flyer}','${schedule}','${video}');
     `
-  await executeQuery(putQuery, res)
-  res.json("Successfully updated!")
+  const result = await executeQuery(putQuery, next)
+  if(result) res.json("Successfully added!")
 }
 
-
-const updateEventController = async (req, res) => {
+const updateEventController = async (req, res, next) => {
   const { id, updated } = req.body
+  const { eventName, venue, address, dateAndTime, flyer, schedule, video } = updated
   const putQuery = 
-    `UPDATE event
-      SET  event_name = '${updated.eventName}', venue = '${updated.venue}', address = '${updated.address}', date_and_time = '${updated.dateAndTime}', flyer = '${updated.flyer}'
+    `UPDATE events
+      SET event_name = '${eventName}', venue = '${venue}', address = '${address}', date_and_time = '${dateAndTime}',
+      flyer = '${flyer}', schedule = '${schedule}', video = '${video}'
       WHERE id = ${id};
     `
-  await executeQuery(putQuery, res)
-  res.json("Successfully updated!")
+  const result = await executeQuery(putQuery, next)
+  if(result) res.json("Successfully updated!")
 }
 
-const deleteEventController = async (req, res) => {
+const deleteEventController = async (req, res, next) => {
   const { id } = req.body
   const putQuery = 
     `DELETE FROM events
      WHERE id = ${id};
     `
-  await executeQuery(putQuery, res)
-  res.json("Successfully updated!")
+  const result = await executeQuery(putQuery, next)
+  if(result) res.json("Successfully deleted!")
 }
 
 module.exports =  { getEventsController, addEventController, updateEventController, deleteEventController }

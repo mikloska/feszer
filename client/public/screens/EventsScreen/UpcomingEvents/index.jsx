@@ -43,14 +43,14 @@ const UpcomingEvents = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const columnsTranslation = {
     'Event' : 'Esemény',
-    'Location' : 'Helyszín',
+    'Venue' : 'Helyszín',
     'Address' : 'Cím',
     'Date & Time' : 'Dátum és idő'
   }
   const [columns, setColumns] = useState(
     [
       { id: 'name', label: 'Event', minWidth: 100 },
-      { id: 'location', label: 'Location', minWidth: 100 },
+      { id: 'venue', label: 'Venue', minWidth: 100 },
       { id: 'address', label: 'Address', minWidth: 110, maxWidth: 110 },
       { id: 'dateAndTime', label: 'Date & Time', minWidth: 90, maxWidth: 150 },
       { id: 'flyer', label: 'Flyer', minWidth: 90},
@@ -58,10 +58,10 @@ const UpcomingEvents = () => {
   );
 
   const [rows, setRows] = useState([
-    {name: 'Christmas Concert', 'location': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
-    {name: 'Dance House', 'location': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM', 'flyer': <IconButton disabled={true} color='primary'><ImageIcon/></IconButton>},
-    {name: 'Mikulás (Santa Claus)', 'location': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
-    {name: 'Hungarian Bazaar', 'location': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
+    // {name: 'Christmas Concert', 'venue': 'Magyar Tanya', 'address': '1495 Huffs Church Rd, Barto, PA 19504', 'dateAndTime': 'December 4, 2022 2:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
+    // {name: 'Dance House', 'venue': 'Hungarian House', 'address': '213 E 82nd St, New York, NY 10028', 'dateAndTime': 'December 3, 2022 7:00 PM', 'flyer': <IconButton disabled={true} color='primary'><ImageIcon/></IconButton>},
+    // {name: 'Mikulás (Santa Claus)', 'venue': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
+    // {name: 'Hungarian Bazaar', 'venue': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
   ])
   return (
     <Paper>

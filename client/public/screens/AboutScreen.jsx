@@ -11,7 +11,6 @@ const AboutScreen = () =>{
   const dispatch = useDispatch()
   const language = useSelector((state) => state.language.value)
   const { data, error, isLoading } = useGetAboutMembersQuery()
-  if(data) console.log(data)
 
   useEffect(() => {
     if(isLoading){
