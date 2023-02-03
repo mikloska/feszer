@@ -18,6 +18,7 @@ const EventsScreen = () => {
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  const [sortedEvents, setSortedEvents] = useState([])
 
   const [openPastEventsModal, setOpenPastEventsModal] = useState(false);
   const handlePastEventsModal = () => setOpenPastEventsModal(!openPastEventsModal);
@@ -50,16 +51,13 @@ const EventsScreen = () => {
   //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'February 20, 2032 4:20 PM'),
   // ];
 
-  // useEffect(()=> {
-  //   const sorted = data.sort((date1, date2) => date1.dateAndTime - date2.dateAndTime)
-  //   const processed = sorted.map(el => {
-  //     createData(Object.keys(el))
-  //   })
-  //   const processedTemp = data.map(el => {
-  //     createData(Object.values(el))
-  //   })
-  //   setRows(processedTemp)
-  // }, [])
+  useEffect(()=> {
+    if(data){
+      const spread = [...data]
+      const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
+      setSortedEvents(sorted)
+    }
+  }, [data])
 
   return (
     <>
@@ -70,7 +68,7 @@ const EventsScreen = () => {
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>
-      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={data}/>
+      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={sortedEvents}/>
     </>
   );
 }

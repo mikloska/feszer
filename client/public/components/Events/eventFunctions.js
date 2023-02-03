@@ -10,10 +10,10 @@ export const handleClose = (setFormError, setOpen) => {
 const setEvent = (event, setEventDateAndTime) => {
   setEventDateAndTime(event)
   const dateAndTime = Object.values(event)[2]
-  const date = dateAndTime.toDateString();
-  const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
-  const newEvent = `${date} ${time}`
-  return newEvent;
+  // const date = dateAndTime.toDateString();
+  // const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
+  // const newEvent = `${date} ${time}`
+  return dateAndTime;
 }
 
 export const saveEvent = (
