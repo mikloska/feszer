@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import { Button } from '@mui/material'
 
 import UpcomingEvents from './UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
 import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
+import { ErrorModal } from '../../components/ErrorModal';
+import { changeLoading } from '../../../redux/slices/loadingSlice';
 
 
 const EventsScreen = () => {
+  const dispatch = useDispatch()
   const { data, error, isLoading } = useGetEventsQuery()
   const { addEvent, response } = useAddEventMutation()
   const language = useSelector((state) => state.language.value)
@@ -15,7 +18,6 @@ const EventsScreen = () => {
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-  // const [currentDate, setCurrentDate] = useState(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`)
 
   const [openPastEventsModal, setOpenPastEventsModal] = useState(false);
   const handlePastEventsModal = () => setOpenPastEventsModal(!openPastEventsModal);
@@ -25,6 +27,13 @@ const EventsScreen = () => {
 
 
   const pastEvenets = [{uri: 'https://feszer-band.s3.amazonaws.com/past-events.docx'}]
+  useEffect(() => {
+    if(isLoading){
+      dispatch(changeLoading({"loading":true}))
+    } else {
+      dispatch(changeLoading({"loading":false}))
+    }
+  }, [isLoading])
 
   // const rows = [
   //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2030 4:20 PM'),
@@ -54,6 +63,9 @@ const EventsScreen = () => {
 
   return (
     <>
+      {error && 
+        <ErrorModal error={error.data.message}/>
+      }
       <UpcomingEvents/>
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}

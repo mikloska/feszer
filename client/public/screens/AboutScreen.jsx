@@ -5,6 +5,7 @@ import {Typography, Grid} from '@mui/material';
 import { useGetAboutMembersQuery } from '../../redux/slices/aboutMembersSlice';
 import Person from '../components/Person'
 import { changeLoading } from '../../redux/slices/loadingSlice';
+import { ErrorModal } from '../components/ErrorModal';
 
 
 const AboutScreen = () =>{
@@ -22,6 +23,9 @@ const AboutScreen = () =>{
 
   return (
     <div>
+      {error && 
+        <ErrorModal error={error.data.message}/>
+      }
       <Typography variant ='h3'>{language === 'MAGYAR' ? 'About Us' : 'Rólunk'}</Typography>
       <Grid container style={{marginTop:0}} spacing={6} justifyContent='center' alignItems='center'>
         {data && data.map((current, index) => (
