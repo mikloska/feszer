@@ -17,20 +17,21 @@ const setEvent = (event, setEventDateAndTime) => {
 }
 
 export const saveEvent = (
-  eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, setEventName, setEventVenue, 
-  setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setOpen
+  eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, setEventName, setEventVenue, 
+  setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
   ) => {
   if(eventName === '' || eventVenue === '' || eventAddress === ''){
     setFormError(true)
   } else {
-    const newEvent = setEvent(eventDateAndTime, setEventDateAndTime)
+    const newEventDateAndTime = setEvent(eventDateAndTime, setEventDateAndTime)
     setEventName('')
     setEventVenue('')
     setEventAddress('')
     setEventDateAndTime(new Date())
     setFormError(false)
     setEventFlyer('')
-    console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'newEvent: ', newEvent, 'eventFlyer: ', eventFlyer)
+    setEventSchedule('')
+    console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'eventFlyer: ', eventFlyer, 'eventSchedule: ', eventSchedule, 'newEventDateAndTime: ', newEventDateAndTime, )
     setOpen(false);
   }
 }

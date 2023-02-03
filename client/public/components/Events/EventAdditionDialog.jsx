@@ -17,6 +17,7 @@ const EventAdditionDialog = () => {
   const [eventAddress, setEventAddress] = useState('')
   const [eventDateAndTime, setEventDateAndTime] = useState(new Date())
   const [eventFlyer, setEventFlyer] = useState('')
+  const [eventSchedule, setEventSchedule] = useState('')
 
   return (
     <div>
@@ -41,6 +42,9 @@ const EventAdditionDialog = () => {
           <TextInput 
             textId={'eventFlyer'} textLabel={'Event Flyer'} setFunction={setEventFlyer} requiredField={false}
           />
+          <TextInput 
+            textId={'eventSchedule'} textLabel={'Event Schedule'} setFunction={setEventSchedule} requiredField={false}
+          />
         </DialogContent>
         <Box style={{width: 150, paddingLeft: 24}}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -54,10 +58,14 @@ const EventAdditionDialog = () => {
         </LocalizationProvider>
         </Box>
         <DialogActions>
-          <Button onClick={()=> saveEvent(
-            eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, setEventName, setEventVenue,
-            setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setOpen
-          )}>Save Event</Button>
+          <Button onClick={()=> 
+            saveEvent(
+              eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, setEventName, setEventVenue,
+              setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
+            )
+          }>
+            Save Event
+          </Button>
           <Button onClick={() => handleClose(setFormError, setOpen)}>Cancel</Button>
         </DialogActions>
       </Dialog>
