@@ -10,18 +10,17 @@ import {
   TablePagination,
   TableRow,
   Typography,
-  IconButton 
+  IconButton,
 } from '@mui/material'
 import { 
   Delete as DeleteIcon,
   Edit as EditIcon,
-  Image as ImageIcon 
 } from '@mui/icons-material';
 
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog';
 
-const UpcomingEvents = () => {
+const UpcomingEvents = ({ events }) => {
   const language = useSelector((state) => state.language.value)
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   useEffect(()=> {
@@ -34,10 +33,6 @@ const UpcomingEvents = () => {
       ]);
     }
   }, [loggedIn])
-
-  useEffect(() => {
-
-  }, [language])
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -66,6 +61,31 @@ const UpcomingEvents = () => {
     // {name: 'Mikulás (Santa Claus)', 'venue': 'Reka Darida Foundation', 'address': '1065 Madison Ave, New York, NY 10028', 'dateAndTime': 'December 3, 2022', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
     // {name: 'Hungarian Bazaar', 'venue': 'Women\'s Club of Chevy Chase', 'address': '7931 Connecticut Ave, Chevy Chase, MD 20815', 'dateAndTime': 'December 19, 2022 1:00 PM', 'flyer': <IconButton color='primary'><ImageIcon/></IconButton>},
   ])
+
+  useEffect(() => {
+    console.log(events)
+    const temp = []
+    if(events.length > 0){
+      setRows(events)
+    // events.forEach((event) => {
+    //   setRows([
+    //     ...rows,
+    //     { name: event.event_name, venue: event.venue, address: event.address, dateAndTime: event.date_and_time, 
+    //       'flyer': <IconButton color='primary' disabled={event.flyer.length > 1 ? false : true} target="_blank" href={event.flyer}><ImageIcon/></IconButton>,
+    //       'schedule': <IconButton color='primary' disabled={event.schedule.length > 1 ? false : true} target="_blank" href={event.schedule}><ImageIcon/></IconButton>
+    //     }
+    //   ])
+    // }) 
+    // setRows(temp)
+  }
+  
+
+  }, [events])
+
+  useEffect(() => {
+    if(rows.length > 1) console.log('rows', rows)
+  }, [rows])
+
   return (
     <Paper>
       <TableContainer sx={{ minHeight: 440 }} style={{overflowX: 'auto'}}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Button } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
+import { Image as ImageIcon } from '@mui/icons-material';
 
 import UpcomingEvents from './UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
@@ -27,8 +28,6 @@ const EventsScreen = () => {
     return { name, location, address, dateAndTime, modify };
   }
 
-
-  const pastEvenets = [{uri: 'https://feszer-band.s3.amazonaws.com/past-events.docx'}]
   useEffect(() => {
     if(isLoading){
       dispatch(changeLoading({"loading":true}))
@@ -37,35 +36,28 @@ const EventsScreen = () => {
     }
   }, [isLoading])
 
-  // const rows = [
-  //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2030 4:20 PM'),
-  //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'October 22, 2022'),
-  //   createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'September 20, 2022'),
-  //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023 4:20 PM'),
-  //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  //   createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2023'),
-  //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2035'),
-  //   createData('TH 1', 'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 21, 2035 4:20 PM'),
-  //   createData('Concert',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'August 20, 2022'),
-  //   createData('TH2',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'April 20, 2024'),
-  //   createData('Seven Tribesman',  'HAAC New Brunswick, NJ', '123 Plum St. New Brunswick, NJ 111111', 'February 20, 2032 4:20 PM'),
-  // ];
-
   useEffect(()=> {
     if(data){
       const spread = [...data]
       const futureTemp = []
-      let end;
+      let start = null;
       const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
       for(let i = 0; i < sorted.length; i++){
-        if(new Date(sorted[i]) > date){
-          futureTemp.push(sorted[i])
+        if(new Date(sorted[i].date_and_time) > date){
+          start = i
+          futureTemp.push(
+            { name: sorted[i].event_name, venue: sorted[i].venue, address: sorted[i].address, dateAndTime: sorted[i].date_and_time, 
+              'flyer': <IconButton color='primary' disabled={sorted[i].flyer.length > 1 ? false : true} target="_blank" href={sorted[i].flyer}><ImageIcon/></IconButton>,
+              'schedule': <IconButton color='primary' disabled={sorted[i].schedule.length > 1 ? false : true} target="_blank" href={sorted[i].schedule}><ImageIcon/></IconButton>,
+              id: sorted[i].id
+            }
+          )
         } else {
           break;
         }
       }
-      setSortedPastEvents(sorted)
+      setSortedPastEvents(start ? sorted.slice(start+1): sorted)
+      setSortedFutureEvents(futureTemp)
     }
   }, [data])
 
@@ -74,7 +66,7 @@ const EventsScreen = () => {
       {error && 
         <ErrorModal error={error.data.message}/>
       }
-      <UpcomingEvents/>
+      <UpcomingEvents events={sortedFutureEvents}/>
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>
