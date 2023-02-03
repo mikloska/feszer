@@ -18,6 +18,7 @@ const EventAdditionDialog = () => {
   const [eventDateAndTime, setEventDateAndTime] = useState(new Date())
   const [eventFlyer, setEventFlyer] = useState('')
   const [eventSchedule, setEventSchedule] = useState('')
+  const [eventVideo, setEventVideo] = useState('')
 
   return (
     <div>
