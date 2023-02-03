@@ -18,7 +18,7 @@ const EventsScreen = () => {
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
-  const [sortedEvents, setSortedEvents] = useState([])
+  const [sortedPastEvents, setSortedPastEvents] = useState([])
 
   const [openPastEventsModal, setOpenPastEventsModal] = useState(false);
   const handlePastEventsModal = () => setOpenPastEventsModal(!openPastEventsModal);
@@ -55,7 +55,7 @@ const EventsScreen = () => {
     if(data){
       const spread = [...data]
       const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
-      setSortedEvents(sorted)
+      setSortedPastEvents(sorted)
     }
   }, [data])
 
@@ -68,7 +68,7 @@ const EventsScreen = () => {
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>
-      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={sortedEvents}/>
+      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={sortedPastEvents}/>
     </>
   );
 }
