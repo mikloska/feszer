@@ -19,6 +19,7 @@ const EventsScreen = () => {
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   const [sortedPastEvents, setSortedPastEvents] = useState([])
+  const [sortedFutureEvents, setSortedFutureEvents] = useState([])
 
   const [openPastEventsModal, setOpenPastEventsModal] = useState(false);
   const handlePastEventsModal = () => setOpenPastEventsModal(!openPastEventsModal);
@@ -54,7 +55,16 @@ const EventsScreen = () => {
   useEffect(()=> {
     if(data){
       const spread = [...data]
+      const futureTemp = []
+      let end;
       const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
+      for(let i = 0; i < sorted.length; i++){
+        if(new Date(sorted[i]) > date){
+          futureTemp.push(sorted[i])
+        } else {
+          break;
+        }
+      }
       setSortedPastEvents(sorted)
     }
   }, [data])
