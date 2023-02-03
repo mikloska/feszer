@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, IconButton } from '@mui/material'
 import { Image as ImageIcon } from '@mui/icons-material';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import UpcomingEvents from './UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
@@ -48,7 +49,7 @@ const EventsScreen = () => {
           futureTemp.push(
             { name: sorted[i].event_name, venue: sorted[i].venue, address: sorted[i].address, dateAndTime: sorted[i].date_and_time, 
               'flyer': <IconButton color='primary' disabled={sorted[i].flyer.length > 1 ? false : true} target="_blank" href={sorted[i].flyer}><ImageIcon/></IconButton>,
-              'schedule': <IconButton color='primary' disabled={sorted[i].schedule.length > 1 ? false : true} target="_blank" href={sorted[i].schedule}><ImageIcon/></IconButton>,
+              'schedule': <IconButton color='primary' disabled={sorted[i].schedule.length > 1 ? false : true} target="_blank" href={sorted[i].schedule}><AssignmentIcon/></IconButton>,
               id: sorted[i].id
             }
           )
