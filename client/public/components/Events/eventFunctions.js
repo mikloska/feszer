@@ -10,15 +10,15 @@ export const handleClose = (setFormError, setOpen) => {
 const setEvent = (event, setEventDateAndTime) => {
   setEventDateAndTime(event)
   const dateAndTime = Object.values(event)[2]
-  // const date = dateAndTime.toDateString();
-  // const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
-  // const newEvent = `${date} ${time}`
-  return dateAndTime;
+  const date = dateAndTime.toDateString();
+  const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
+  const newEvent = `${date} ${time}`
+  return newEvent;
 }
 
 export const saveEvent = (
-  eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, setEventName, setEventVenue, 
-  setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
+    eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
+    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
   ) => {
   if(eventName === '' || eventVenue === '' || eventAddress === ''){
     setFormError(true)
@@ -31,7 +31,7 @@ export const saveEvent = (
     setFormError(false)
     setEventFlyer('')
     setEventSchedule('')
-    console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'eventFlyer: ', eventFlyer, 'eventSchedule: ', eventSchedule, 'newEventDateAndTime: ', newEventDateAndTime, )
+    console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'eventFlyer: ', eventFlyer, 'eventSchedule: ', eventSchedule, 'eventVideo: ', eventVideo, 'newEventDateAndTime: ', newEventDateAndTime, )
     setOpen(false);
   }
 }

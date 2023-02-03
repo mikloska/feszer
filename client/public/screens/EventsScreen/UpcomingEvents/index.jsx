@@ -62,10 +62,6 @@ const UpcomingEvents = ({ events }) => {
     }
   }, [events])
 
-  useEffect(() => {
-    if(rows.length > 1) console.log('rows', rows)
-  }, [rows])
-
   return (
     <Paper>
       <TableContainer sx={{ minHeight: 440 }} style={{overflowX: 'auto'}}>

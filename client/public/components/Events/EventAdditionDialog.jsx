@@ -61,8 +61,8 @@ const EventAdditionDialog = () => {
         <DialogActions>
           <Button onClick={()=> 
             saveEvent(
-              eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, setEventName, setEventVenue,
-              setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
+              eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
+              setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
             )
           }>
             Save Event
