@@ -1,30 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Alert, Box, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle
+  Alert, Box, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, IconButton
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { Edit as EditIcon } from '@mui/icons-material';
+
 
 import { TextInput } from '../TextInput';
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
-const EventAdditionDialog = () => {
+const EventAdditionDialog = ({ edit = false, config = {} }) => {
+  const {
+    'name' : savedName = '',
+    'address' : savedAddress = '',
+    'venue' : savedVenue = '',
+    'dateAndTime' : savedDateAndTime = new Date(),
+    'flyer.props.href ' : savedFlyer= '',
+    'schedule.props.href ' : savedSchedule = '',
+
+  } = config
   const [open, setOpen] = useState(false)
   const [formError, setFormError] = useState(false)
-  const [eventName, setEventName] = useState('')
-  const [eventVenue, setEventVenue] = useState('')
-  const [eventAddress, setEventAddress] = useState('')
-  const [eventDateAndTime, setEventDateAndTime] = useState(new Date())
+  const [eventName, setEventName] = useState(savedName)
+  const [eventVenue, setEventVenue] = useState(savedVenue)
+  const [eventAddress, setEventAddress] = useState(savedAddress)
+  const [eventDateAndTime, setEventDateAndTime] = useState(savedDateAndTime)
   const [eventFlyer, setEventFlyer] = useState('')
   const [eventSchedule, setEventSchedule] = useState('')
   const [eventVideo, setEventVideo] = useState('')
 
+  useEffect(() => {
+    if(edit) console.log('config: ', config)
+  }, [])
+
   return (
     <div>
-      <Button variant="contained" onClick={() => handleClickOpen(setOpen)} style={{marginLeft: 20}}>
-        Add Event
-      </Button>
+      {edit ? 
+        <IconButton onClick={() => handleClickOpen(setOpen)}>
+          <EditIcon fontSize='small' />
+        </IconButton>  
+        :
+        <Button variant="contained" onClick={() => handleClickOpen(setOpen)} style={{marginLeft: 20}}>
+          Add Event
+        </Button>
+      }
+
       <Dialog open={open} onClose={() => handleClose(setFormError, setOpen)}>
         <DialogTitle>Add Event</DialogTitle>
         {formError &&

@@ -12,10 +12,7 @@ import {
   Typography,
   IconButton,
 } from '@mui/material'
-import { 
-  Delete as DeleteIcon,
-  Edit as EditIcon,
-} from '@mui/icons-material';
+import { Delete as DeleteIcon } from '@mui/icons-material';
 
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog';
@@ -108,9 +105,7 @@ const UpcomingEvents = ({ events }) => {
                             <IconButton>
                               <DeleteIcon fontSize='small'/>
                             </IconButton>
-                            <IconButton>
-                              <EditIcon fontSize='small' />
-                            </IconButton>
+                            <EventAdditionDialog edit={true} config ={row} />
                           </>
                               :
                             value
