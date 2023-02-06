@@ -109,7 +109,7 @@ const UpcomingEvents = ({ events }) => {
                               <DeleteIcon fontSize='small'/>
                             </IconButton>
                             <IconButton>
-                              <EditIcon fontSize='small'/>
+                              <EditIcon fontSize='small' />
                             </IconButton>
                           </>
                               :

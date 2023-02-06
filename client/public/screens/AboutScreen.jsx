@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {Typography, Grid} from '@mui/material';
+import { Typography, Grid, IconButton } from '@mui/material';
 
 import { useGetAboutMembersQuery } from '../../redux/slices/aboutMembersSlice';
 import Person from '../components/Person'
@@ -10,6 +10,7 @@ import { ErrorModal } from '../components/ErrorModal';
 
 const AboutScreen = () =>{
   const dispatch = useDispatch()
+
   const language = useSelector((state) => state.language.value)
   const { data, error, isLoading } = useGetAboutMembersQuery()
 
@@ -38,7 +39,8 @@ const AboutScreen = () =>{
             hungarianBio={current.hungarian_bio}
             key={`${current.first_name}-${current.last_name}`}
             id={current.id}
-          />
+          >
+          </Person>
         ))}
       </Grid>
     </div>
