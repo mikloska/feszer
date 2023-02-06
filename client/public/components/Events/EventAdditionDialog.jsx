@@ -17,9 +17,8 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
     'address' : savedAddress = '',
     'venue' : savedVenue = '',
     'dateAndTime' : savedDateAndTime = new Date(),
-    'flyer.props.href ' : savedFlyer= '',
-    'schedule.props.href ' : savedSchedule = '',
-
+    'flyer' : savedFlyer = '',
+    'schedule' : savedSchedule = ''
   } = config
   const [open, setOpen] = useState(false)
   const [formError, setFormError] = useState(false)
@@ -27,12 +26,12 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
   const [eventVenue, setEventVenue] = useState(savedVenue)
   const [eventAddress, setEventAddress] = useState(savedAddress)
   const [eventDateAndTime, setEventDateAndTime] = useState(savedDateAndTime)
-  const [eventFlyer, setEventFlyer] = useState('')
-  const [eventSchedule, setEventSchedule] = useState('')
+  const [eventFlyer, setEventFlyer] = useState(savedFlyer)
+  const [eventSchedule, setEventSchedule] = useState(savedSchedule)
   const [eventVideo, setEventVideo] = useState('')
 
   useEffect(() => {
-    if(edit) console.log('config: ', config)
+    if(edit) console.log('config: ', config.schedule.props.href)
   }, [])
 
   return (
@@ -55,18 +54,23 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
         <DialogContent>
           <TextInput 
             textId={'eventName'} textLabel={'Event Name'} setFunction={setEventName}
+            defaultText={eventName}
           />
           <TextInput 
             textId={'eventVenue'} textLabel={'Event Venue Name'} setFunction={setEventVenue}
+            defaultText={eventVenue}
           />
           <TextInput
             textId={'eventAddress'} textLabel={'Event Address'} setFunction={setEventAddress}
+            defaultText={eventAddress}
           />
           <TextInput 
             textId={'eventFlyer'} textLabel={'Event Flyer'} setFunction={setEventFlyer} requiredField={false}
+            defaultText={edit ? eventFlyer.props.href : ''}
           />
           <TextInput 
             textId={'eventSchedule'} textLabel={'Event Schedule'} setFunction={setEventSchedule} requiredField={false}
+            defaultText={edit ? eventSchedule.props.href : ''}
           />
         </DialogContent>
         <Box style={{width: 150, paddingLeft: 24}}>
