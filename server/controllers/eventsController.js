@@ -7,10 +7,11 @@ const getEventsController = async (req, res, next) => {
 }
 
 const addEventController = async (req, res, next) => {
-  const { eventName, venue, address, dateAndTime, flyer, schedule, video } = req.body
+  console.log('addEventController, req.body is: ', req.body)
+  const { name, venue, address, dateAndTime, flyer, schedule, video } = req.body
   const putQuery = 
     `INSERT INTO events(event_name, venue, address, date_and_time, flyer, schedule, video)
-      VALUES('${eventName}','${venue}','${address}','${dateAndTime}','${flyer}','${schedule}','${video}');
+      VALUES('${name}','${venue}','${address}','${dateAndTime}','${flyer}','${schedule}','${video}');
     `
   const result = await executeQuery(putQuery, next)
   if(result) res.json("Successfully added!")
@@ -31,6 +32,7 @@ const updateEventController = async (req, res, next) => {
 
 const deleteEventController = async (req, res, next) => {
   const { id } = req.body
+  console.log('deleteEventController, req.body is: ', req.body)
   const putQuery = 
     `DELETE FROM events
      WHERE id = ${id};

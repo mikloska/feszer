@@ -16,22 +16,38 @@ const setEvent = (event, setEventDateAndTime) => {
   return newEvent;
 }
 
-export const saveEvent = (
+export const saveEvent = async (
     eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
+    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent
   ) => {
   if(eventName === '' || eventVenue === '' || eventAddress === ''){
     setFormError(true)
   } else {
     const newEventDateAndTime = setEvent(eventDateAndTime, setEventDateAndTime)
-    setEventName('')
-    setEventVenue('')
-    setEventAddress('')
-    setEventDateAndTime(new Date())
-    setFormError(false)
-    setEventFlyer('')
-    setEventSchedule('')
-    console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'eventFlyer: ', eventFlyer, 'eventSchedule: ', eventSchedule, 'eventVideo: ', eventVideo, 'newEventDateAndTime: ', newEventDateAndTime, )
+
+    // console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'eventFlyer: ', eventFlyer, 'eventSchedule: ', eventSchedule, 'eventVideo: ', eventVideo, 'newEventDateAndTime: ', newEventDateAndTime, )
+    const data = {name:  eventName, venue: eventVenue, address:  eventAddress, flyer:  eventFlyer, schedule: eventSchedule, video:  eventVideo, dateAndTime:  newEventDateAndTime}
+    try {
+      const result = await addEvent(data)
+      setEventName('')
+      setEventVenue('')
+      setEventAddress('')
+      setEventDateAndTime(new Date())
+      setFormError(false)
+      setEventFlyer('')
+      setEventSchedule('')
+    } catch(error) {
+      console.log('error: ', error)
+    }
     setOpen(false);
+  }
+}
+
+
+export const removeEvent = async (deleteEvent, id) => {
+  try {
+    await deleteEvent({id: id})
+  } catch(error) {
+     console.log('error: ', error)
   }
 }

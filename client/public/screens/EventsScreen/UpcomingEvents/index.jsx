@@ -15,9 +15,12 @@ import {
 import { Delete as DeleteIcon } from '@mui/icons-material';
 
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
-import EventAdditionDialog from '../../../components/Events/EventAdditionDialog';
+import EventAdditionDialog from '../../../components/Events/EventAdditionDialog'
+import { useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
+import { removeEvent } from '../../../components/Events/eventFunctions';
 
 const UpcomingEvents = ({ events }) => {
+  const [deleteEvent, eventDeletionResponse] = useDeleteEventMutation()
   const language = useSelector((state) => state.language.value)
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   useEffect(()=> {
@@ -102,10 +105,22 @@ const UpcomingEvents = ({ events }) => {
                         <TableCell key={`${column.id}-${column.label}`} align={column.align}>
                           {(column.id === 'modify' && loggedIn) ?
                           <>
-                            <IconButton>
+                            <IconButton onClick = {()=> removeEvent(deleteEvent, row.id)}>
                               <DeleteIcon fontSize='small'/>
                             </IconButton>
-                            <EventAdditionDialog edit={true} config ={row} />
+                            <EventAdditionDialog edit={true} 
+                              config ={
+                                {
+                                  "id" : row.id,
+                                  "name" : row.name,
+                                  "venue" : row.venue, 
+                                  "address" : row.address, 
+                                  "dateAndTime" : row.dateAndTime,
+                                  "schedule" : row.schedule.props.href,
+                                  "flyer" : row.flyer.props.href,
+                                }
+                              } 
+                            />
                           </>
                               :
                             value

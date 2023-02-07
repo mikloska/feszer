@@ -7,11 +7,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { Edit as EditIcon } from '@mui/icons-material';
 
+import { useAddEventMutation, useUpdateEventMutation } from '../../../redux/slices/eventsSlice';
 
 import { TextInput } from '../TextInput';
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
 const EventAdditionDialog = ({ edit = false, config = {} }) => {
+  const [addEvent, eventAdditionResponse] = useAddEventMutation()
   const {
     'name' : savedName = '',
     'address' : savedAddress = '',
@@ -31,7 +33,7 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
   const [eventVideo, setEventVideo] = useState('')
 
   useEffect(() => {
-    if(edit) console.log('config: ', config.schedule.props.href)
+    if(edit) console.log('config: ', config)
   }, [])
 
   return (
@@ -66,11 +68,11 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
           />
           <TextInput 
             textId={'eventFlyer'} textLabel={'Event Flyer'} setFunction={setEventFlyer} requiredField={false}
-            defaultText={edit ? eventFlyer.props.href : ''}
+            defaultText={edit ? eventFlyer : ''}
           />
           <TextInput 
             textId={'eventSchedule'} textLabel={'Event Schedule'} setFunction={setEventSchedule} requiredField={false}
-            defaultText={edit ? eventSchedule.props.href : ''}
+            defaultText={edit ? eventSchedule : ''}
           />
         </DialogContent>
         <Box style={{width: 150, paddingLeft: 24}}>
@@ -85,15 +87,20 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
         </LocalizationProvider>
         </Box>
         <DialogActions>
-          <Button onClick={()=> 
-            saveEvent(
-              eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-              setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen
+          <Button  variant="contained"
+            onClick={()=> 
+              saveEvent(
+                eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
+                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent
             )
           }>
-            Save Event
+            {edit ? 'Update Event' : 'Save Event'}
           </Button>
-          <Button onClick={() => handleClose(setFormError, setOpen)}>Cancel</Button>
+          <Button variant="contained"
+            onClick={() => handleClose(setFormError, setOpen)} 
+          >
+            Cancel
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
