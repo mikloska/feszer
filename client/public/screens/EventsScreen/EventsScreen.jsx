@@ -4,7 +4,7 @@ import { Button, IconButton } from '@mui/material'
 import { Image as ImageIcon } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
-import UpcomingEvents from './UpcomingEvents';
+import UpcomingEvents from './UpcomingEvents/UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
 import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
 import { ErrorModal } from '../../components/ErrorModal';
@@ -13,7 +13,7 @@ import { changeLoading } from '../../../redux/slices/loadingSlice';
 
 const EventsScreen = () => {
   const dispatch = useDispatch()
-  const { data, error, isLoading } = useGetEventsQuery()
+  const { data, error, isLoading, refetch } = useGetEventsQuery()
   const { addEvent, response } = useAddEventMutation()
   const language = useSelector((state) => state.language.value)
   const date = new Date()
@@ -67,7 +67,7 @@ const EventsScreen = () => {
       {error && 
         <ErrorModal error={error.data.message}/>
       }
-      <UpcomingEvents events={sortedFutureEvents}/>
+      <UpcomingEvents events={sortedFutureEvents} refetch={refetch}/>
       <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>

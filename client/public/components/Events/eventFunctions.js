@@ -18,8 +18,9 @@ const setEvent = (event, setEventDateAndTime) => {
 
 export const saveEvent = async (
     eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent
+    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, refetch
   ) => {
+    console.log('refetch: ', refetch)
   if(eventName === '' || eventVenue === '' || eventAddress === ''){
     setFormError(true)
   } else {
@@ -36,6 +37,7 @@ export const saveEvent = async (
       setFormError(false)
       setEventFlyer('')
       setEventSchedule('')
+      refetch()
     } catch(error) {
       console.log('error: ', error)
     }
@@ -44,9 +46,10 @@ export const saveEvent = async (
 }
 
 
-export const removeEvent = async (deleteEvent, id) => {
+export const removeEvent = async (deleteEvent, id, refetch) => {
   try {
     await deleteEvent({id: id})
+    refetch()
   } catch(error) {
      console.log('error: ', error)
   }

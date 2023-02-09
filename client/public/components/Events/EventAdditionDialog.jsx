@@ -12,7 +12,7 @@ import { useAddEventMutation, useUpdateEventMutation } from '../../../redux/slic
 import { TextInput } from '../TextInput';
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
-const EventAdditionDialog = ({ edit = false, config = {} }) => {
+const EventAdditionDialog = ({ edit = false, config = {}, refetch }) => {
   const [addEvent, eventAdditionResponse] = useAddEventMutation()
   const {
     'name' : savedName = '',
@@ -33,6 +33,7 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
   const [eventVideo, setEventVideo] = useState('')
 
   useEffect(() => {
+    console.log('refetch: ', refetch)
     if(edit) console.log('config: ', config)
   }, [])
 
@@ -91,9 +92,9 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
             onClick={()=> 
               saveEvent(
                 eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent
-            )
-          }>
+                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, refetch
+              )
+            }>
             {edit ? 'Update Event' : 'Save Event'}
           </Button>
           <Button variant="contained"
