@@ -6,7 +6,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import UpcomingEvents from './UpcomingEvents/UpcomingEvents';
 import PastEventsModal from './PastEventsModal';
-import { useGetEventsQuery, useAddEventMutation, useUpdateEventMutation, useDeleteEventMutation } from '../../../redux/slices/eventsSlice';
+import { useGetEventsQuery } from '../../../redux/slices/eventsSlice';
 import { ErrorModal } from '../../components/ErrorModal';
 import { changeLoading } from '../../../redux/slices/loadingSlice';
 
@@ -14,20 +14,12 @@ import { changeLoading } from '../../../redux/slices/loadingSlice';
 const EventsScreen = () => {
   const dispatch = useDispatch()
   const { data, error, isLoading, refetch } = useGetEventsQuery()
-  const { addEvent, response } = useAddEventMutation()
   const language = useSelector((state) => state.language.value)
   const date = new Date()
-  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const loggedIn = useSelector((state) => state.loggedIn.value) 
-  const currentDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
   const [sortedPastEvents, setSortedPastEvents] = useState([])
   const [sortedFutureEvents, setSortedFutureEvents] = useState([])
-
   const [openPastEventsModal, setOpenPastEventsModal] = useState(false);
   const handlePastEventsModal = () => setOpenPastEventsModal(!openPastEventsModal);
-  const createData = ([name, location, address, dateAndTime, modify]) => {
-    return { name, location, address, dateAndTime, modify };
-  }
 
   useEffect(() => {
     if(isLoading){
@@ -43,7 +35,10 @@ const EventsScreen = () => {
       const futureTemp = []
       let start = null;
       const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
+      console.log(date, new Date(sorted[2].date_and_time))
       for(let i = 0; i < sorted.length; i++){
+        const currentDate = new Date(sorted[i].date_and_time)
+        console.log(currentDate)
         if(new Date(sorted[i].date_and_time) > date){
           start = i
           futureTemp.push(

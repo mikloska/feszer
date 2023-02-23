@@ -7,7 +7,6 @@ const getEventsController = async (req, res, next) => {
 }
 
 const addEventController = async (req, res, next) => {
-  console.log('addEventController, req.body is: ', req.body)
   const { name, venue, address, dateAndTime, flyer, schedule, video } = req.body
   const putQuery = 
     `INSERT INTO events(event_name, venue, address, date_and_time, flyer, schedule, video)

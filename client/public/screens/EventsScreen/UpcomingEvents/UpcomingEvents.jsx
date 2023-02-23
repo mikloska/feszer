@@ -16,7 +16,7 @@ import { Delete as DeleteIcon } from '@mui/icons-material';
 
 import { handleChangePage, handleChangeRowsPerPage } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog'
-import { useGetEventsQuery, useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
+import { useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
 import { removeEvent } from '../../../components/Events/eventFunctions';
 
 const UpcomingEvents = ({ events, refetch }) => {
