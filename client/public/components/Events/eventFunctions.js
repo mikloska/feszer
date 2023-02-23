@@ -1,3 +1,5 @@
+import { eventsApi } from "../../../redux/slices/eventsSlice";
+
 export const handleClickOpen = (setOpen) => {
   setOpen(true);
 };
@@ -18,16 +20,21 @@ const setEvent = (event, setEventDateAndTime) => {
 
 export const saveEvent = async (
     eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, refetch
+    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch
   ) => {
-    console.log('refetch: ', refetch)
   if(eventName === '' || eventVenue === '' || eventAddress === ''){
     setFormError(true)
   } else {
     const newEventDateAndTime = setEvent(eventDateAndTime, setEventDateAndTime)
-
-    // console.log('eventName: ', eventName, 'eventVenue: ', eventVenue, 'eventAddress: ', eventAddress, 'eventFlyer: ', eventFlyer, 'eventSchedule: ', eventSchedule, 'eventVideo: ', eventVideo, 'newEventDateAndTime: ', newEventDateAndTime, )
-    const data = {name:  eventName, venue: eventVenue, address:  eventAddress, flyer:  eventFlyer, schedule: eventSchedule, video:  eventVideo, dateAndTime:  newEventDateAndTime}
+    const data = {
+      name:  eventName, 
+      venue: eventVenue, 
+      address:  eventAddress, 
+      flyer:  eventFlyer, 
+      schedule: eventSchedule, 
+      video:  eventVideo, 
+      dateAndTime:  newEventDateAndTime
+    }
     try {
       const result = await addEvent(data)
       setEventName('')
@@ -37,7 +44,8 @@ export const saveEvent = async (
       setFormError(false)
       setEventFlyer('')
       setEventSchedule('')
-      refetch()
+      // refetch()
+      dispatch(eventsApi.endpoints.getEvents.initiate())
     } catch(error) {
       console.log('error: ', error)
     }

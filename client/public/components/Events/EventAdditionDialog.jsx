@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { Edit as EditIcon } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
 
 import { useAddEventMutation, useUpdateEventMutation } from '../../../redux/slices/eventsSlice';
 
@@ -13,6 +14,7 @@ import { TextInput } from '../TextInput';
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
 const EventAdditionDialog = ({ edit = false, config = {}, refetch }) => {
+  const dispatch = useDispatch()
   const [addEvent, eventAdditionResponse] = useAddEventMutation()
   const {
     'name' : savedName = '',
@@ -81,6 +83,7 @@ const EventAdditionDialog = ({ edit = false, config = {}, refetch }) => {
           <DateTimePicker
             label="Date & Time"
             onChange={(newValue) => {
+              console.log(newValue)
               setEventDateAndTime(newValue);
             }} value={eventDateAndTime} 
             renderInput={(params) => <TextField {...params} />}
@@ -92,7 +95,7 @@ const EventAdditionDialog = ({ edit = false, config = {}, refetch }) => {
             onClick={()=> 
               saveEvent(
                 eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, refetch
+                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch
               )
             }>
             {edit ? 'Update Event' : 'Save Event'}
