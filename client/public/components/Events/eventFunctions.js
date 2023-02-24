@@ -12,8 +12,21 @@ export const handleClose = (setFormError, setOpen) => {
 const setEvent = (event, setEventDateAndTime) => {
   setEventDateAndTime(event)
   const dateAndTime = Object.values(event)[2]
+  let time = String(dateAndTime).slice(-41, -36)
+  const hour = time.slice(0,2)
+  const minutes = time.slice(2,5)
+  if(hour == '00') {
+    time = `12${minutes} AM`
+  } else if(Number(hour) < 12) {
+    if(Number(hour) < 10) {
+      time = `${time.slice(1)} AM`
+    } else {
+      time += ' AM'
+    }
+  } else {
+    time = `${Number(hour) === 12 ? hour : Number(hour) - 12}${minutes} PM`
+  }
   const date = dateAndTime.toDateString();
-  const time = dateAndTime.toLocaleTimeString().match(/\d{2}:\d{2}|[AMP]+/g).join(' ')
   const newEvent = `${date} ${time}`
   return newEvent;
 }
@@ -54,11 +67,3 @@ export const saveEvent = async (
 }
 
 
-export const removeEvent = async (deleteEvent, id, refetch) => {
-  try {
-    await deleteEvent({id: id})
-    refetch()
-  } catch(error) {
-     console.log('error: ', error)
-  }
-}

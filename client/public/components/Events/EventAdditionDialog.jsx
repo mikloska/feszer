@@ -13,7 +13,7 @@ import { useAddEventMutation, useUpdateEventMutation } from '../../../redux/slic
 import { TextInput } from '../TextInput';
 import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
 
-const EventAdditionDialog = ({ edit = false, config = {}, refetch }) => {
+const EventAdditionDialog = ({ edit = false, config = {} }) => {
   const dispatch = useDispatch()
   const [addEvent, eventAdditionResponse] = useAddEventMutation()
   const {
@@ -33,11 +33,6 @@ const EventAdditionDialog = ({ edit = false, config = {}, refetch }) => {
   const [eventFlyer, setEventFlyer] = useState(savedFlyer)
   const [eventSchedule, setEventSchedule] = useState(savedSchedule)
   const [eventVideo, setEventVideo] = useState('')
-
-  useEffect(() => {
-    console.log('refetch: ', refetch)
-    if(edit) console.log('config: ', config)
-  }, [])
 
   return (
     <div>

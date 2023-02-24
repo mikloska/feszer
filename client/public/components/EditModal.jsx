@@ -12,7 +12,6 @@ export const EditModal = ({ data, setEdit, setNewData, submitUpdate, newData, ti
   return(
   <Modal
     open={open}
-    // onClose={}
     aria-labelledby="error-modal"
     aria-describedby="error-modal"
     style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}
