@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {   
   Paper,
   Table,
@@ -21,9 +21,9 @@ import { Delete as DeleteIcon } from '@mui/icons-material';
 import { handleChangePage, handleChangeRowsPerPage, removeEvent } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog'
 import { useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
-// import { removeEvent } from '../../../components/Events/eventFunctions';
 
 const UpcomingEvents = ({ events, refetch }) => {
+  const dispatch = useDispatch()
   const [deleteEvent, eventDeletionResponse] = useDeleteEventMutation()
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const language = useSelector((state) => state.language.value)
@@ -42,6 +42,8 @@ const UpcomingEvents = ({ events, refetch }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([])
+  const [deleteId, setDeleteId] = useState(null)
+  
   const columnsTranslation = {
     'Event' : 'Esemény',
     'Venue' : 'Helyszín',
@@ -50,7 +52,7 @@ const UpcomingEvents = ({ events, refetch }) => {
     'Flyer' : 'Plakát',
     'Schedule' : 'Program'
   }
-  // ()=> removeEvent(deleteEvent, row.id, refetch)}
+
   const [columns, setColumns] = useState(
     [
       { id: 'name', label: 'Event', minWidth: 100 },
@@ -67,6 +69,10 @@ const UpcomingEvents = ({ events, refetch }) => {
       setRows(events)
     }
   }, [events])
+
+  useEffect(() => {
+    if (events.length > 0) refetch()
+  }, [deleteId])
 
   return (
     <Paper>
@@ -111,7 +117,7 @@ const UpcomingEvents = ({ events, refetch }) => {
                         <TableCell key={`${column.id}-${column.label}`} align={column.align}>
                           {(column.id === 'modify' && loggedIn) ?
                           <>
-                            <IconButton onClick = {()=> setOpenConfirmationModal(true)}>
+                            <IconButton onClick = {()=> {setOpenConfirmationModal(true); setDeleteId(row.id)}}>
                               <DeleteIcon fontSize='small'/>
                             </IconButton>
                             <Dialog
@@ -122,14 +128,14 @@ const UpcomingEvents = ({ events, refetch }) => {
                                 Are you sure you'd like to delete this event?
                               </DialogTitle>
                               <DialogActions>
-                                <Button onClick={()=> {removeEvent(deleteEvent, row.id, refetch); }}>
+                                <Button onClick={()=> removeEvent(deleteEvent, deleteId, refetch, setDeleteId, setOpenConfirmationModal)}>
                                   Yes
                                 </Button>
                                 <Button onClick={()=> setOpenConfirmationModal(false)}>
                                   No
                                 </Button>
                               </DialogActions>
-                            </Dialog>     
+                            </Dialog>
                             <EventAdditionDialog edit={true} 
                               config ={
                                 {
