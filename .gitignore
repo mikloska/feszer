@@ -5,4 +5,6 @@ readme_images
 client/feszer_logo
 .env
 build
+dist
 dbdesign.js
+functions
