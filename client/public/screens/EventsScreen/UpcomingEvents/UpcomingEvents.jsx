@@ -24,7 +24,7 @@ import { useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
 
 const UpcomingEvents = ({ events, refetch }) => {
   const dispatch = useDispatch()
-  const [deleteEvent, eventDeletionResponse] = useDeleteEventMutation()
+  const [deleteEvent] = useDeleteEventMutation()
   const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
   const language = useSelector((state) => state.language.value)
   const loggedIn = useSelector((state) => state.loggedIn.value) 
@@ -148,6 +148,7 @@ const UpcomingEvents = ({ events, refetch }) => {
                                   "flyer" : row.flyer.props.href,
                                 }
                               }
+                              refetch={refetch}
                             />
                           </>
                               :

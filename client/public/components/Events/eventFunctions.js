@@ -31,6 +31,36 @@ const setEvent = (event, setEventDateAndTime) => {
   return newEvent;
 }
 
+export const updateExistingEvent = async (
+  eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, id,
+  setOpen, updateEvent, setEventDateAndTime, refetch
+) => {
+  console.log('here')
+  const newEventDateAndTime = 
+    typeof eventDateAndTime === "string"  ? eventDateAndTime :
+    setEvent(eventDateAndTime, setEventDateAndTime)
+  const data = {
+    id : id,
+    updated : {
+      eventName:  eventName, 
+      venue: eventVenue, 
+      address:  eventAddress, 
+      flyer:  eventFlyer, 
+      schedule: eventSchedule, 
+      video:  eventVideo, 
+      dateAndTime:  newEventDateAndTime
+    }
+  }
+  try {
+    await updateEvent(data)
+    refetch()
+  } catch(error) {
+    console.log('error: ', error)
+  }
+  dispatch(eventsApi.endpoints.getEvents.initiate())
+  setOpen(false);
+}
+
 export const saveEvent = async (
     eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
     setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch
@@ -57,7 +87,6 @@ export const saveEvent = async (
       setFormError(false)
       setEventFlyer('')
       setEventSchedule('')
-      // refetch()
       dispatch(eventsApi.endpoints.getEvents.initiate())
     } catch(error) {
       console.log('error: ', error)

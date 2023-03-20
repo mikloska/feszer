@@ -11,12 +11,14 @@ import { useDispatch } from 'react-redux';
 import { useAddEventMutation, useUpdateEventMutation } from '../../../redux/slices/eventsSlice';
 
 import { TextInput } from '../TextInput';
-import { handleClickOpen, handleClose, saveEvent } from './eventFunctions';
+import { handleClickOpen, handleClose, saveEvent, updateExistingEvent } from './eventFunctions';
 
-const EventAdditionDialog = ({ edit = false, config = {} }) => {
+const EventAdditionDialog = ({ edit = false, config = {}, refetch = null}) => {
   const dispatch = useDispatch()
-  const [addEvent, eventAdditionResponse] = useAddEventMutation()
+  const [addEvent] = useAddEventMutation()
+  const [updateEvent] = useUpdateEventMutation()
   const {
+    id,
     'name' : savedName = '',
     'address' : savedAddress = '',
     'venue' : savedVenue = '',
@@ -42,12 +44,14 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
         </IconButton>  
         :
         <Button variant="contained" onClick={() => handleClickOpen(setOpen)} style={{marginLeft: 20}}>
-          Add Event
+          {edit ? 'Update Event' : 'Add Event'}
         </Button>
       }
 
       <Dialog open={open} onClose={() => handleClose(setFormError, setOpen)}>
-        <DialogTitle>Add Event</DialogTitle>
+        <DialogTitle>
+          {edit ? 'Update Event' : 'Add Event'}
+        </DialogTitle>
         {formError &&
           <Alert severity="formError">Fill out all required fields!</Alert>
         }
@@ -88,6 +92,11 @@ const EventAdditionDialog = ({ edit = false, config = {} }) => {
         <DialogActions>
           <Button  variant="contained"
             onClick={()=> 
+              edit ? 
+              updateExistingEvent(
+                eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, id,
+                setOpen, updateEvent, setEventDateAndTime, refetch
+              ) :
               saveEvent(
                 eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
                 setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch
