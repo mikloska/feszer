@@ -8,6 +8,7 @@
     "start": "nodemon node server/server.js",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --open\"",
     "build": "webpack --mode production && echo /*  /index.html  200 | cat >build/_redirects",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
