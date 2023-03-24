@@ -1,5 +1,5 @@
 export const updatePerson = async (
-  id, newData, language, updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch
+  id, newData, language, updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch, changeLoading
 ) => {
   const data = {
     id : id,
@@ -7,13 +7,15 @@ export const updatePerson = async (
     bio: newData
   }
   try {
+    dispatch(changeLoading({"loading":true}))
     await updateAboutMember(data)
+    dispatch(changeLoading({"loading":false}))
     setNewData('')
     refetch()
   } catch(error) {
+    dispatch(changeLoading({"loading":false}))
     console.log('error: ', error)
   }
-  // dispatch(eventsApi.endpoints.getEvents.initiate())
   setEdit(false)
   setOpen(false);
 }

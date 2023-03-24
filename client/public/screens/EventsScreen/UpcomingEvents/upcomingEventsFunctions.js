@@ -9,14 +9,16 @@ export const handleChangeRowsPerPage = (event) => {
   setPage(0);
 };
 
-export const removeEvent = async (deleteEvent, id, refetch, setDeleteId, setOpenConfirmationModal) => {
+export const removeEvent = async (deleteEvent, id, refetch, setDeleteId, setOpenConfirmationModal, dispatch, changeLoading) => {
   try {
+    dispatch(changeLoading({"loading":true}))
     await deleteEvent({id: id})
+    dispatch(changeLoading({"loading":false}))
     setDeleteId(null)
     setOpenConfirmationModal(false)
-    // dispatch(eventsApi.endpoints.getEvents.initiate())
     refetch()
   } catch(error) {
+    dispatch(changeLoading({"loading":false}))
      console.log('error: ', error)
   }
 }

@@ -12,6 +12,7 @@ import { useAddEventMutation, useUpdateEventMutation } from '../../../redux/slic
 
 import { TextInput } from '../TextInput';
 import { handleClickOpen, handleClose, saveEvent, updateExistingEvent } from './eventFunctions';
+import { changeLoading } from '../../../redux/slices/loadingSlice';
 
 const EventAdditionDialog = ({ edit = false, config = {}, refetch = null}) => {
   const dispatch = useDispatch()
@@ -82,7 +83,6 @@ const EventAdditionDialog = ({ edit = false, config = {}, refetch = null}) => {
           <DateTimePicker
             label="Date & Time"
             onChange={(newValue) => {
-              console.log(newValue)
               setEventDateAndTime(newValue);
             }} value={eventDateAndTime} 
             renderInput={(params) => <TextField {...params} />}
@@ -95,11 +95,11 @@ const EventAdditionDialog = ({ edit = false, config = {}, refetch = null}) => {
               edit ? 
               updateExistingEvent(
                 eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, id,
-                setOpen, updateEvent, setEventDateAndTime, refetch
+                setOpen, updateEvent, setEventDateAndTime, refetch, dispatch, changeLoading
               ) :
               saveEvent(
                 eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch
+                setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch, changeLoading
               )
             }>
             {edit ? 'Update Event' : 'Save Event'}

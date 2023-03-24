@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { TextInput } from './TextInput'
 import { updatePerson } from './Person/personFunctions'
 import { useUpdateAboutMemberMutation } from '../../redux/slices/aboutMembersSlice';
+import { changeLoading } from '../../redux/slices/loadingSlice'
 
 export const EditModal = ({ data, id, setEdit, setNewData, newData, title, refetch }) => {
   const [updateAboutMember] = useUpdateAboutMemberMutation()
@@ -28,7 +29,7 @@ export const EditModal = ({ data, id, setEdit, setNewData, newData, title, refet
       <TextInput textId={'edit-about'} textLabel={title} setFunction={setNewData} requiredField={false} defaultText={text} multi={true} key={`${text}`}/>
     ))}
   <Button variant="contained"
-    onClick={() => { updatePerson(id, newData, language === 'MAGYAR' ? 'english' : 'magyar', updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch) }}
+    onClick={() => { updatePerson(id, newData, language === 'MAGYAR' ? 'english' : 'magyar', updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch, changeLoading) }}
   >
     UPDATE
   </Button>

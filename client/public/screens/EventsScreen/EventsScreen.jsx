@@ -38,7 +38,6 @@ const EventsScreen = () => {
       console.log(date, new Date(sorted[2].date_and_time))
       for(let i = 0; i < sorted.length; i++){
         const currentDate = new Date(sorted[i].date_and_time)
-        console.log(currentDate)
         if(new Date(sorted[i].date_and_time) > date){
           start = i
           futureTemp.push(
@@ -52,9 +51,7 @@ const EventsScreen = () => {
           break;
         }
       }
-      // if(sortedFutureEvents.length === 1) {
-      //   refetch()
-      // }
+      
       setSortedPastEvents(start ? sorted.slice(start+1): sorted)
       setSortedFutureEvents(futureTemp)
     }

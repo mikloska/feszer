@@ -21,6 +21,7 @@ import { Delete as DeleteIcon } from '@mui/icons-material';
 import { handleChangePage, handleChangeRowsPerPage, removeEvent } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog'
 import { useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
+import { changeLoading } from '../../../../redux/slices/loadingSlice';
 
 const UpcomingEvents = ({ events, refetch }) => {
   const dispatch = useDispatch()
@@ -128,7 +129,7 @@ const UpcomingEvents = ({ events, refetch }) => {
                                 Are you sure you'd like to delete this event?
                               </DialogTitle>
                               <DialogActions>
-                                <Button onClick={()=> removeEvent(deleteEvent, deleteId, refetch, setDeleteId, setOpenConfirmationModal)}>
+                                <Button onClick={()=> removeEvent(deleteEvent, deleteId, refetch, setDeleteId, setOpenConfirmationModal, dispatch, changeLoading)}>
                                   Yes
                                 </Button>
                                 <Button onClick={()=> setOpenConfirmationModal(false)}>

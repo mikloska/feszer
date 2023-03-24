@@ -33,7 +33,7 @@ const setEvent = (event, setEventDateAndTime) => {
 
 export const updateExistingEvent = async (
   eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, id,
-  setOpen, updateEvent, setEventDateAndTime, refetch
+  setOpen, updateEvent, setEventDateAndTime, refetch, dispatch, changeLoading
 ) => {
   const newEventDateAndTime = 
     typeof eventDateAndTime === "string"  ? eventDateAndTime :
@@ -51,9 +51,12 @@ export const updateExistingEvent = async (
     }
   }
   try {
+    dispatch(changeLoading({"loading":true}))
     await updateEvent(data)
+    dispatch(changeLoading({"loading":false}))
     refetch()
   } catch(error) {
+    dispatch(changeLoading({"loading":false}))
     console.log('error: ', error)
   }
   // dispatch(eventsApi.endpoints.getEvents.initiate())
@@ -62,7 +65,7 @@ export const updateExistingEvent = async (
 
 export const saveEvent = async (
     eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, 
-    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch
+    setEventName, setEventVenue, setEventAddress, setEventDateAndTime, setFormError, setEventFlyer, setEventSchedule, setOpen, addEvent, dispatch, changeLoading
   ) => {
   if(eventName === '' || eventVenue === '' || eventAddress === ''){
     setFormError(true)
@@ -78,7 +81,9 @@ export const saveEvent = async (
       dateAndTime:  newEventDateAndTime
     }
     try {
-      const result = await addEvent(data)
+      dispatch(changeLoading({"loading":true}))
+      await addEvent(data)
+      dispatch(changeLoading({"loading":false}))
       setEventName('')
       setEventVenue('')
       setEventAddress('')
@@ -88,6 +93,7 @@ export const saveEvent = async (
       setEventSchedule('')
       dispatch(eventsApi.endpoints.getEvents.initiate())
     } catch(error) {
+      dispatch(changeLoading({"loading":false}))
       console.log('error: ', error)
     }
     setOpen(false);
