@@ -51,7 +51,7 @@ const EventsScreen = () => {
           break;
         }
       }
-      
+
       setSortedPastEvents(start ? sorted.slice(start+1): sorted)
       setSortedFutureEvents(futureTemp)
     }
@@ -63,7 +63,7 @@ const EventsScreen = () => {
         <ErrorModal error={error.data.message}/>
       }
       <UpcomingEvents events={sortedFutureEvents} refetch={refetch}/>
-      <Button variant = "contained" onClick={handlePastEventsModal} style ={{marginTop: 20}}>
+      <Button variant = "contained" onClick={handlePastEventsModal} style={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
       </Button>
       <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={sortedPastEvents}/>

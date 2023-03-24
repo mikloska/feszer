@@ -7,6 +7,7 @@ import loadingReducer from './slices/loadingSlice'
 import { aboutBandApi } from './slices/aboutBandSlice'
 import { aboutMembersApi } from './slices/aboutMembersSlice'
 import { eventsApi } from './slices/eventsSlice'
+import { galleryApi } from './slices/gallerySlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,9 +17,10 @@ export const store = configureStore({
     [aboutBandApi.reducerPath]: aboutBandApi.reducer,
     [aboutMembersApi.reducerPath]: aboutMembersApi.reducer,
     [eventsApi.reducerPath]: eventsApi.reducer,
+    [galleryApi.reducerPath]: galleryApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(aboutBandApi.middleware, aboutMembersApi.middleware, eventsApi.middleware),
+  getDefaultMiddleware().concat(aboutBandApi.middleware, aboutMembersApi.middleware, eventsApi.middleware, galleryApi.middleware),
 })
 
 setupListeners(store.dispatch)

@@ -21,17 +21,12 @@ const HomeScreen = () =>{
 
   useEffect(() => {
     // This will be used for the query
-    console.log(language === "MAGYAR" ? "english" : "magyar")
     if(isLoading || updateLoading){
       dispatch(changeLoading({"loading":true}))
     } else {
       dispatch(changeLoading({"loading":false}))
     }
   }, [isLoading, updateLoading])
-
-  useEffect(() => {
-    console.log('newData: ', newData, 'updateLoading: ', updateLoading)
-  }, [newData, updateLoading])
   
 
   return (
