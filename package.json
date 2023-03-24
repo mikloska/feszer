@@ -7,7 +7,7 @@
     "local": "webpack serve --mode development --open --hot",
     "start": "nodemon node server/server.js",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --open\"",
-    "build": "webpack --mode production && echo /*  /index.html  200 | cat >dist/_redirects",
+    "build": "webpack --mode production && echo /*  /index.html  200 | cat >build/_redirects",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -58,7 +58,6 @@
     "react-image-gallery": "^1.2.11",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.2.0",
-    "serverless-http": "^3.2.0",
     "style-loader": "^3.2.1",
     "webpack": "^5.50.0",
     "webpack-cli": "^4.7.2",

@@ -27,7 +27,7 @@ module.exports = {
   entry : ['babel-polyfill','./client/index.js'],
   devtool: 'inline-source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/',
     //clean: true,

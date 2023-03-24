@@ -4,9 +4,8 @@ import {Typography, Grid, Paper, Box, IconButton} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReactCardFlip from 'react-card-flip';
-import { AboutMembersText } from '../Text/AboutMembersText';
 import { Edit as EditIcon } from '@mui/icons-material';
-import { EditModal } from '../components/EditModal';
+import { EditModal } from '../EditModal';
 
 const useStyles = makeStyles((theme) => ({
   Box: {
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const People = ({
-  musicianFirstName, musicianLastName, englishIntruments, hungarianInstruments, englishBio, hungarianBio, id
+  musicianFirstName, musicianLastName, englishIntruments, hungarianInstruments, englishBio, hungarianBio, id, refetch
 }) => {
   const language = useSelector((state) => state.language.value)
   const loggedIn = useSelector((state) => state.loggedIn.value)
@@ -49,10 +48,6 @@ const People = ({
     (flipped===false)?setFlipped(true):setFlipped(false)
   }
 
-  useEffect(() => {
-    console.log('newData: ', newData)
-  }, [newData])
-
   return(
     <Grid item s={12} m={3}>
       {loggedIn && edit && 
@@ -63,11 +58,12 @@ const People = ({
               englishBio : hungarianBio
             ]
           }
+          id={id}
           setEdit={setEdit}
           setNewData={setNewData}
-          submitUpdate={()=>{}}
           newData={newData}
-          title={`Change ${musicianFirstName} ${language} bio`}
+          title={`Change ${musicianFirstName} ${language === 'MAGYAR' ? 'english' : 'magyar'} bio`}
+          refetch={refetch}
         />
       }
       <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">

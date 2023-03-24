@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Box, Button } from '@mui/material'
-import { TextInput } from './TextInput'
+import { useSelector, useDispatch } from 'react-redux'
 
-export const EditModal = ({ data, setEdit, setNewData, submitUpdate, newData, title }) => {
+import { TextInput } from './TextInput'
+import { updatePerson } from './Person/personFunctions'
+import { useUpdateAboutMemberMutation } from '../../redux/slices/aboutMembersSlice';
+
+export const EditModal = ({ data, id, setEdit, setNewData, newData, title, refetch }) => {
+  const [updateAboutMember] = useUpdateAboutMemberMutation()
+  const dispatch = useDispatch()
+  const language = useSelector((state) => state.language.value)
   const [open, setOpen] = useState(false)
   useEffect(() => {
     if(data){
@@ -21,7 +28,7 @@ export const EditModal = ({ data, setEdit, setNewData, submitUpdate, newData, ti
       <TextInput textId={'edit-about'} textLabel={title} setFunction={setNewData} requiredField={false} defaultText={text} multi={true} key={`${text}`}/>
     ))}
   <Button variant="contained"
-    onClick={() => {submitUpdate(newData); setOpen(false);}}
+    onClick={() => { updatePerson(id, newData, language === 'MAGYAR' ? 'english' : 'magyar', updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch) }}
   >
     UPDATE
   </Button>

@@ -35,7 +35,6 @@ export const updateExistingEvent = async (
   eventName, eventVenue, eventAddress, eventDateAndTime, eventFlyer, eventSchedule, eventVideo, id,
   setOpen, updateEvent, setEventDateAndTime, refetch
 ) => {
-  console.log('here')
   const newEventDateAndTime = 
     typeof eventDateAndTime === "string"  ? eventDateAndTime :
     setEvent(eventDateAndTime, setEventDateAndTime)
@@ -57,7 +56,7 @@ export const updateExistingEvent = async (
   } catch(error) {
     console.log('error: ', error)
   }
-  dispatch(eventsApi.endpoints.getEvents.initiate())
+  // dispatch(eventsApi.endpoints.getEvents.initiate())
   setOpen(false);
 }
 

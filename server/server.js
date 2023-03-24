@@ -9,7 +9,6 @@ const aboutRoute = require("./routes/aboutRoute.js")
 const aboutMembersRoute = require("./routes/aboutMembersRoute.js")
 const eventsRoute = require("./routes/eventsRoute.js")
 const {notFound, errorHandler} = require("./middleware/errorHandler.js")
-const serverless = require("serverless-http")
 
 dotenv.config();
 connectDB()
@@ -27,7 +26,7 @@ app.use('/api', aboutMembersRoute)
 app.use('/api', eventsRoute)
 // const __dirname = path.resolve()
 
-const root = path.join(__dirname, 'dist')
+const root = path.join(__dirname, 'build')
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
     if(!req.header) res.redirect(`https://${req.header('host')}${req.url}`)
@@ -55,5 +54,3 @@ app.use(notFound)
 app.use(errorHandler)
 
 app.listen(PORT, ()=> console.log(`Server running in '${process.env.NODE_ENV}' mode on port ${PORT}`))
-
-module.exports.handler = serverless(app)

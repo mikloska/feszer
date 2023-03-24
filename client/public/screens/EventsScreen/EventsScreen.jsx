@@ -52,6 +52,9 @@ const EventsScreen = () => {
           break;
         }
       }
+      // if(sortedFutureEvents.length === 1) {
+      //   refetch()
+      // }
       setSortedPastEvents(start ? sorted.slice(start+1): sorted)
       setSortedFutureEvents(futureTemp)
     }

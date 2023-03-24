@@ -20,8 +20,9 @@ const getAboutMembersController = async (req, res, next) => {
 
 const updateAboutMemberController = async (req, res, next) => {
   const { id, language, bio } = req.body
+  const table = language === 'english' ? 'english_bio' : 'hungarian_bio'
   const putQuery = 
-    `UPDATE ${language}_bio
+    `UPDATE ${table}
       SET bio = '${bio}'
       WHERE member_id = ${id};
     `

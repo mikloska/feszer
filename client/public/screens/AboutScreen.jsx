@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Typography, Grid, IconButton } from '@mui/material';
 
 import { useGetAboutMembersQuery } from '../../redux/slices/aboutMembersSlice';
-import Person from '../components/Person'
+import Person from '../components/Person/Person'
 import { changeLoading } from '../../redux/slices/loadingSlice';
 import { ErrorModal } from '../components/ErrorModal';
 
@@ -12,7 +12,7 @@ const AboutScreen = () =>{
   const dispatch = useDispatch()
 
   const language = useSelector((state) => state.language.value)
-  const { data, error, isLoading } = useGetAboutMembersQuery()
+  const { data, error, isLoading, refetch } = useGetAboutMembersQuery()
 
   useEffect(() => {
     if(isLoading){
@@ -39,6 +39,7 @@ const AboutScreen = () =>{
             hungarianBio={current.hungarian_bio}
             key={`${current.first_name}-${current.last_name}`}
             id={current.id}
+            refetch={refetch}
           >
           </Person>
         ))}
