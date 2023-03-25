@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const eventsApi = createApi({
   reducerPath: 'eventsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.URL}),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://www.feszerband.com/api'}),
   refetchOnMountOrArgChange: 10,
   endpoints: (builder) => ({
     getEvents: builder.query({

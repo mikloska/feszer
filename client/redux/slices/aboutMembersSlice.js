@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const aboutMembersApi = createApi({
   reducerPath: 'aboutMembersApi',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.URL}),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://www.feszerband.com/api'}),
   endpoints: (builder) => ({
     getAboutMembers: builder.query({
       query: () => 'about-members',
