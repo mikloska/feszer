@@ -1,16 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
 
 const initialState = {
   value: false,
   error: false
 }
 
+export const loginApi = createApi({
+  reducerPath: 'loginApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api'}),
+  endpoints: (builder) => ({
+    checkLogin: builder.mutation({
+      query: (payload) => ({
+        url: '/login',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+    }),
+  }),
+})
+
 export const loginSlice = createSlice({
   name: 'loggedIn',
   initialState,
   reducers: {
     login: (state, action) => {
-      if(action.payload.username === 'zene' && action.payload.password === 'kar'){
+      if(action.payload.loggedIn === 'successfully logged in !'){
         state.value = true;
         state.error = false;
       } else {

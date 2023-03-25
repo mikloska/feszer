@@ -12,8 +12,10 @@ import VpnKeyOffIcon from '@mui/icons-material/VpnKeyOff';
 import { IconButton } from '@mui/material';
 
 import { login, logout } from '../../redux/slices/loginSlice';
+import { loginApi } from '../../redux/slices/loginSlice';
 
 const LoginDialog = () => {
+  const [checkLogin] = loginApi.useCheckLoginMutation()
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState('')
@@ -30,8 +32,17 @@ const LoginDialog = () => {
     setOpen(false);
   };
 
-  const loginUser = () => {
-    dispatch(login({"username" : userName, "password":password}))
+  const loginUser = async () => {
+    try {
+      const result = await checkLogin({"userName" : userName, "password":password})
+      if (result.data === 'successfully logged in !') {
+        dispatch(login({"loggedIn" : result.data}))
+      } else {
+        setLoginError(true)
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
