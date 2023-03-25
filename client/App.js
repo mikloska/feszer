@@ -16,6 +16,7 @@ const App = () => {
   const loading = useSelector((state) => state.loading.value)
 
   useEffect(() => {
+    console.log(localStorage.getItem('loggedIn'))
     window.process = {
       ...window.process,
     };

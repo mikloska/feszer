@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 
 const initialState = {
-  value: false,
+  value: (localStorage.getItem('loggedIn') && JSON.parse(localStorage.getItem('loggedIn') ) === true) ? true : false,
   error: false
 }
 
@@ -30,6 +30,7 @@ export const loginSlice = createSlice({
   reducers: {
     login: (state, action) => {
       if(action.payload.loggedIn === 'successfully logged in !'){
+        localStorage.setItem('loggedIn', true)
         state.value = true;
         state.error = false;
       } else {
@@ -38,6 +39,7 @@ export const loginSlice = createSlice({
       }
     },
     logout: (state) => {
+      localStorage.setItem('loggedIn', false)
       state.value = false;
       state.error = false;
     }
