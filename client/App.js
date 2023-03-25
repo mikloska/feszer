@@ -16,6 +16,12 @@ const App = () => {
   const loading = useSelector((state) => state.loading.value)
 
   useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
+  }, []);
+
+  useEffect(() => {
     if(loading === false || loading === true) {
       setSpinnerActive(loading)
     }
