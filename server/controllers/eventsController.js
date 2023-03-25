@@ -31,7 +31,6 @@ const updateEventController = async (req, res, next) => {
 
 const deleteEventController = async (req, res, next) => {
   const { id } = req.body
-  console.log('deleteEventController, req.body is: ', req.body)
   const putQuery = 
     `DELETE FROM events
      WHERE id = ${id};

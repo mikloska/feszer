@@ -9,7 +9,6 @@ const getAboutController = async (req, res, next) => {
 }
 
 const updateAboutController = async (req, res, next) => {
-  console.log(req.body)
   const { language, updated } = req.body
   const putQuery = 
     `UPDATE about

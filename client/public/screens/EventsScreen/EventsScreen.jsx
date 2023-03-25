@@ -35,7 +35,6 @@ const EventsScreen = () => {
       const futureTemp = []
       let start = null;
       const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
-      console.log(date, new Date(sorted[2].date_and_time))
       for(let i = 0; i < sorted.length; i++){
         const currentDate = new Date(sorted[i].date_and_time)
         if(new Date(sorted[i].date_and_time) > date){
