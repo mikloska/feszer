@@ -16,7 +16,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       title: 'Feszer Band',
-      template: './client/index.html',
+      template: './index.html',
     }),
   ],
   resolve: {
