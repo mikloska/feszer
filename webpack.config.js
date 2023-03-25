@@ -35,9 +35,9 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.URL': JSON.stringify(process.env.URL),
-      'process.env.LOGIN_USERNAME': JSON.stringify(process.env.LOGIN_USERNAME),
-      'process.env.LOGIN_PASSWORD': JSON.stringify(process.env.LOGIN_PASSWORD)
+      'process.env.URL': `${process.env.URL}`,
+      'process.env.LOGIN_USERNAME': `${process.env.LOGIN_USERNAME}`,
+      'process.env.LOGIN_PASSWORD': `${process.env.LOGIN_PASSWORD}`
     }),
     new HtmlWebpackPlugin({
       inject: false,
