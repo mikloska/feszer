@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReactCardFlip from 'react-card-flip';
 import { Edit as EditIcon } from '@mui/icons-material';
-import { EditModal } from '../EditModal';
+import { EditModal } from '../EditModal/EditModal';
 
 const useStyles = makeStyles((theme) => ({
   Box: {
@@ -64,6 +64,7 @@ const People = ({
           newData={newData}
           title={`Change ${musicianFirstName} ${language === 'MAGYAR' ? 'english' : 'magyar'} bio`}
           refetch={refetch}
+          usage={'person'}
         />
       }
       <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">

@@ -16,7 +16,6 @@ export const aboutBandApi = createApi({
           'Content-type': 'application/json; charset=UTF-8',
         },
       }),
-      // invalidatesTags: ['Put'],
     }),
   }),
 })

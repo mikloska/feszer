@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Box, Button } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { TextInput } from './TextInput'
-import { updatePerson } from './Person/personFunctions'
-import { useUpdateAboutMemberMutation } from '../../redux/slices/aboutMembersSlice';
-import { changeLoading } from '../../redux/slices/loadingSlice'
+import { TextInput } from '../TextInput'
+import { updatePerson, updateAbout } from './editFunctions'
+import { useUpdateAboutMemberMutation } from '../../../redux/slices/aboutMembersSlice';
+import { useUpdateAboutBandMutation } from '../../../redux/slices/aboutBandSlice'
+import { changeLoading } from '../../../redux/slices/loadingSlice'
 
-export const EditModal = ({ data, id, setEdit, setNewData, newData, title, refetch }) => {
+export const EditModal = ({ data, id, setEdit, setNewData, newData, title, refetch, usage }) => {
+  const [updateAboutBand] = useUpdateAboutBandMutation()
   const [updateAboutMember] = useUpdateAboutMemberMutation()
   const dispatch = useDispatch()
   const language = useSelector((state) => state.language.value)
@@ -29,7 +31,10 @@ export const EditModal = ({ data, id, setEdit, setNewData, newData, title, refet
       <TextInput textId={'edit-about'} textLabel={title} setFunction={setNewData} requiredField={false} defaultText={text} multi={true} key={`${text}`}/>
     ))}
   <Button variant="contained"
-    onClick={() => { updatePerson(id, newData, language === 'MAGYAR' ? 'english' : 'magyar', updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch, changeLoading) }}
+    onClick={() =>  usage === 'person' ?
+      updatePerson(id, newData, language === 'MAGYAR' ? 'english' : 'magyar', updateAboutMember, setOpen, setNewData, setEdit, refetch, dispatch, changeLoading) :
+      updateAbout(newData,  language === 'MAGYAR' ? 'english' : 'magyar', updateAboutBand, setOpen, setNewData, setEdit, refetch, dispatch, changeLoading)
+    }
   >
     UPDATE
   </Button>

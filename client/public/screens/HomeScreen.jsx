@@ -8,13 +8,13 @@ import { Edit as EditIcon } from '@mui/icons-material';
 import { changeLoading } from '../../redux/slices/loadingSlice';
 import { useGetAboutBandQuery, useUpdateAboutBandMutation } from '../../redux/slices/aboutBandSlice';
 import { ErrorModal } from '../components/ErrorModal';
-import { EditModal } from '../components/EditModal';
+import { EditModal } from '../components/EditModal/EditModal';
 
 const HomeScreen = () =>{
   const dispatch = useDispatch()
   const loggedIn = useSelector((state) => state.loggedIn.value) 
   const language = useSelector((state) => state.language.value)
-  const { data, error, isLoading } = useGetAboutBandQuery()
+  const { data, error, isLoading, refetch } = useGetAboutBandQuery()
   const [edit, setEdit] = useState(false)
   const [newData, setNewData] = useState('')
   const [updateAboutBand, { updateLoading }] = useUpdateAboutBandMutation();
@@ -44,6 +44,8 @@ const HomeScreen = () =>{
           submitUpdate={updateAboutBand}
           newData={newData}
           title={'Change About Band Text'}
+          refetch={refetch}
+          usage={'band'}
         />
       }
       {/* {error && 
