@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -5,7 +6,7 @@ module.exports = {
   entry : ['babel-polyfill','./client/index.js'],
   devtool: 'inline-source-map',
   output: {
-    path: './build',
+    path: path.resolve(__dirname, 'server/build'),
     filename: 'bundle.js',
     publicPath: '/',
     //clean: true,
