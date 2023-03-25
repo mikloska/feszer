@@ -1,14 +1,17 @@
+const bcrypt = require('bcrypt')
+
 const {executeQuery} = require("../config/executeQuery")
 
 const loginController = async (req, res, next) => {
-  console.log(req.body)
   const { userName, password } = req.body
   const selectQuery = "SELECT user_name, password FROM login WHERE id=1;"
   const result = await executeQuery(selectQuery, next)
+  const compare = await bcrypt.compare(password, result.rows[0].password)
+
   if(
     result && 
     result.rows[0].user_name === userName && 
-    result.rows[0].password === password
+    compare
   ) {
     res.json('successfully logged in !')
   } else {

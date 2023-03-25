@@ -9,7 +9,7 @@ const initialState = {
 
 export const loginApi = createApi({
   reducerPath: 'loginApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api'}),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://www.feszerband.com/api'}),
   endpoints: (builder) => ({
     checkLogin: builder.mutation({
       query: (payload) => ({
