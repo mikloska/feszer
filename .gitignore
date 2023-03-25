@@ -6,3 +6,4 @@ client/feszer_logo
 .env
 build
 dbdesign.js
+server/build
