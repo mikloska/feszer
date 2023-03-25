@@ -9,9 +9,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "local": "webpack serve --mode development --open --hot",
-    "start": "nodemon node server/server.js",
+    "start": "cross-env NODE_ENV=production nodemon node server/server.js",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --open\"",
-    "build": "webpack --mode production",
+    "build": "cross-env NODE_ENV=production webpack",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

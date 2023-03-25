@@ -14,15 +14,16 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      inject: false,
+      // inject: false,
       title: 'Feszer Band',
       template: './index.html',
     }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
-    fallback: { "fs": false, "os" : false, "path" : false }
+    // fallback: { "fs": false, "os" : false, "path" : false }
   },
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -57,9 +58,9 @@ module.exports = {
     publicPath: '/build/',
     //Having '/build/' in puclicPath, was the reason I had to keep changing the src tag in the root index.html.
     publicPath: '/',
-    // proxy: {
-    //   '/api': 'http://localhost:5000',
-    // },
+    proxy: {
+      '/api': 'http://localhost:5000',
+    },
   },
 
 
