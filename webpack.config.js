@@ -34,11 +34,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.URL': `${process.env.URL}`,
-      'process.env.LOGIN_USERNAME': `${process.env.LOGIN_USERNAME}`,
-      'process.env.LOGIN_PASSWORD': `${process.env.LOGIN_PASSWORD}`
-    }),
+    new webpack.DefinePlugin(envKeys),
     new HtmlWebpackPlugin({
       inject: false,
       title: 'Feszer Band',
