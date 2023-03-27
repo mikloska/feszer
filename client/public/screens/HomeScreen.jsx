@@ -52,7 +52,7 @@ const HomeScreen = () =>{
         <ErrorModal error={error.data.message}/>
       } */}
       <Grid item md={5} sm={12} style={{textAlign:'left'}}>
-        <iframe width='100%' height='225' src="https://www.youtube.com/watch?v=dgqVcvD2hc4" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+        <iframe width='100%' height='225' src="https://www.youtube.com/embed/dgqVcvD2hc4" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         <iframe width='100%' height='225' src="https://www.youtube.com/embed/VLbdGoYf3_k" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         <iframe width='100%' height='225' src="https://www.youtube.com/embed/OQacr-i-V28" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       </Grid>
