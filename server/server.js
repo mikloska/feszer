@@ -10,6 +10,7 @@ const aboutMembersRoute = require("./routes/aboutMembersRoute.js")
 const eventsRoute = require("./routes/eventsRoute.js")
 const galleryRoute = require("./routes/galleryRoute.js")
 const loginRoute = require("./routes/loginRoute.js")
+const videosRoute = require("./routes/videosRoute.js")
 const {notFound, errorHandler} = require("./middleware/errorHandler.js")
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.use('/api', aboutMembersRoute)
 app.use('/api', eventsRoute)
 app.use('/api', galleryRoute)
 app.use('/api', loginRoute)
+app.use('/api', videosRoute)
 // const __dirname = path.resolve()
 
 const root = path.join(__dirname, 'build')
