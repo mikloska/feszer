@@ -4,7 +4,7 @@ const getAboutController = async (req, res, next) => {
   const selectQuery = "SELECT * FROM about;"
   const result = await executeQuery(selectQuery, next)
   if(result) {
-    res.json(result.rows[0])
+    res.send(result.rows[0])
   }
 }
 
@@ -17,7 +17,7 @@ const updateAboutController = async (req, res, next) => {
     `
   const result = await executeQuery(putQuery, next)
   if(result) {
-    res.json("Successfully updated!")
+    res.send("Successfully updated!")
   }
 }
 

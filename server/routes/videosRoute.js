@@ -1,9 +1,9 @@
 const express = require("express")
-const { getVideosController, updateVideosController } = require("../controllers/videosController.js")
+const { getVideosController, updateVideoController } = require("../controllers/videosController.js")
 
 const router = express.Router()
 
 router.route('/videos').get(getVideosController)
-router.route('/videos').put(updateVideosController)
+router.route('/videos').put(updateVideoController)
 
 module.exports = router

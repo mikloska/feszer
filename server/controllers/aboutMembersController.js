@@ -15,7 +15,7 @@ const getAboutMembersController = async (req, res, next) => {
       ORDER BY rank;
     `
   const result = await executeQuery(selectQuery, next)
-  if(result) res.json(result.rows)
+  if(result) res.send(result.rows)
 }
 
 const updateAboutMemberController = async (req, res, next) => {
@@ -27,7 +27,7 @@ const updateAboutMemberController = async (req, res, next) => {
       WHERE member_id = ${id};
     `
   const result = await executeQuery(putQuery, next)
-  if(result) res.json("Successfully updated!")
+  if(result) res.send("Successfully updated!")
 }
 
 module.exports =  { getAboutMembersController, updateAboutMemberController }

@@ -3,7 +3,7 @@ const {executeQuery} = require("../config/executeQuery")
 const getEventsController = async (req, res, next) => {
   const selectQuery = "SELECT * FROM events;"
   const result = await executeQuery(selectQuery, next)
-  if(result) res.json(result.rows)
+  if(result) res.send(result.rows)
 }
 
 const addEventController = async (req, res, next) => {
@@ -13,7 +13,7 @@ const addEventController = async (req, res, next) => {
       VALUES('${name}','${venue}','${address}','${dateAndTime}','${flyer}','${schedule}','${video}');
     `
   const result = await executeQuery(putQuery, next)
-  if(result) res.json("Successfully added!")
+  if(result) res.send("Successfully added!")
 }
 
 const updateEventController = async (req, res, next) => {
@@ -26,7 +26,7 @@ const updateEventController = async (req, res, next) => {
       WHERE id = ${id};
     `
   const result = await executeQuery(putQuery, next)
-  if(result) res.json("Successfully updated!")
+  if(result) res.send("Successfully updated!")
 }
 
 const deleteEventController = async (req, res, next) => {
@@ -36,7 +36,7 @@ const deleteEventController = async (req, res, next) => {
      WHERE id = ${id};
     `
   const result = await executeQuery(putQuery, next)
-  if(result) res.json("Successfully deleted!")
+  if(result) res.send("Successfully deleted!")
 }
 
 module.exports =  { getEventsController, addEventController, updateEventController, deleteEventController }
