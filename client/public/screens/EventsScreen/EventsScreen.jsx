@@ -36,8 +36,8 @@ const EventsScreen = () => {
       let start = null;
       const sorted = spread.sort((date1, date2) => new Date(date2.date_and_time) - new Date(date1.date_and_time))
       for(let i = 0; i < sorted.length; i++){
-        const currentDate = new Date(sorted[i].date_and_time)
-        if(new Date(sorted[i].date_and_time) > date){
+        // const currentDate = new Date(sorted[i].date_and_time)
+        // if(new Date(sorted[i].date_and_time) > date){
           start = i
           futureTemp.push(
             { name: sorted[i].event_name, venue: sorted[i].venue, address: sorted[i].address, dateAndTime: sorted[i].date_and_time, 
@@ -46,12 +46,12 @@ const EventsScreen = () => {
               id: sorted[i].id
             }
           )
-        } else {
-          break;
-        }
+        // } else {
+        //   break;
+        // }
       }
 
-      setSortedPastEvents(start ? sorted.slice(start+1): sorted)
+      // setSortedPastEvents(start ? sorted.slice(start+1): sorted)
       setSortedFutureEvents(futureTemp)
     }
   }, [data])
@@ -59,13 +59,13 @@ const EventsScreen = () => {
   return (
     <>
       {error && 
-        <ErrorModal error={error.data.message}/>
+        <ErrorModal error={error.data}/>
       }
       <UpcomingEvents events={sortedFutureEvents} refetch={refetch}/>
-      <Button variant = "contained" onClick={handlePastEventsModal} style={{marginTop: 20}}>
+      {/* <Button variant = "contained" onClick={handlePastEventsModal} style={{marginTop: 20}}>
         {language === 'MAGYAR' ? 'View Past Events' : 'Múlt események megtekintése'}
-      </Button>
-      <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={sortedPastEvents}/>
+      </Button> */}
+      {/* <PastEventsModal handlePastEventsModal={handlePastEventsModal} openPastEventsModal={openPastEventsModal} events={sortedPastEvents}/> */}
     </>
   );
 }
