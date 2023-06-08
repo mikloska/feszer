@@ -1,6 +1,6 @@
 import { eventsApi } from "../../../../redux/slices/eventsSlice";
 
-export const handleChangePage = (event, newPage) => {
+export const handleChangePage = (event, newPage, setPage) => {
   setPage(newPage);
 };
 

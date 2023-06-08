@@ -18,7 +18,8 @@ import {
 } from '@mui/material'
 import { Delete as DeleteIcon } from '@mui/icons-material';
 
-import { handleChangePage, handleChangeRowsPerPage, removeEvent } from './upcomingEventsFunctions';
+import { removeEvent } from './upcomingEventsFunctions';
+// import { handleChangePage, handleChangeRowsPerPage, removeEvent } from './upcomingEventsFunctions';
 import EventAdditionDialog from '../../../components/Events/EventAdditionDialog'
 import { useDeleteEventMutation } from '../../../../redux/slices/eventsSlice';
 import { changeLoading } from '../../../../redux/slices/loadingSlice';
@@ -44,6 +45,15 @@ const UpcomingEvents = ({ events, refetch }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([])
   const [deleteId, setDeleteId] = useState(null)
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   
   const columnsTranslation = {
     'Event' : 'Esemény',
@@ -84,7 +94,8 @@ const UpcomingEvents = ({ events, refetch }) => {
               <TableCell align="left" colSpan={loggedIn ? 7 : 6} >
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <Typography style={{fontSize: 'h6.fontSize', fontWeight: 'bold'}}>
-                  {language === 'MAGYAR' ? 'Upcoming Events' : 'Közelgő események'}
+                  {/* {language === 'MAGYAR' ? 'Upcoming Events' : 'Közelgő események'} */}
+                  {language === 'MAGYAR' ? 'Events' : 'Események'}
                 </Typography>
                 {loggedIn &&
                   <EventAdditionDialog/>
@@ -169,10 +180,15 @@ const UpcomingEvents = ({ events, refetch }) => {
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
-        rowsPerPage={rowsPerPage}
+      
         page={page}
         onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        // rowsPerPage={rowsPerPage}
+        // page={page}
+        // onPageChange={() => handleChangePage(event, newPage, setPage)}
+        // onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
   )
